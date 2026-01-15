@@ -1,0 +1,23 @@
+{ config, pkgs, ... }:
+
+{
+  programs.fish = {
+    enable = true;
+    
+    shellAliases = {
+      nixadd = "sudo nano +(math (grep -n '# ---PkgsEnd---' /etc/nixos/modules/programs.nix | cut -d: -f1) - 1) /etc/nixos/modules/programs.nix";
+      nixupd = "sudo sh -c 'nixos-rebuild switch 2>&1| nom'";
+      nixclean = "sudo nix-collect-garbage -d";
+    };
+  };
+
+  users.users.dale.shell = pkgs.fish;
+  environment.systemPackages = with pkgs; [
+    nix-output-monitor
+    starship 
+  ];
+
+  programs.starship = {
+    enable = true;
+  };
+}
