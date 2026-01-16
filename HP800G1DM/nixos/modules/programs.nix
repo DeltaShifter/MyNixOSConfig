@@ -11,6 +11,7 @@
     extraArgs = "-system-composer";
     };
   };
+  programs.gamescope.enable = true;
   services.v2raya.enable = true;
   services.v2raya.cliPackage = pkgs.xray;
   
@@ -39,5 +40,6 @@
     ouch
     file-roller    
     brave
+
  ]; # ---PkgsEnd---
 }
