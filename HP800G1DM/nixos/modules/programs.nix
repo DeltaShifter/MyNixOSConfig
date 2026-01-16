@@ -38,5 +38,6 @@
     wpsoffice-cn
     ouch
     file-roller    
+    brave
  ]; # ---PkgsEnd---
 }
