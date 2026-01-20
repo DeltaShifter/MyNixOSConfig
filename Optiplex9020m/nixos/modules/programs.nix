@@ -27,7 +27,6 @@
     fastfetch
     obsidian
     yazi
-    bat
     lsd
     xray
     gparted
@@ -41,7 +40,7 @@
     file-roller    
     brave
     intel-undervolt
-
+    nh
 
  ]; # ---PkgsEnd---
 }
