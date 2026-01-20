@@ -3,8 +3,8 @@
 NixOS+Niri+DMS
 结构如下，主旨就是configuration.nix最小化通用化，modules\ 用于各种用途的配置，home-manager仅用于管理~\.config
 
-'''.
-
+```
+.
 └── nixos  
     ├── configuration.nix  
     ├── flake.lock  
@@ -22,4 +22,3 @@ NixOS+Niri+DMS
         ├── locale.nix # 中文环境、Fctix5输入法  
         ├── network-alter.nix # 软件源配置  
         └── programs.nix # 软件安装  
-'''
