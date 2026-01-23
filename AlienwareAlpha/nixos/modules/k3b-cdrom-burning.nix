@@ -23,4 +23,5 @@
     permissions = "u+wrx,g+x";
     source = "${pkgs.cdrtools}/bin/cdrecord";
   };
+ };
 }
