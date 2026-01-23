@@ -18,8 +18,6 @@
   # Starship
   xdg.configFile."starship.toml".source = ./homeconfig/starship.toml;
 
-  programs = {  };
-
   programs.home-manager.enable = true;
   home.packages = with pkgs; [  ];
 
