@@ -17,7 +17,6 @@
   services.v2raya.cliPackage = pkgs.xray;
   
   services.udisks2.enable = true; # 开启USB挂载
-  programs.k3b.enable = true; # 启用k3b刻录工具
   
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -46,8 +45,8 @@
     brave
     intel-undervolt
     nh
-    cdrtools
     thunderbird
+    glide-media-player
 
  ]; # ---PkgsEnd---
 }

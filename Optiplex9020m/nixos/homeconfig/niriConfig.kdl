@@ -1,5 +1,5 @@
 spawn-at-startup "dms" "run"
-spawn-at-startup "udiskie" "--smarttray"
+spawn-at-startup "udiskie" "--smart-tray"
 
 window-rule {
     match app-id="Alacritty"
