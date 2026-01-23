@@ -42,7 +42,6 @@
     wpsoffice-cn
     ouch
     file-roller    
-    brave
     intel-undervolt
     nh
     thunderbird

@@ -20,6 +20,9 @@
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/Fcitx5ui.conf;
   # Fuzzel.ini
   xdg.configFile."fuzzel/fuzzel.ini".source = ./homeconfig/fuzzel.ini;
+  # Starship
+  xdg.configFile."starship.toml".source = ./homeconfig/starship.toml;
+
 
   programs = {
 
