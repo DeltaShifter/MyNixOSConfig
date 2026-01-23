@@ -74,7 +74,7 @@
   users.users.dale = {
     isNormalUser = true;
     description = "dale";
-    extraGroups = [ "networkmanager" "wheel" "cdrom" ];
+    extraGroups = [ "networkmanager" "wheel" "cdrom" "optical" ];
     packages = with pkgs; [
     #  thunderbird
     ];
