@@ -11,9 +11,12 @@
     extraArgs = "-system-composer";
     };
   };
-  programs.gamescope.enable = true;
+  programs.gamescope.enable = true; # 开启gamescope取得更好的全屏体验
+  
   services.v2raya.enable = true;
   services.v2raya.cliPackage = pkgs.xray;
+  
+  services.udisks2.enable = true; # 开启USB挂载
   
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -41,6 +44,8 @@
     brave
     intel-undervolt
     nh
+    brasero
+    cdrtools
 
  ]; # ---PkgsEnd---
 }

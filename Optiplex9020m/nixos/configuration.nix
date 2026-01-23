@@ -74,7 +74,7 @@
   users.users.dale = {
     isNormalUser = true;
     description = "dale";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "cdrom" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -100,6 +100,7 @@
   ];
 
   environment.sessionVariables = {
+    FLAKE = "/home/dale/.MyNixConf/Optiplex9020m/nixos";
     MOZ_ENABLE_WAYLAND = "1";
   };
 
