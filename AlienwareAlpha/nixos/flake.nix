@@ -29,14 +29,14 @@
     system = "x86_64-linux";
     # 自动扫描 modules 目录下的所有 .nix 文件
     configDir = ./modules;
-    generatedModules = builtins.map (file: configDir + "/${file}") 
-      (builtins.filter (file: nixpkgs.lib.hasSuffix ".nix" file) 
-        (builtins.attrNames (builtins.readDir configDir)));
+    generatedModules = builtins.map (file: configDir + "/${file}")  # 最终模块路径等于目录+文件名
+      (builtins.filter (file: nixpkgs.lib.hasSuffix ".nix" file)  # 逐个检查扩展名是否为.nix,否则过滤
+        (builtins.attrNames (builtins.readDir configDir))); # attrNames提取出最终文件名列表
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs; };
+      specialArgs = { inherit inputs; }; # 继承全部变量传递给inputs
       modules = [
         ./configuration.nix
       home-manager.nixosModules.home-manager

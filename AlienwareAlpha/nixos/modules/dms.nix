@@ -20,7 +20,6 @@
     
     systemd.enable = false;
     enableSystemMonitoring = true;
-    enableClipboard = true;
     enableDynamicTheming = true;
     enableAudioWavelength = true;
     enableVPN = true;
