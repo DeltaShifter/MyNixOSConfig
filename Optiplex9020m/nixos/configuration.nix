@@ -100,7 +100,6 @@
   ];
 
   environment.sessionVariables = {
-    FLAKE = "/home/dale/.MyNixConf/Optiplex9020m/nixos";
     MOZ_ENABLE_WAYLAND = "1";
   };
 
