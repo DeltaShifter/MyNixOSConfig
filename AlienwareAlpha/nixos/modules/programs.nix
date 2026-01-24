@@ -47,7 +47,6 @@
     nh
     thunderbird
     glide-media-player
-    
 
  ]; # ---PkgsEnd---
 }
