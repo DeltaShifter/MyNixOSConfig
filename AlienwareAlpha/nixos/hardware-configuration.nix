@@ -25,13 +25,19 @@
       options = [ "subvol=@home" ];
     };
 
+  fileSystems."/mnt/data" =
+    { device = "/dev/disk/by-uuid/4698be45-c08c-451e-a944-af8e699f38e2";
+      fsType = "btrfs";
+      options = [ "users" "nofail" "exec" "rw"];
+    };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/C3BE-3DCB";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
 
-  swapDevices = [ ];
+  swapDevices = [ {device="/dev/disk/by-uuid/51863794-5c78-45f2-b256-271f8834c4a6";} ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
