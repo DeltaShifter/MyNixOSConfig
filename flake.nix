@@ -27,6 +27,7 @@
   };
 
   outputs = { self, nixpkgs,home-manager,nur, ... }@inputs: 
+
   let
     system = "x86_64-linux";
     # 自动扫描 modules 目录下的所有 .nix 文件
@@ -63,6 +64,17 @@
       specialArgs = { inherit inputs; }; # 继承全部变量传递给inputs
       modules = [
         ./devices/Optiplex9020m/configuration.nix
+        homeManagerConfig
+        nurModule
+      ] ++ generatedModules; 
+    };
+  
+
+    nixosConfigurations.X1c = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit inputs; }; # 继承全部变量传递给inputs
+      modules = [
+        ./devices/X1c/configuration.nix
         homeManagerConfig
         nurModule
       ] ++ generatedModules; 
