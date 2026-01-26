@@ -10,19 +10,18 @@
       ./hardware-configuration.nix
     ];
 
-  # Window Manager
-  services.xserver.enable = true;
-  programs.niri.enable = true;
+  # Sources
+  nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  # Enable flake
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "Optiplex"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
+  # Enable flakes
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -34,8 +33,14 @@
   # Set your time zone.
   time.timeZone = "Asia/Shanghai";
 
-  # USB auto mount
-  services.udisks2.enable = true;
+  # Enable the X11 windowing system.
+  services.xserver.enable = true;
+  hardware.graphics.enable = true;
+
+  # Enable Niri WM and SDDM
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  programs.niri.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -43,52 +48,60 @@
     variant = "";
   };
 
+  # Enable CUPS to print documents.
+  services.printing.enable = true;
+
+  # Enable sound with pipewire.
+  services.pulseaudio.enable = false;
+  security.rtkit.enable = true;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # If you want to use JACK applications, uncomment this
+    #jack.enable = true;
+
+    # use the example session manager (no others are packaged yet so this is enabled by default,
+    # no need to redefine it in your config for now)
+    #media-session.enable = true;
+  };
+
+  # Enable touchpad support (enabled default in most desktopManager).
+  # services.xserver.libinput.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.dale = {
     isNormalUser = true;
     description = "dale";
-    extraGroups = [ "networkmanager" "wheel" ];
-    shell = pkgs.zsh;
+    extraGroups = [ "networkmanager" "wheel" "cdrom" "optical" ];
     packages = with pkgs; [
-    google-chrome
-    alacritty
-    fuzzel
-    lxappearance
-    papirus-icon-theme
-    tela-circle-icon-theme
-    reversal-icon-theme
-    nix-output-monitor
-    exfatprogs
+    #  thunderbird
     ];
   };
 
-  # 环境变量
-    environment.sessionVariables = {
-    # 告诉所有 Qt 程序（包括 DMS）去读 GTK 的设置
-    QT_QPA_PLATFORMTHEME = "gtk3";
-    };
+  # Install firefox.
+  programs.firefox.enable = true;
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # Hardware GPU acc
-  hardware.graphics = {
-  enable = true;
-  enable32Bit = true; 
-  extraPackages = with pkgs; [
-    intel-media-driver
-    intel-vaapi-driver         # 老旧 Intel 显卡用这个
-    libvdpau-va-gl
-    ];
-  };
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  xwayland-satellite
-  udiskie
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+  curl
+  git
+  wget
+  alacritty
+  fuzzel
+  swaybg
+  xwayland-satellite
   ];
+
+  environment.sessionVariables = {
+    MOZ_ENABLE_WAYLAND = "1";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
