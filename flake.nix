@@ -1,5 +1,5 @@
 {
-  description = "NixOS configuration with auto-module loading";
+  description = "Dale`s NixOS configuration with auto-module loading";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,12 +14,19 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    home-manager.url = "github:nix-community/home-manager";
-    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager = {
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
+      nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
   };
 
-  outputs = { self, nixpkgs,home-manager, ... }@inputs: 
+  outputs = { self, nixpkgs,home-manager,nur, ... }@inputs: 
   let
     system = "x86_64-linux";
     # 自动扫描 modules 目录下的所有 .nix 文件
@@ -36,6 +43,19 @@
            home-manager.extraSpecialArgs = { inherit inputs; };# 别忘了继承变量传递inputs
            home-manager.users.dale = import ./generic/home.nix;
       };
+
+     # NUR
+     nurModule = {
+        nixpkgs.overlays = [ 
+          (final: prev: { 
+            nur = import nur { # 拼接仓库
+              nurpkgs = prev;
+              pkgs = prev;
+            };
+          })
+        ];
+      };
+
   in
   {
     nixosConfigurations.Optiplex = nixpkgs.lib.nixosSystem {
@@ -44,6 +64,7 @@
       modules = [
         ./devices/Optiplex9020m/configuration.nix
         homeManagerConfig
+        nurModule
       ] ++ generatedModules; 
     };
   };

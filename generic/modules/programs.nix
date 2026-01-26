@@ -23,6 +23,8 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    nur.repos.chillcicada.ttf-ms-win10-sc-sup
+    nur.repos.chillcicada.ttf-wps-fonts
     vim
     wget
     git
@@ -47,6 +49,6 @@
     nh
     thunderbird
     glide-media-player
-
+   
  ]; # ---PkgsEnd---
 }
