@@ -1,7 +1,7 @@
 { config, pkgs, ... }:  
 
 {
-  programs.k3d.enable = true;
+  programs.k3b.enable = true;
   environment.systemPackages = with pkgs; [
     kdePackages.k3b
     dvdplusrwtools
@@ -9,18 +9,20 @@
     cdrtools
   ];
  
-  security.wrappers = { cdrdao = {
+  security.wrappers = { 
+    cdrdao = {
     setuid = true;
     owner = "root";
     group = "cdrom";
     permissions = "u+wrx,g+x";
     source = "${pkgs.cdrdao}/bin/cdrdao";
-  };
+    };
   cdrecord = {
     setuid = true;
     owner = "root";
     group = "cdrom";
     permissions = "u+wrx,g+x";
     source = "${pkgs.cdrtools}/bin/cdrecord";
+    };
   };
 }
