@@ -32,4 +32,5 @@
 
   # 4. 辅助配置：确保字体在 Flatpak 应用中正常显示
   fonts.fontconfig.enable = true;
+
 }
