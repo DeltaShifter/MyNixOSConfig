@@ -52,6 +52,7 @@
       noto-fonts-cjk-serif   # 思源宋体
       noto-fonts-color-emoji
       source-han-sans        # 思源黑体
+      nerd-fonts.jetbrains-mono
     ];
     
     fontconfig = {

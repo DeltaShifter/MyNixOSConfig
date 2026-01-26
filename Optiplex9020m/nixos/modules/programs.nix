@@ -1,9 +1,9 @@
 { config, pkgs, ... }:
 
 {
-# Install firefox.
-  programs.firefox.enable = true;
-  programs.steam = {
+  programs.firefox.enable = true; # 火狐浏览器
+
+  programs.steam = { # Steam
   enable = true;
   remotePlay.openFirewall = true; # 为 Steam 流式传输开启防火墙
   dedicatedServer.openFirewall = true;
@@ -27,6 +27,7 @@
     wget
     git
     gh
+    helix
     fastfetch
     obsidian
     udiskie
@@ -42,7 +43,6 @@
     wpsoffice-cn
     ouch
     file-roller    
-    brave
     intel-undervolt
     nh
     thunderbird
