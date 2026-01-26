@@ -3,6 +3,8 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     
     quickshell = {
       url = "github:quickshell-mirror/quickshell";
@@ -26,7 +28,7 @@
     
   };
 
-  outputs = { self, nixpkgs,home-manager,nur, ... }@inputs: 
+  outputs = { self, nixpkgs,nixos-hardware,home-manager,nur, ... }@inputs: 
 
   let
     system = "x86_64-linux";
@@ -75,6 +77,7 @@
       specialArgs = { inherit inputs; }; # 继承全部变量传递给inputs
       modules = [
         ./devices/X1c/configuration.nix
+        nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
         homeManagerConfig
         nurModule
       ] ++ generatedModules; 

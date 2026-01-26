@@ -49,6 +49,8 @@
     nh
     thunderbird
     glide-media-player
-   
+    gearlever
+    appimage-run
+           
  ]; # ---PkgsEnd---
 }
