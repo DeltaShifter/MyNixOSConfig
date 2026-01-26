@@ -22,6 +22,8 @@
     nerd-fonts.jetbrains-mono
   ];
 
+  documentation.man.generateCaches = false;
+
   environment.systemPackages = with pkgs; [
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts
