@@ -102,6 +102,11 @@
     MOZ_ENABLE_WAYLAND = "1";
   };
 
+  services.fprintd.enable = true;
+  security.pam.services.login.fprintAuth = true;
+  security.pam.services.sudo.fprintAuth = true;
+  security.pam.services.swaylock.fprintAuth = true;
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
