@@ -1,4 +1,5 @@
-import = [~/.config/alacritty/dank-theme.toml]
+[general]
+import = ["~/.config/alacritty/dank-theme.toml"]
 
 [font.bold]
 family = "JetBrainsMono Nerd Font Mono"
