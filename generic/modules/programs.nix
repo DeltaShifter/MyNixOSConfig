@@ -42,6 +42,7 @@
     pcmanfm
     google-chrome
     qq
+    gopeed
     wechat
     papirus-icon-theme
     wpsoffice-cn
