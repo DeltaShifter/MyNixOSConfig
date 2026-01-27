@@ -22,7 +22,7 @@
   home.packages = with pkgs; [  ];
 
   home.activation = {
-    # Niri 注入imclude脚本
+    # Niri 注入include脚本
     ensureNiriInclude = lib.hm.dag.entryAfter ["writeBoundary"] ''
       CONFIG_FILE="$HOME/.config/niri/config.kdl"
       INCLUDE_LINE='include "my-custom.kdl"'
