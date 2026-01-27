@@ -39,8 +39,8 @@
         (builtins.attrNames (builtins.readDir configDir))); # attrNames提取出最终文件名列表
     
      # HM通用设置
-    homeManagerConfig = {inputs, ... }: {
-      imports = [ inputs.home-manager.nixosModules.home-manager ];
+    homeManagerConfig = { ... }: {
+      imports = [ home-manager.nixosModules.home-manager ];
            home-manager.useGlobalPkgs = true;
            home-manager.useUserPackages = true;
            home-manager.extraSpecialArgs = { inherit inputs; };# 别忘了继承变量传递inputs
