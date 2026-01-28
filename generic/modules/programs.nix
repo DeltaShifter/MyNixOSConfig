@@ -41,6 +41,7 @@
     gparted
     pcmanfm
     google-chrome
+    gopeed
     qq
     gopeed
     wechat
