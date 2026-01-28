@@ -3,8 +3,13 @@ spawn-at-startup "udiskie" "--smart-tray"
 spawn-at-startup "alacritty" "migrate"
 
 window-rule {
+    geometry-corner-radius 14
+    clip-to-geometry true
+    draw-border-with-background false 
+}
+
+window-rule {
     match app-id="Alacritty"
-    draw-border-with-background false
     opacity 0.96
 }
 
