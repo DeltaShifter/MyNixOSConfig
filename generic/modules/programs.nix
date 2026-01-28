@@ -56,5 +56,6 @@
     gearlever
     appimage-run
     wl-clipboard
+    xclip
  ]; # ---PkgsEnd---
 }
