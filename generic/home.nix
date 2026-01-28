@@ -10,7 +10,7 @@
   xdg.configFile."alacritty/alacritty.toml".source = ./homeconfig/alacritty.toml;
 
   # Fcitx5 外观
-  xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/Fcitx5ui.conf;
+  xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/fcitx5ui.conf;
 
   # Fuzzel.ini
   xdg.configFile."fuzzel/fuzzel.ini".source = ./homeconfig/fuzzel.ini;
