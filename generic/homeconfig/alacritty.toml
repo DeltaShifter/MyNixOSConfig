@@ -23,3 +23,7 @@ y = 0
 
 [cursor]
 style = { shape = "Block", blinking = "On" }
+
+[window]
+padding = {x = 6,y = 6}
+dynamic_padding = true
