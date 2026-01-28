@@ -51,9 +51,10 @@
     intel-undervolt
     nh
     thunderbird
+    zenity
     glide-media-player
     gearlever
     appimage-run
-           
+    wl-clipboard
  ]; # ---PkgsEnd---
 }

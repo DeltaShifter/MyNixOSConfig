@@ -26,7 +26,7 @@
   };
 
   programs.dsearch = {
-    enable = true;
+    enable = false;
     systemd = {
       enable = true;
       target = "graphical-session.target";  # Only start in graphical sessions

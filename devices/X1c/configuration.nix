@@ -75,7 +75,7 @@
   users.users.dale = {
     isNormalUser = true;
     description = "dale";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -95,6 +95,7 @@
   fuzzel
   swaybg
   xwayland-satellite
+  brightnessctl
   ];
 
   environment.sessionVariables = {
