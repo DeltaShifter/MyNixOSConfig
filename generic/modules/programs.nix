@@ -18,6 +18,8 @@
   
   services.udisks2.enable = true; # 开启USB挂载
   
+  services.gvfs.enable = true;
+
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
@@ -39,7 +41,7 @@
     lsd
     xray
     gparted
-    pcmanfm
+    thunar
     google-chrome
     gopeed
     qq
