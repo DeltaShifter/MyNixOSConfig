@@ -16,5 +16,4 @@
     };
   };
 
-  users.groups.cdrom = {};
 }
