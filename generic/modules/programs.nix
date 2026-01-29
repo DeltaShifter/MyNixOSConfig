@@ -58,5 +58,6 @@
     appimage-run
     wl-clipboard
     xclip
+    caligula
  ]; # ---PkgsEnd---
 }
