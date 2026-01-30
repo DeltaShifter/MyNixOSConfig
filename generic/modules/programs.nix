@@ -35,7 +35,6 @@
     gh
     helix
     fastfetch
-    obsidian
     udiskie
     yazi
     lsd
