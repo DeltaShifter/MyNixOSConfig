@@ -56,13 +56,6 @@ let
       xdg-desktop-portal-gtk
     ]);
     runScript = "bash";
-    # 解决字体问题
-    extraOutputsToInstall = [ "font" ];
-    profile = ''
-      export FONTCONFIG_FILE=/etc/fonts/fonts.conf
-      export FONTCONFIG_PATH=/etc/fonts
-      export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$(id -u)/bus"
-    '';
 
   };
 in
