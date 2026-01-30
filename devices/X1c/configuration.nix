@@ -10,8 +10,11 @@
       ./hardware-configuration.nix
     ];
 
-  # Sources
-  nix.settings.substituters = [ "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store" ];
+  # Swap
+  swapDevices = [ {
+    device = "/var/lib/swapfile";
+    size = 16 * 1024;
+  } ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
