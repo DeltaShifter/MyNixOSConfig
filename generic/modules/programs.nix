@@ -61,8 +61,7 @@
     xclip
     caligula
     nixd
-    dpkg
-    steam-run
     nur.repos.xddxdd.baidunetdisk
+    mousepad
  ]; # ---PkgsEnd---
 }
