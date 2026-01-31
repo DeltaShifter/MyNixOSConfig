@@ -1,0 +1,7 @@
+theme = "tokyonight_storm"
+
+[editor]
+line-number = "relative"
+cursor-shape = { insert = "bar", normal = "block", select = "underline" }
+true-color = true
+lsp.display-messages = true

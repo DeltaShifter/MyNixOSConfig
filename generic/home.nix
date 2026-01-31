@@ -18,6 +18,9 @@
   # Starship
   xdg.configFile."starship.toml".source = ./homeconfig/starship.toml;
 
+  # Helix
+  xdg.configFile."helix/config.toml" = ./homeconfig/helix.toml;
+  
   programs.home-manager.enable = true;
   home.packages = with pkgs; [  ];
 
