@@ -3,8 +3,6 @@
 {
   programs.dconf.enable = true;
   
-  environment.variables = { TERMINAL = "alacritty"; };
-
   programs.firefox.enable = true; # 火狐浏览器
 
   programs.steam = { # Steam
@@ -96,4 +94,9 @@
     nixd
     nur.repos.xddxdd.baidunetdisk
  ]; # ---PkgsEnd---
+ 
+ environment.variables = {
+    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
+  };
+
 }
