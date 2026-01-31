@@ -48,13 +48,13 @@
     packages = with pkgs; [
       cascadia-code
       noto-fonts 
-      noto-fonts-cjk-sans    # 思源黑体
-      noto-fonts-cjk-serif   # 思源宋体
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
       noto-fonts-color-emoji
-      source-han-sans        # 思源黑体
+      source-han-sans
       nerd-fonts.jetbrains-mono
     ];
-    
+ 
     fontconfig = {
       defaultFonts = {
         sansSerif = [ "Noto Sans CJK SC" "DejaVu Sans" ];

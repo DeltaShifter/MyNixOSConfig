@@ -22,7 +22,6 @@
   xdg.configFile."helix/config.toml".source = ./homeconfig/helix.toml;
   
   programs.home-manager.enable = true;
-  home.packages = with pkgs; [  ];
 
   home.activation = {
     # Niri 注入include脚本
