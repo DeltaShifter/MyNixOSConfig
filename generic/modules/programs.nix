@@ -62,8 +62,10 @@
     thunar-vcs-plugin
     thunar-volman
     mousepad
+    swayimg
     xray
     gparted
+    nwg-look
     spacedrive
     google-chrome
     gopeed
