@@ -63,5 +63,6 @@
     nixd
     dpkg
     steam-run
+    nur.repos.xddxdd.baidunetdisk
  ]; # ---PkgsEnd---
 }
