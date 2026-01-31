@@ -82,6 +82,18 @@
         nurModule
       ] ++ generatedModules; 
     };
+    
+    nixosConfigurations.AlienwareAlpha = nixpkgs.lib.nixosSystem {
+      inherit system;
+      specialArgs = { inherit inputs; }; # 继承全部变量传递给inputs
+      modules = [
+        ./devices/AlienwareAlpha/configuration.nix
+        nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
+        homeManagerConfig
+        nurModule
+      ] ++ generatedModules; 
+    };
+
   };
 }
 

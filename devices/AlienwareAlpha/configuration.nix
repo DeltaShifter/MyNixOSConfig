@@ -18,7 +18,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "nvidia" ];
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "AlienwareAlpha"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Bluetooth
