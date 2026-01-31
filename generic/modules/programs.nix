@@ -3,6 +3,8 @@
 {
   programs.dconf.enable = true;
   
+  environment.variables = { TERMINAL = "alacritty"; };
+
   programs.firefox.enable = true; # 火狐浏览器
 
   programs.steam = { # Steam
@@ -18,10 +20,19 @@
   services.v2raya.enable = true;
   services.v2raya.cliPackage = pkgs.xray;
   
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs;[
+      thunar-archive-plugin
+      thunar-vcs-plugin
+      thunar-volman
+    ];
+  };
+  programs.xfconf.enable = true;
   services.udisks2.enable = true; # 开启USB挂载
-  
+  services.tumbler.enable = true; # 解决文管缩略图显示
   services.gvfs.enable = true;
-
+  
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
@@ -57,12 +68,8 @@
     udiskie
     yazi
     lsd
-    thunar
-    thunar-archive-plugin
-    thunar-vcs-plugin
-    thunar-volman
     mousepad
-    swayimg
+    loupe
     xray
     gparted
     nwg-look
