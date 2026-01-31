@@ -30,23 +30,20 @@
 
   nixpkgs.overlays = [ # 应用行为
   
-  (final: prev: { # 修正spacedrive
+  (final: prev: { 
     spacedrive = prev.symlinkJoin { # 修正spacedrive显示问题和路径问题
       name = "spacedrive";
       paths = [ prev.spacedrive ]; 
       nativeBuildInputs = [ final.makeWrapper ];
       postBuild = ''
-        echo "headerbar, titlebar, window.decoration { background: #1e1e1e; color: white; border: none; box-shadow: none; }" > $out/share/spacedrive-dark.css
         wrapProgram $out/bin/spacedrive \
           --set GDK_BACKEND x11 \
           --set WEBKIT_DISABLE_COMPOSITING_MODE 1 \
-          --set GTK_CSD_CSS "$out/share/spacedrive-dark.css" \
-          --prefix XDG_DATA_DIRS : "${final.gtk3}/share/gsettings-schemas/${final.gtk3.name}:${final.gsettings-desktop-schemas}/share/gsettings-schemas/${final.gsettings-desktop-schemas.name}"
+          --prefix XDG_DATA_DIRS : "${final.gtk3}/share/gsettings-schemas"
         '';
       };
     })
   ];
-
   
   environment.systemPackages = with pkgs; [
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
