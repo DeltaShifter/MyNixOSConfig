@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 
 {
+  programs.dconf.enable = true;
+  programs.dbus.enable = true;
+  
   programs.firefox.enable = true; # 火狐浏览器
 
   programs.steam = { # Steam
@@ -24,8 +27,22 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  documentation.man.generateCaches = false;
+  documentation.man.generateCaches = false; #关闭man cache加快构建速度
 
+  nixpkgs.overlays = [  # 覆盖应用行为
+    (final: prev: {
+      spacedrive = prev.symlinkJoin { # 修复spacedrive
+        name = "spacedrive";
+        paths = [ prev.spacedrive ];
+        nativeBuildInputs = [ final.makeWrapper ];
+        postBuild = ''
+          wrapProgram $out/bin/spacedrive \
+            --set GDK_BACKEND x11 \
+        '';
+      };
+    })
+  ];
+  
   environment.systemPackages = with pkgs; [
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts
@@ -40,7 +57,7 @@
     lsd
     xray
     gparted
-    thunar
+    spacedrive
     google-chrome
     gopeed
     qq
@@ -62,6 +79,5 @@
     caligula
     nixd
     nur.repos.xddxdd.baidunetdisk
-    mousepad
  ]; # ---PkgsEnd---
 }
