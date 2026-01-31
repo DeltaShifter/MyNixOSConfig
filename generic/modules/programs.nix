@@ -2,7 +2,6 @@
 
 {
   programs.dconf.enable = true;
-  programs.dbus.enable = true;
   
   programs.firefox.enable = true; # 火狐浏览器
 
@@ -29,17 +28,13 @@
 
   documentation.man.generateCaches = false; #关闭man cache加快构建速度
 
-  nixpkgs.overlays = [  # 覆盖应用行为
+  nixpkgs.overlays = [  # 应用行为修正
     (final: prev: {
-      spacedrive = prev.symlinkJoin { # 修复spacedrive
-        name = "spacedrive";
-        paths = [ prev.spacedrive ];
-        nativeBuildInputs = [ final.makeWrapper ];
-        postBuild = ''
-          wrapProgram $out/bin/spacedrive \
-            --set GDK_BACKEND x11 \
-        '';
-      };
+      spacedrive = final.runCommand "spacedrive" { nativeBuildInputs = [ prev.makeWrapper ]; } ''
+        makeWrapper ${final.spacedrive}/bin/spacedrive $out/bin/spacedrive \
+          --set GDK_BACKEND x11 \
+          --set WEBKIT_DISABLE_COMPOSITING_MODE 1
+      '';
     })
   ];
   
