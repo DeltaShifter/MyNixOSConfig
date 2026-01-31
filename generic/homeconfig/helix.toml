@@ -1,7 +1,7 @@
 theme = "tokyonight_storm"
 
 [editor]
-line-number = "relative"
-cursor-shape = { insert = "bar", normal = "block", select = "underline" }
-true-color = true
+line-number = "relative" # 相对行号
+cursor-shape = { insert = "bar", normal = "block", select = "underline" } # 光标
+true-color = true 
 lsp.display-messages = true

@@ -60,6 +60,7 @@
     wl-clipboard
     xclip
     caligula
+    nixd
     dpkg
     steam-run
  ]; # ---PkgsEnd---
