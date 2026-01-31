@@ -30,6 +30,7 @@
   services.udisks2.enable = true; # 开启USB挂载
   services.tumbler.enable = true; # 解决文管缩略图显示
   services.gvfs.enable = true;
+  services.xserver.desktopManager.xterm.enable = false;
   
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -55,6 +56,9 @@
   ];
   
   environment.systemPackages = with pkgs; [
+    (pkgs.writeShellScriptBin "xterm" ''  # 伪装xterm解决某些顽固的默认开启问题
+      exec ${pkgs.alacritty}/bin/alacritty "$@"
+    '')
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts
     vim
@@ -95,8 +99,6 @@
     nur.repos.xddxdd.baidunetdisk
  ]; # ---PkgsEnd---
  
- environment.variables = {
-    TERMINAL = "${pkgs.alacritty}/bin/alacritty";
-  };
-
+services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
+  
 }
