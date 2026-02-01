@@ -109,7 +109,7 @@
 
   services.fprintd.enable = true;
   services.gnome.gnome-keyring.enable = true;
-  security.pam.services.login.fprintAuth = true;
+  security.pam.services.login.fprintAuth = false;
   security.pam.services.sudo.fprintAuth = true;
 
   # Some programs need SUID wrappers, can be configured further or are
