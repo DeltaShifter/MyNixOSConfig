@@ -25,14 +25,6 @@
     enableVPN = true;
   };
 
-  programs.dsearch = {
-    enable = false;
-    systemd = {
-      enable = true;
-      target = "graphical-session.target";  # Only start in graphical sessions
-    };
-  };
-
   environment.systemPackages = [
     inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
