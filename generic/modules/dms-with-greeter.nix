@@ -11,30 +11,27 @@
     compositor.name = "niri";  # Or "hyprland" or "sway"
   };
   
-  services.greetd = {
-    enable = true;
-    settings = {
-      default_session = {
-        command = ''
-        ${pkgs.tuigreet}/bin/tuigreet \
-          --time \
-          --remember \
-          --remember-user \
-          --asterisks \
-          --user-menu \
-          --container-padding 2 \
-          --width 40 \
-          --greeting "ThinkPad X1 Carbon | Ready for Action" \
-          --theme "border=blue;text=white;prompt=cyan;time=magenta;action=blue;button=white" \
-          --cmd niri
-      '';
-        user = "greeter";
-      };
+  programs.regreet = {
+  enable = true;
+  settings = {
+    GTK = {
+      application_prefer_dark_theme = true;
+      cursor_theme_name = "Adwaita";
+      icon_theme_name = "Adwaita";
+      theme_name = "Adwaita"; 
     };
+    appearance = {
+      greeting = "ThinkPad X1 Carbon | Ready to roll";
+    };
+    widget.clock = {
+      format = "%a %H:%M";
+      resolution = "500ms";
+    };
+    extraCss = ''
+      window {background-color:#1a1b26;}
+    '';
   };
-  systemd.services.greetd.serviceConfig = {
-  Environment = "LANG=en_US.UTF-8";
-  };
+};
   
   services.upower.enable = true;
 
