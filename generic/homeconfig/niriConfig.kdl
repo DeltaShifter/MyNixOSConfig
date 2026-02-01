@@ -24,10 +24,6 @@ gestures {
     }
 }
 
-cursor {
-    xcursor-size 36
-}
-
 binds {
     "Mod+WheelScrollUp"   cooldown-ms=150 { focus-column-left; }
     "Mod+WheelScrollDown" cooldown-ms=150 { focus-column-right; }
