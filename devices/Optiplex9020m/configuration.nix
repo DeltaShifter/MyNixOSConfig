@@ -42,6 +42,10 @@
   services.displayManager.sddm.wayland.enable = true;
   programs.niri.enable = true;
 
+  # Bluetooth
+  hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "cn";
