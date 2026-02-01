@@ -10,7 +10,7 @@ window-rule {
 
 window-rule {
     match app-id="Alacritty"
-    opacity 0.96
+    opacity 0.86
 }
 
 window-rule {
@@ -24,7 +24,28 @@ gestures {
     }
 }
 
+cursor {
+    xcursor-size 36
+}
+
 binds {
     "Mod+WheelScrollUp"   cooldown-ms=150 { focus-column-left; }
     "Mod+WheelScrollDown" cooldown-ms=150 { focus-column-right; }
+}
+
+animations {
+    // damping-ratio (阻尼): 越小越弹。1.0 是不弹，0.5 会弹得很厉害。
+    // stiffness (刚度): 越大越快。
+    
+    horizontal-view-movement {
+        spring damping-ratio=0.7 stiffness=600 epsilon=0.0001
+    }
+
+    window-open {
+        spring damping-ratio=0.6 stiffness=1000 epsilon=0.0001
+    }
+
+    window-close {
+        spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
+    }
 }
