@@ -10,7 +10,7 @@ window-rule {
 
 window-rule {
     match app-id="Alacritty"
-    opacity 0.86
+    opacity 0.9
 }
 
 window-rule {

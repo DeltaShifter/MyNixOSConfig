@@ -21,9 +21,6 @@
   # Helix
   xdg.configFile."helix/config.toml".source = ./homeconfig/helix.toml;
   
-  # Thunar
-  xdg.configFile."xfce4/helpers.rc".source = ./homeconfig/xfce4-helpers.rc;
-  
   programs.home-manager.enable = true;
 
   home.activation = {
