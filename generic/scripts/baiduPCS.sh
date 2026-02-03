@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# 百度网盘TUI 0.2
+# 
 # === 配置 ===
 PCS_CMD="BaiduPCS-Go"
 DOWNLOAD_DIR="$HOME/Downloads"
@@ -31,13 +33,15 @@ while true; do
     # 获取原生输出
     RAW_OUTPUT=$($PCS_CMD ls "$PCS_WORKING")
     EXIT_CODE=$?
-
-    if [[ $EXIT_CODE -ne 0 ]]; then
+    while true;do
+        if [[ $EXIT_CODE -eq 0 ]]; then
+        break
+        fi
+    
         echo -e "${RED}Error: BaiduPCS-Go 命令执行失败!${NC}"
         echo "$RAW_OUTPUT"
-        read -p "按任意键退出..." -n 1
-        exit 1
-    fi
+        read -s -p "按任意键重试，或Ctrl+C退出..." -n 1
+    done
 
     # === 数据清洗 ===
     # 1. sed: 去除 ANSI 颜色代码
@@ -60,24 +64,29 @@ while true; do
             printf "%-10s\t%s\n", $2, name
         }')
 
-    # 空列表检查
+   # 空列表检查
     if [[ -z "$CLEAN_LIST" ]]; then
-        echo -e "${RED}列表为空 (解析后)${NC}"
-        echo "--------------------------------"
-        echo "原始输出前10行:"
-        echo "$RAW_OUTPUT" | head -n 10
+        echo -e "${RED}提示: 该文件夹为空，或者解析失败。${NC}"
         echo "--------------------------------"
         
-        read -p "按 'r' 返回根目录，按 'q' 退出: " -n 1 CHOICE
-        echo
-        if [[ "$CHOICE" == "r" ]]; then
-            PCS_WORKING="/"
-            continue
-        elif [[ "$CHOICE" == "q" ]]; then
-            exit 0
+        # 自动尝试获取父目录路径
+        PARENT_PATH=$(dirname "$PCS_WORKING")
+        
+        # 提示用户
+        if [[ "$PCS_WORKING" == "/" ]]; then
+            read -p "当前已在根目录,按任意键刷新。" -n 1
         else
-            continue
+            read -p "按任意键返回上层目录..." -n 1
+            # 逻辑：如果当前不是根目录，就退到父目录；如果是根目录，就保持现状
+            if [[ "$PCS_WORKING" != "/" ]]; then
+                PCS_WORKING="$PARENT_PATH"
+            else
+                PCS_WORKING="/"
+            fi
         fi
+        
+        echo -e "\n正在跳转..."
+        continue
     fi
 
     # 组合菜单
