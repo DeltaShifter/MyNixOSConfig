@@ -105,10 +105,8 @@
   environment.sessionVariables = {
     EDITOR = "hx";
     MOZ_ENABLE_WAYLAND = "1";
-    XCURSOR_SIZE = "48";
-    XCURSOR_THEME = "Adwaita";
   };
-  
+
   services.fprintd.enable = true;
   services.gnome.gnome-keyring.enable = true;
   security.pam.services.login.fprintAuth = false;

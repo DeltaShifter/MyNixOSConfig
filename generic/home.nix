@@ -5,7 +5,6 @@
 
   # niri 配置相关
   xdg.configFile."niri/my-custom.kdl".source = ./homeconfig/niriConfig.kdl;
-  xdg.configFile."niri/regreet.kdl".source = ./homeconfig/niriGreeter.kdl;
 
   # Alacritty 相关
   xdg.configFile."alacritty/alacritty.toml".source = ./homeconfig/alacritty.toml;

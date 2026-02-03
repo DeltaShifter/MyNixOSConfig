@@ -73,6 +73,7 @@
     mousepad
     gsettings-desktop-schemas
     adwaita-icon-theme
+    bibata-cursors-translucent
     loupe
     xray
     gparted

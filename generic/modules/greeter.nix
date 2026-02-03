@@ -4,9 +4,6 @@
   programs.regreet = {
   enable = true;
   settings = {
-    default_session = {
-      command = "${pkgs.niri}/bin/niri --config ~/.config/niri/greeter.kdl;
-    }
     background = {
       path = ../asset/Night.png;
       fit = "Cover";
