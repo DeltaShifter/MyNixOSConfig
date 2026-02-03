@@ -103,6 +103,7 @@
     nur.repos.xddxdd.baidunetdisk
     nur.repos.xddxdd.rime-custom-pinyin-dictionary
     gigolo
+    nfs-utils
  ]; # ---PkgsEnd---
  
 services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
