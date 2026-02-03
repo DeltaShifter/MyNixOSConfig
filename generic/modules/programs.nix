@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib , ... }:
 
 {
   programs.dconf.enable = true;
@@ -71,6 +71,8 @@
     yazi
     lsd
     mousepad
+    gsettings-desktop-schemas
+    adwaita-icon-theme
     loupe
     xray
     gparted
@@ -90,6 +92,8 @@
     thunderbird
     zenity
     glide-media-player
+    clapper
+    clapper-enhancers
     gearlever
     appimage-run
     wl-clipboard
@@ -101,5 +105,5 @@
  ]; # ---PkgsEnd---
  
 services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
-  
+
 }
