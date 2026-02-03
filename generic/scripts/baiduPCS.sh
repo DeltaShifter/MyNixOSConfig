@@ -26,13 +26,15 @@ done
 
 while true; do
     # 清屏
+    clear
     echo -e "${GREEN}=== 百度网盘 TUI ===${NC}"
-    echo -e "路径: ${GREEN}$PSC_PWD${NC}"
-    echo "获取列表中..."
+    echo -e "路径: ${GREEN}$PCS_WORKING${NC}"
+    echo -ne "正在获取列表... \r"
 
     # 获取原生输出
     RAW_OUTPUT=$($PCS_CMD ls "$PCS_WORKING")
     EXIT_CODE=$?
+    echo -ne "\033[K"
     while true;do
         if [[ $EXIT_CODE -eq 0 ]]; then
         break
