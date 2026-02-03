@@ -1,4 +1,4 @@
-{ pkgs , lib , ... }:
+{ config, lib, pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
   samba
@@ -10,14 +10,10 @@
   gst_all_1.gst-libav
   glib-networking 
 ];
-  environment.sessionVariables = {
-    GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
-    pkgs.gst_all_1.gstreamer
-    pkgs.gst_all_1.gst-plugins-base
-    pkgs.gst_all_1.gst-plugins-good
-    pkgs.gst_all_1.gst-plugins-bad
-    pkgs.gst_all_1.gst-plugins-ugly
-    pkgs.gst_all_1.gst-libav
-  ];
-};
+  environment.sessionVariables.GST_PLUGIN_SYSTEM_PATH_1_0 = lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" (with pkgs.gst_all_1; [
+  gst-plugins-good
+  gst-plugins-bad
+  gst-plugins-ugly
+  gst-libav
+  ]);
 }
