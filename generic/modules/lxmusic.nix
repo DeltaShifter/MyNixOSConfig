@@ -1,45 +1,52 @@
-{ config, pkgs, lib, ... }:
-
-with lib;
+{ pkgs, ... }:
 
 let
-  cfg = config.myModules.lx-music;
+  # 使用官方稳定的 24.11 分支链接，绝不会 404
+  oldPkgs = import (fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
+    # 如果这个 sha256 报错 mismatch，请将其改为报错信息里的 "got" 值
+    sha256 = "sha256:1s2gr5rcyqvpr58vxdcb095mdhblij9bfzaximrva2243aal3dgx";
+  }) { 
+    system = pkgs.stdenv.hostPlatform.system; 
+    config = {
+      allowUnfree = true;
+      permittedInsecurePackages = [
+        "electron-33.4.11"
+      ];
+    };
+  };
 
-  # 这里定义包的提取和包装逻辑
   lx-music-pkg = pkgs.stdenv.mkDerivation rec {
     pname = "lx-music-desktop";
     version = "2.12.0";
 
     src = pkgs.fetchurl {
       url = "https://github.com/lyswhut/lx-music-desktop/releases/download/v${version}/lx-music-desktop_${version}_x64.pacman";
-      # 如果下载慢，可以换成这个：url = "https://ghfast.top/https://github.com/lyswhut/lx-music-desktop/releases/download/v${version}/lx-music-desktop_${version}_x64.pacman";
-      hash = "sha256-gpVf2mNMLByCvBHf0R4B7B+BHP59X/Xbz70B7B9zZTI="; 
+      hash = "sha256-B1I42K9o0ybS2Nii+gcHEfuPd9tZl9le+J2rJValUPQ="; 
     };
 
     nativeBuildInputs = [ pkgs.makeWrapper pkgs.libarchive ];
 
     dontBuild = true;
 
-    unpackPhase = ''
-      bsdtar -xf $src
-    '';
+    unpackPhase = "bsdtar -xf $src";
 
     installPhase = ''
       mkdir -p $out/lib/lx-music
       cp opt/lx-music-desktop/resources/app.asar $out/lib/lx-music/
-      
+      echo '{"name":"lx-music-desktop","productName":"lx-music-desktop"}' > $out/lib/lx-music/package.json
+
       mkdir -p $out/share/icons/hicolor/512x512/apps
       cp usr/share/icons/hicolor/512x512/apps/lx-music-desktop.png $out/share/icons/hicolor/512x512/apps/lx-music.png
 
-      # 使用系统原生的 Electron 35 驱动，彻底解决 Wayland 渲染问题
-      makeWrapper ${pkgs.electron_35}/bin/electron $out/bin/lx-music \
+      makeWrapper ${oldPkgs.electron_33}/bin/electron $out/bin/lx-music \
         --add-flags "$out/lib/lx-music/app.asar" \
         --add-flags "--enable-features=UseOzonePlatform" \
         --add-flags "--ozone-platform=wayland" \
         --add-flags "--no-sandbox"
     '';
 
-    # 顺便把桌面图标也打进去
+    # 桌面文件部分保持不变...
     desktopItem = pkgs.makeDesktopItem {
       name = "lx-music";
       exec = "lx-music";
@@ -53,15 +60,6 @@ let
       cp $desktopItem/share/applications/* $out/share/applications/
     '';
   };
-
 in {
-  # 定义模块开关
-  options.myModules.lx-music.enable = mkEnableOption "洛雪音乐原生包装模块";
-
-  config = mkIf cfg.enable {
-    # 只需要开启开关，包就会自动出现在系统里
-    environment.systemPackages = [
-      lx-music-pkg
-    ];
-  };
+  environment.systemPackages = [ lx-music-pkg ];
 }
