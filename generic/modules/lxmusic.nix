@@ -11,7 +11,7 @@ let
     config = {
       allowUnfree = true;
       permittedInsecurePackages = [
-        "electron-33.4.11"
+        "electron-36.9.5"
       ];
     };
   };
@@ -39,7 +39,7 @@ let
       mkdir -p $out/share/icons/hicolor/512x512/apps
       cp usr/share/icons/hicolor/512x512/apps/lx-music-desktop.png $out/share/icons/hicolor/512x512/apps/lx-music.png
 
-      makeWrapper ${oldPkgs.electron_33}/bin/electron $out/bin/lx-music \
+      makeWrapper ${oldPkgs.electron_36}/bin/electron $out/bin/lx-music \
         --add-flags "$out/lib/lx-music/app.asar" \
         --add-flags "--enable-features=UseOzonePlatform" \
         --add-flags "--ozone-platform=wayland" \
