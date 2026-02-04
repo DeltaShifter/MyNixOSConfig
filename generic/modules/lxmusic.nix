@@ -1,21 +1,21 @@
 { pkgs, ... }:
 
 let
-  # 使用官方稳定的 24.11 分支链接，绝不会 404
+  # 使用官方稳定的 24.11 分支链接
   oldPkgs = import (fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/nixos-24.11.tar.gz";
+    url = "https://github.com/NixOS/nixpkgs/archive/nixos-25.05.tar.gz";
     # 如果这个 sha256 报错 mismatch，请将其改为报错信息里的 "got" 值
     sha256 = "sha256:1s2gr5rcyqvpr58vxdcb095mdhblij9bfzaximrva2243aal3dgx";
-  }) { 
+  }){
     system = pkgs.stdenv.hostPlatform.system; 
     config = {
       allowUnfree = true;
       permittedInsecurePackages = [
-        "electron-36.9.5"
+        "electron"
       ];
     };
   };
-
+  
   lx-music-pkg = pkgs.stdenv.mkDerivation rec {
     pname = "lx-music-desktop";
     version = "2.12.0";
@@ -39,7 +39,7 @@ let
       mkdir -p $out/share/icons/hicolor/512x512/apps
       cp usr/share/icons/hicolor/512x512/apps/lx-music-desktop.png $out/share/icons/hicolor/512x512/apps/lx-music.png
 
-      makeWrapper ${oldPkgs.electron_36}/bin/electron $out/bin/lx-music \
+      makeWrapper ${oldPkgs.electron}/bin/electron $out/bin/lx-music \
         --add-flags "$out/lib/lx-music/app.asar" \
         --add-flags "--enable-features=UseOzonePlatform" \
         --add-flags "--ozone-platform=wayland" \
