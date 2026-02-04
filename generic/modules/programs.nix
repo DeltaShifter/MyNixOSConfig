@@ -32,12 +32,6 @@
   services.gvfs.enable = true;
   services.xserver.desktopManager.xterm.enable = false;
   
-  services.rustdesk-server = {
-  enable = true;
-  openFirewall = true;
-  signal.relayHosts = ["100.88.86.109:21117"];
-  };
-
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
