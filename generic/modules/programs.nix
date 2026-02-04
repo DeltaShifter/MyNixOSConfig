@@ -106,6 +106,7 @@
     gigolo
     nfs-utils
     baidupcs-go
+    telegram-desktop
  ]; # ---PkgsEnd---
  
 services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
