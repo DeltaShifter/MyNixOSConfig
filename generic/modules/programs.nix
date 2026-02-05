@@ -104,7 +104,6 @@
     caligula
     nixd
     nur.repos.xddxdd.baidunetdisk
-    nur.repos.xddxdd.rime-custom-pinyin-dictionary
     gigolo
     nfs-utils
     baidupcs-go
