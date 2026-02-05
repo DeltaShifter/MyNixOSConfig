@@ -5,6 +5,8 @@
   
   programs.firefox.enable = true; # 火狐浏览器
 
+  programs.kdeconnect.enable = true;
+
   programs.steam = { # Steam
   enable = true;
   remotePlay.openFirewall = true; # 为 Steam 流式传输开启防火墙
