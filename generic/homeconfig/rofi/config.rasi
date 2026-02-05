@@ -1,6 +1,6 @@
 configuration {
     /* --- 基础行为 --- */
-    modi: "drun,run,calc,emoji";
+    modi: "drun,run,calc";
     show-icons: true;
     icon-theme: "Papirus";
     terminal: "alacritty";

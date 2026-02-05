@@ -14,7 +14,8 @@
 
   # Rofi
   xdg.configFile."rofi/config.rasi".source = ./homeconfig/rofi/config.rasi;
-  xdg.configFile."rofi/theme.rasi".source = ./homeconfig/rofi/rounded-nord-dark.rasi;
+  xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeconfig/rofi/rounded-nord-dark.rasi;
+  xdg.configFile."rofi/template/rounded-template.rasi".source = ./homeconfig/rofi/rounded-template.rasi;
 
   # Starship
   xdg.configFile."starship.toml".source = ./homeconfig/starship.toml;
@@ -36,5 +37,5 @@
       fi
     '';
    };
-   
+    
 }
