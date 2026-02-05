@@ -18,4 +18,4 @@ configuration {
     display-emoji: " 󰞅 Emoji ";
 }
 
-@theme "theme.rasi"
+@theme "rounded-nord-dark.rasi"
