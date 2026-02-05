@@ -109,7 +109,6 @@
     nfs-utils
     baidupcs-go
     telegram-desktop
-    rustdesk
  ]; # ---PkgsEnd---
  
 services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm

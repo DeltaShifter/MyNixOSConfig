@@ -105,6 +105,7 @@
   fuzzel
   swaybg
   xwayland-satellite
+  rustdesk
   ];
 
   environment.sessionVariables = {
