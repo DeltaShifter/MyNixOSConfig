@@ -27,7 +27,7 @@ gestures {
 input {
     keyboard {
         xkb {
-            options "hyper:ralt" 
+            options "lv3:ralt_switch,ralt:hyper"
         }
     }
 }
