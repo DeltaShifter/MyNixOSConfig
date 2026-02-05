@@ -96,7 +96,7 @@
   git
   wget
   alacritty
-  fuzzel
+  rofi
   swaybg
   xwayland-satellite
   brightnessctl

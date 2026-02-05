@@ -33,6 +33,7 @@ input {
 }
 
 binds {
+    "Mod+D" { spawn "rofi" "-show" "drun"; }
     "Mod+WheelScrollUp"   cooldown-ms=150 { focus-column-left; }
     "Mod+WheelScrollDown" cooldown-ms=150 { focus-column-right; }
 }

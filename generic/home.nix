@@ -12,8 +12,8 @@
   # Fcitx5 外观
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/fcitx5ui.conf;
 
-  # Fuzzel.ini
-  xdg.configFile."fuzzel/fuzzel.ini".source = ./homeconfig/fuzzel.ini;
+  # Rofi
+  xdg.configFile."rofi/theme.rasi".source = ./homeconfig/rofi/rounded-nord-dark.rasi;
 
   # Starship
   xdg.configFile."starship.toml".source = ./homeconfig/starship.toml;
