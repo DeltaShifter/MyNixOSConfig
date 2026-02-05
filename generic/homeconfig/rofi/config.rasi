@@ -1,0 +1,21 @@
+configuration {
+    /* --- 基础行为 --- */
+    modi: "drun,run,calc,emoji";
+    show-icons: true;
+    icon-theme: "Papirus";
+    terminal: "alacritty";
+    
+    /* --- 搜索逻辑 --- */
+    matching: "fuzzy"; 
+    scroll-method: 0;
+    disable-history: false;
+    
+    /* --- 显示设置 --- */
+    drun-display-format: "{icon} {name}";
+    display-drun: " 📦 Apps ";
+    display-run: " 🏃 Run ";
+    display-calc: " 󰪚 Calc ";
+    display-emoji: " 󰞅 Emoji ";
+}
+
+@theme "theme.rasi"

@@ -13,6 +13,7 @@
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/fcitx5ui.conf;
 
   # Rofi
+  xdg.configFile."rofi/config.rasi".source = ./homeconfig/rofi/config.rasi;
   xdg.configFile."rofi/theme.rasi".source = ./homeconfig/rofi/rounded-nord-dark.rasi;
 
   # Starship
