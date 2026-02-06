@@ -13,7 +13,7 @@
 
   trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
-    "dale-nix-cachex.cachix.org-1:FGt8SQ+Jlk5sNZPyVbEAfaNxD2D4RWDkXUXLbcAcxWU="
+    "dale-nix-cachix.cachix.org-1:N+YRpTWo6H8F1VA5hNZ3Uhl3zPiNtkiKspO9UcggJzM="
   ];
 
     # 增大下载缓存，防止大文件下载中断 (500MB)
