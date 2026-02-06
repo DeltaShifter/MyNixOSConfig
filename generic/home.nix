@@ -11,7 +11,8 @@
 
   # Fcitx5 外观
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/fcitx5ui.conf;
-
+  # Regreet-Greeter
+  environment.etc."xdg/regreet/style.css".source = ./homeconfig/regreet/style.css;
   # Rofi
   xdg.configFile."rofi/config.rasi".source = ./homeconfig/rofi/config.rasi;
   xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeconfig/rofi/rounded-nord-dark.rasi;
