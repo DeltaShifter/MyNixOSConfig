@@ -25,5 +25,7 @@ y = 0
 style = { shape = "Block", blinking = "On" }
 
 [window]
+dynamic_title = true
+decorations_theme_variant = "Dark"
 padding = {x = 6,y = 6}
 dynamic_padding = true

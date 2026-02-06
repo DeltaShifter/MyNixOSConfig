@@ -3,6 +3,19 @@
 {
   home.stateVersion = "25.11"; 
 
+  # 整体主题配置
+  gtk = {
+    enable = true;
+    theme = {
+      name = "Materia";
+      package = pkgs.materia-theme;
+      };
+    iconTheme ={
+      name = "Papirus";
+      package = pkgs.papirus-icon-theme;
+      };
+    };
+
   # niri 配置相关
   xdg.configFile."niri/my-custom.kdl".source = ./homeconfig/niriConfig.kdl;
 

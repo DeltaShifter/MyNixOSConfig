@@ -79,7 +79,6 @@
     loupe
     xray
     gparted
-    nwg-look
     spacedrive
     google-chrome
     gopeed
