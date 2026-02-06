@@ -6,12 +6,14 @@
     substituters = lib.mkForce [
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
+      "https://dale-nix-chacex.cachix.org"
       "https://nix-community.cachix.org"
       "https://cache.nixos.org/"
     ];
 
   trusted-public-keys = [
     "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    "dale-nix-cachex.cachix.org-1:FGt8SQ+Jlk5sNZPyVbEAfaNxD2D4RWDkXUXLbcAcxWU="
   ];
 
     # 增大下载缓存，防止大文件下载中断 (500MB)

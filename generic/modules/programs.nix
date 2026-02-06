@@ -71,6 +71,7 @@
     fastfetch
     udiskie
     yazi
+    cachix
     lsd
     mousepad
     gsettings-desktop-schemas
