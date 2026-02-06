@@ -15,7 +15,7 @@
       theme_name = "Adwaita"; 
     };
     appearance = {
-      greeting = "ThinkPad X1 Carbon | Ready to roll";
+      greeting = "Welcome back,Commander!";
     };
     widget.clock = {
       format = "%a %H:%M";
