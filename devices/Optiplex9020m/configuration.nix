@@ -39,11 +39,16 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  hardware.graphics.enable = true;
+  hardware.graphics = {
+  enable = true;
+  enable32Bit = true;
+  extraPackages = with pkgs; [
+    intel-vaapi-driver
+    libvdpau-va-gl    
+  ];
+};
 
-  # Enable Niri WM and SDDM
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
+  # Enable Niri WM
   programs.niri.enable = true;
 
   # Bluetooth
