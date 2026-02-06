@@ -1,6 +1,10 @@
 { config, pkgs , lib, ... }:
 
 {
+  environment.systemPackages = with pkgs;[
+    materia-theme
+  ];
+  
   programs.regreet = {
   enable = true;
   settings = {
@@ -11,11 +15,7 @@
     GTK = {
       application_prefer_dark_theme = true;
       cursor_theme_name = "Adwaita";
-      icon_theme_name = "Adwaita";
-      theme_name = "Adwaita"; 
-    };
-    appearance = {
-      greeting = "Welcome back,Commander!";
+      theme_name = lib.mkForce "Materia"; 
     };
     widget.clock = {
       format = "%a %H:%M";
@@ -23,5 +23,5 @@
     };
   };
 };
-  
-}
+
+ }
