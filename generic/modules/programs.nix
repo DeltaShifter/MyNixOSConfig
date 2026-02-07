@@ -2,6 +2,7 @@
 
 {
   programs.dconf.enable = true;
+  services.envfs.enable = true;
   
   programs.firefox.enable = true; # 火狐浏览器
 
