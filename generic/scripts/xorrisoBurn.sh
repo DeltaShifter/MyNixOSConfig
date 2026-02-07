@@ -42,7 +42,7 @@ while true; do
     fi
 
     HEADER_LINE1="📂 $display_path"
-    HEADER_LINE2="📝 已选: ${COUNT} | [Tab]选 [Enter]进 [Esc]烧"
+    HEADER_LINE2="📝 已选: ${COUNT} | [Tab]选择 [Enter]导航 [Esc]刻录"
 
     # --- FZF 执行 ---
     OUTPUT=$(echo -e ".. (上级目录)\n$LIST" | fzf \
