@@ -3,6 +3,7 @@
 {
   environment.systemPackages = with pkgs; [
     xorriso 
+    file
     gum
     eject
   ];
