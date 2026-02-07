@@ -1,7 +1,7 @@
 configuration {
     /* --- 基础行为 --- */
-    modi: "combi,run,calc,power:dale-mod-power-menu";
-    combi-modi:"drun,emoji";
+    modi: "combi,drun,run,calc,power:rofi-power-menu,emoji:rofimoji";
+    combi-modi: "drun,emoji";
     show-icons: true;
     icon-theme: "Papirus";
     terminal: "alacritty";
