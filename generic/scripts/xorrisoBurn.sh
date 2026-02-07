@@ -125,7 +125,19 @@ echo "正在调用 xorriso 进行刻录..."
 # -joliet on: 增加 Windows 兼容性
 # -commit: 执行写入
 # -eject all: 写入完成后弹出
-xorriso -dev /dev/sr0 -joliet on -compliance no_emul_toc "${XORRISO_ARGS[@]}" -commit -eject all
+VOLID="DATA_$(date +%Y%m%d)"
+
+# 解释核心参数的变化：
+# -volid "$VOLID": 设置卷标
+# -dev /dev/sr0: 自动加载现有数据
+# -assert_volid ...: 可选，防止向错误的盘追加数据（这里为了通用性不加）
+#
+xorriso -dev /dev/sr0 \
+    -volid "$VOLID" \
+    -joliet on \
+    -compliance no_emul_toc \
+    "${XORRISO_ARGS[@]}" \
+    -commit -eject all
 
 if [ $? -eq 0 ]; then
     gum style --bold --foreground 82 "✅ 刻录成功！光盘已弹出。"
