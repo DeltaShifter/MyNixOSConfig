@@ -1,24 +1,27 @@
 configuration {
     /* --- 基础行为 --- */
-    modi: "combi,drun,run,power-menu:rofi-power-menu";
-    combi-modi:"drun,calc,emoji";
+    modi: "combi,run,calc,⏻ Power :rofi-power-menu";
+    combi-modi:"drun,emoji";
     show-icons: true;
     icon-theme: "Papirus";
     terminal: "alacritty";
     font: "JetBrainsMono Nerd Font 12";
     
     /* --- 搜索逻辑 --- */
-    matching: "fuzzy"; 
+    matching: "fuzzy";
     scroll-method: 0;
     disable-history: false;
-    spot:true;
+    sort:true;
     sorting-method: "fzf";
+    drun-match-fields:"name,generic,exec";
     
     /* --- 显示设置 --- */
     drun-display-format: "{icon} {name}";
+    combi-hide-mode-prefix: true;
     display-combi: " 💻 All ";
     display-drun: " 📦 Apps ";
     display-run: " >_ Run ";
+    display-calc: " 🖩 Calc ";
 }
 
 @theme "rounded-nord-dark.rasi"

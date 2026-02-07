@@ -9,5 +9,6 @@
         rofimoji
       ];
     })
+    rofi-power-menu
   ];
 }
