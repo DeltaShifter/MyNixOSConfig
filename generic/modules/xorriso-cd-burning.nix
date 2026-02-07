@@ -3,6 +3,8 @@
 {
   environment.systemPackages = with pkgs; [
     xorriso 
+    gum
+    eject
   ];
 
   security.wrappers = {
