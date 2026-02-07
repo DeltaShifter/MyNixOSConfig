@@ -22,13 +22,14 @@ while true; do
     # --- 预览逻辑 ---
     # 优先显示目录，其次尝试 file 命令，失败则降级为 ls -lh
     PREVIEW_STR='sh -c "
+        export GIO_EXTRA_MODULES=;
         if echo {} | grep -q \"上级目录\"; then 
             ls -p --color=always ..; 
         elif [ -d {} ]; then 
             ls -p --color=always {}; 
         else 
             file -b {} 2>/dev/null || ls -lh --color=always {}; 
-        fi"'
+        fi" 2>/dev/null'
 
     # --- 界面统计与路径优化 ---
     COUNT=$(wc -l < "$SELECTED_LOG" | tr -d ' ')
