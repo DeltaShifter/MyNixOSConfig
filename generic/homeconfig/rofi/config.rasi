@@ -1,6 +1,6 @@
 configuration {
     /* --- 基础行为 --- */
-    modi: "combi,run,calc,⏻ Power :rofi-power-menu";
+    modi: "combi,run,calc,power:dale-mod-power-menu";
     combi-modi:"drun,emoji";
     show-icons: true;
     icon-theme: "Papirus";
