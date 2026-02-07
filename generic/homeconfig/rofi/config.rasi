@@ -1,21 +1,24 @@
 configuration {
     /* --- 基础行为 --- */
-    modi: "drun,run,calc";
+    modi: "combi,drun,run,power-menu:rofi-power-menu";
+    combi-modi:"drun,calc,emoji";
     show-icons: true;
     icon-theme: "Papirus";
     terminal: "alacritty";
+    font: "JetBrainsMono Nerd Font 12";
     
     /* --- 搜索逻辑 --- */
     matching: "fuzzy"; 
     scroll-method: 0;
     disable-history: false;
+    spot:true;
+    sorting-method: "fzf";
     
     /* --- 显示设置 --- */
     drun-display-format: "{icon} {name}";
+    display-combi: " 💻 All ";
     display-drun: " 📦 Apps ";
-    display-run: " 🏃 Run ";
-    display-calc: " 󰪚 Calc ";
-    display-emoji: " 󰞅 Emoji ";
+    display-run: " >_ Run ";
 }
 
 @theme "rounded-nord-dark.rasi"

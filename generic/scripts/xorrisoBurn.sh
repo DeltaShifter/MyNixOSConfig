@@ -22,7 +22,6 @@ while true; do
     # --- 预览逻辑 ---
     # 优先显示目录，其次尝试 file 命令，失败则降级为 ls -lh
     PREVIEW_STR='sh -c "
-        export GIO_EXTRA_MODULES=;
         if echo {} | grep -q \"上级目录\"; then 
             ls -p --color=always ..; 
         elif [ -d {} ]; then 
