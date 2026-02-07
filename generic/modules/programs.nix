@@ -62,13 +62,7 @@
     (pkgs.writeShellScriptBin "xterm" ''  # 伪装xterm解决某些顽固的默认开启问题
       exec ${pkgs.alacritty}/bin/alacritty "$@"
     '')
-    (nur.repos.xddxdd.baidunetdisk.overrideAttrs (oldAttrs:{
-      postFixup = (oldAttrs.postFixup or "") + ''
-      wrapProgram $out/bin/baidunetdisk \
-        --set FONTCONFIG_FILE "/etc/fonts/fonts.conf" \
-        --set XDG_DATA_DIRS "${pkgs.gsettings-desktop-schemas}/share/gsettings-schemas/${pkgs.gsettings-desktop-schemas.name}:$XDG_DATA_DIRS"
-      '';
-    }))
+    repos.xddxdd.baidunetdisk
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts
     vim
