@@ -33,10 +33,30 @@
   let
     system = "x86_64-linux";
     # 自动扫描 modules 目录下的所有 .nix 文件
+    lib = nixpkgs.lib;
     configDir = ./generic/modules;
-    generatedModules = map (file: configDir + "/${file}")  # 最终模块路径等于目录+文件名
-      (builtins.filter (file: nixpkgs.lib.hasSuffix ".nix" file)  # 逐个检查扩展名是否为.nix,否则过滤
-        (builtins.attrNames (builtins.readDir configDir))); # attrNames提取出最终文件名列表
+    findAllNixFiles = path:
+      let
+        # 获取当前路径下的所有条目及其类型 (directory, regular, symlink, etc.)
+        content = builtins.readDir path;
+      in
+      lib.flatten (lib.mapAttrsToList (name: type:
+        let 
+          fullPath = path + "/${name}";
+        in
+        if type == "directory" then
+          # 如果是目录，递归进去
+          findAllNixFiles fullPath
+        else if type == "regular" && lib.hasSuffix ".nix" name then
+          # 如果是 nix 文件，返回路径列表
+          [ fullPath ]
+        else
+          # 其他文件忽略
+          [ ]
+      ) content);
+
+    # 调用函数获取所有nix
+    generatedModules = findAllNixFiles configDir;
     
      # HM通用设置
     homeManagerConfig = { ... }: {
