@@ -27,13 +27,21 @@ while true; do
         LIST=$(ls -p --group-directories-first --color=never)
         
         PREVIEW_STR='sh -c "
-            if echo {} | grep -q \"上级目录\"; then 
-                ls -p --color=always ..; 
-            elif [ -d {} ]; then 
-                ls -p --color=always {}; 
-            else 
-                file -b {} 2>/dev/null || ls -lh --color=always {}; 
-            fi" 2>/dev/null'
+        if echo {} | grep -q \"上级目录\"; then 
+            ls -p --color=always ..; 
+        elif [ -d {} ]; then 
+            ls -p --color=always {}; 
+        else 
+            echo -e \"\033[1;33m【文件信息】\033[0m\";
+            echo -n \"📏 大小: \"; du -sh {} | cut -f1;
+            echo -n \"类型: \"; file -b {} | fold -s -w 40;
+            echo \"--------------------------------\";
+            # 如果是文本文件，顺便预览前几行
+            if file {} | grep -q \"text\"; then
+                echo -e \"\n\033[1;34m【内容预览】\033[0m\";
+                head -n 10 {};
+            fi
+        fi" 2>/dev/null'
 
         COUNT=$(wc -l < "$SELECTED_LOG" | tr -d ' ')
         display_path="${CURRENT_DIR/#$HOME/~}"
@@ -119,11 +127,13 @@ while true; do
     echo "正在调用 xorriso 进行刻录..."
 
     # 执行刻录
-    xorriso -dev /dev/sr0 \
-        -volid "$VOLID" \
+    xorriso -x -dev /dev/sr0 \
         -joliet on \
         -compliance no_emul_toc \
+        -rockridge on \
+        -volid "$VOLID" \
         "${XORRISO_ARGS[@]}" \
+        -report_about UPDATE \
         -commit -eject all
 
     if [ $? -eq 0 ]; then
