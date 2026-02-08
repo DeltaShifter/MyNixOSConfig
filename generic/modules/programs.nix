@@ -105,7 +105,6 @@
     xclip
     caligula
     nixd
-    gigolo
     nfs-utils
     baidupcs-go
     telegram-desktop
