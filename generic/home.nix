@@ -3,7 +3,7 @@
 let
   
    # 调取主机名，方便以后的判断
-    currentHostName = osConfig.networking.hostname;
+    currentHostName = osConfig.networking.hostName;
     
 in
 
