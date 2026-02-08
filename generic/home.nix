@@ -1,4 +1,11 @@
-{ config, pkgs, lib, ... }:
+{ osConfig, pkgs, lib, ... }:
+
+let
+  
+   # 调取主机名，方便以后的判断
+    currentHostName = osConfig.networking.hostname;
+    
+in
 
 {
   home.stateVersion = "25.11"; 
@@ -16,11 +23,15 @@
       };
     };
 
+
   # niri 配置相关
   xdg.configFile."niri/my-custom.kdl".source = ./homeconfig/niriConfig.kdl;
 
   # Alacritty 相关
-  xdg.configFile."alacritty/alacritty.toml".source = ./homeconfig/alacritty.toml;
+  xdg.configFile."alacritty/alacritty.toml".source =
+    if currentHostName == "X1c"
+    then ./homeconfig/alacritty/alacritty-X1c.toml
+    else ./homeconfig/alacritty/alacritty.toml;
 
   # Fcitx5 外观
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/fcitx5ui.conf;
