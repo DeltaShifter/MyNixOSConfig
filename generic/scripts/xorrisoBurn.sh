@@ -133,7 +133,6 @@ while true; do
         -rockridge on \
         -volid "$VOLID" \
         "${XORRISO_ARGS[@]}" \
-        -report_about UPDATE \
         -commit -eject all
 
     if [ $? -eq 0 ]; then
