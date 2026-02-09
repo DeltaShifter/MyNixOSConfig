@@ -4,8 +4,8 @@ let
   
    # 调取主机名，方便以后的判断
     currentHostName = osConfig.networking.hostName;
-
-   # 让部分主题不兼容的应用回归默认
+  
+    # 让部分主题不兼容的应用回归默认
     Adwaitar = pkg: pkgs.symlinkJoin {
     name = "${pkg.name}-adwaita";
     paths = [ pkg ];
@@ -13,9 +13,15 @@ let
     postBuild = ''
       wrapProgram $out/bin/${pkg.pname or pkg.name} \
     --set XDG_CONFIG_HOME "\$HOME/.config/gtk-4.0-isolated"
+    mkdir -p $out/share/applications
+      for f in ${pkg}/share/applications/*.desktop; do
+        target="$out/share/applications/$(basename "$f")"
+        rm -f "$target"
+        sed "s|^Exec=[^ ]*\(.*\)|Exec=$out/bin/${pkg.pname or pkg.name}\1|g" "$f" > "$target"
+      done
     '';
-  };
-    
+    };
+
 in
 
 {
@@ -34,13 +40,14 @@ in
       };
     };
 
-   home.packages = with pkgs; [
-     gnome-themes-extra
-   ] ++ (map Adwaitar [
-     clapper
-     loupe
-     ghostty
-   ]);
+    home.packages = with pkgs;[
+      
+    ]
+     ++ (map Adwaitar [
+    clapper
+    ghostty
+    loupe
+      ]);
 
   # niri 配置相关
   xdg.configFile."niri/my-custom.kdl".source = ./homeConfig/niriConfig.kdl;

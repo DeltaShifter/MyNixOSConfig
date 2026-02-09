@@ -1,5 +1,6 @@
 { config, pkgs, lib , ... }:
 
+
 {
   programs.dconf.enable = true;
   services.envfs.enable = true;
@@ -60,9 +61,8 @@
   
   environment.systemPackages = with pkgs; [
     (pkgs.writeShellScriptBin "xterm" ''  # 伪装xterm解决某些顽固的默认开启问题
-      exec ${pkgs.ghostty}/bin/ghostty "$@"
+      exec ${pkgs.alacritty}/bin/alacritty "$@"
     '')
-    ghostty
     alacritty
     nur.repos.xddxdd.baidunetdisk
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
@@ -81,7 +81,6 @@
     gsettings-desktop-schemas
     adwaita-icon-theme
     bibata-cursors-translucent
-    loupe
     xray
     gparted
     spacedrive
@@ -93,14 +92,12 @@
     papirus-icon-theme
     wpsoffice-cn
     ouch
-    file-roller    
+    file-roller
     intel-undervolt
     nh
     thunderbird
     zenity
     glide-media-player
-    clapper
-    clapper-enhancers
     gearlever
     appimage-run
     wl-clipboard
@@ -110,7 +107,10 @@
     nfs-utils
     baidupcs-go
     telegram-desktop
- ]; # ---PkgsEnd---
+    clapper-enhancers
+  # ---PkgsEnd--- 
+    ];
+    
  
 services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
 
