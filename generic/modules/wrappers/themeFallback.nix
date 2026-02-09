@@ -17,8 +17,8 @@
     };
     in
     {
-      clapper = themeFallback prev.clapper;
-      loupe = themeFallback prev.loupe;
+     # clapper = themeFallback prev.clapper;
+     # loupe = themeFallback prev.loupe;
     }
  )
  ];

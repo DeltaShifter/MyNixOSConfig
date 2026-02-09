@@ -13,10 +13,6 @@ in
   # 整体主题配置
   gtk = {
     enable = true;
-    theme = {
-      name = "Materia";
-      package = pkgs.materia-theme;
-      };
     iconTheme ={
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
