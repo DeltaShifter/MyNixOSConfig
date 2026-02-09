@@ -60,8 +60,9 @@
   
   environment.systemPackages = with pkgs; [
     (pkgs.writeShellScriptBin "xterm" ''  # 伪装xterm解决某些顽固的默认开启问题
-      exec ${pkgs.alacritty}/bin/alacritty "$@"
+      exec ${pkgs.ghostty}/bin/ghostty "$@"
     '')
+    ghostty
     nur.repos.xddxdd.baidunetdisk
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts

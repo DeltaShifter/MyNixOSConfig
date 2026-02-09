@@ -107,8 +107,6 @@
   curl
   git
   wget
-  alacritty
-  fuzzel
   swaybg
   xwayland-satellite
   ];
