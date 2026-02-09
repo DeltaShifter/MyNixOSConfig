@@ -13,7 +13,7 @@ let
     postBuild = ''
       wrapProgram $out/bin/${pkg.pname or pkg.name} \
     --set XDG_CONFIG_HOME "\$HOME/.config/gtk-4.0-isolated" # 给这些应用指定一个默认的GTK配置文件
-     mkdir -p $out/share/applications # 接下来我要把.desktop里面的exec指向也改到包装以后的路径
+     mkdir -p $out/share/applications # 接下来我要把.desktop里面的exec指向改到包装以后的路径
       for f in ${pkg}/share/applications/*.desktop; do # 遍历所有desktop文件
         target="$out/share/applications/$(basename "$f")"
         # 先找到原有的链接,拼好链，用$out/share/applications加切掉路径保留文件名的$f
