@@ -10,7 +10,7 @@
     nativeBuildInputs = [ final.makeWrapper ];
     postBuild = ''
       wrapProgram $out/bin/${pkg.pname or pkg.name} \
-        --set XDG_CONFIG_HOME "$HOME/.config/gtk-4.0-isolated" \
+        --set XDG_CONFIG_HOME "\$HOME/.config/gtk-4.0-isolated"
       '';
       };
     in
