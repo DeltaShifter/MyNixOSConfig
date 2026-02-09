@@ -18,10 +18,15 @@ let
         target="$out/share/applications/$(basename "$f")"
         # 先找到原有的链接,拼好链，用$out/share/applications加切掉路径保留文件名的$f
         rm -f "$target" # 断链让symlikJoin生效
-        sed "s|^Exec=[^ ]*\(.*\)|Exec=$out/bin/${pkg.pname or pkg.name}\1|g" "$f" > "$target"
+        sed -e "s|Exec=[^ ]*|Exec=$out/bin/${pkg.pname or pkg.name}|g" \
+            -e "s|TryExec=[^ ]*|TryExec=$out/bin/${pkg.pname or pkg.name}|g" \
+            -e "s|DBusActivatable=true|DBusActivatable=false|g" \
+            "$f" > "$target"
         # 找到Exec=开头的行，把第一个空格之后的所有内容（也就是二进制命令后面的所有参数）抓起来
         # 内容放入寄存1，开始拼好令，替换为Exec=加包装后的路径+寄存1（也就是参数）
         # 拼完后丢入$target,大功告成
+        [ -s "$target" ] || { echo "Error: Failed to generate $target"; exit 1; }
+        # 以防万一，插个调试
       done
     '';
     };
