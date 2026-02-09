@@ -34,11 +34,13 @@ in
       };
     };
 
-  home.packages = with pkgs; [
-    gnome-themes-extra
-    (Adwaitar clapper)
-    (Adwaitar loupe)
-  ];
+   home.packages = with pkgs; [
+     
+   ] ++ (map Adwaitar [
+     clapper
+     loupe
+     ghostty
+   ]);
 
   # niri 配置相关
   xdg.configFile."niri/my-custom.kdl".source = ./homeconfig/niriConfig.kdl;
