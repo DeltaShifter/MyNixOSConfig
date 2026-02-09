@@ -87,8 +87,10 @@
     google-chrome
     gopeed
     qq
-    gopeed
     wechat
+    clapper
+    ghostty
+    loupe
     papirus-icon-theme
     wpsoffice-cn
     ouch
