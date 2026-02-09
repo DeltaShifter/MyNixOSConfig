@@ -35,7 +35,7 @@ in
     };
 
    home.packages = with pkgs; [
-     
+     gnome-themes-extra
    ] ++ (map Adwaitar [
      clapper
      loupe
@@ -43,27 +43,27 @@ in
    ]);
 
   # niri 配置相关
-  xdg.configFile."niri/my-custom.kdl".source = ./homeconfig/niriConfig.kdl;
+  xdg.configFile."niri/my-custom.kdl".source = ./homeConfig/niriConfig.kdl;
 
   # Alacritty 相关
   xdg.configFile."alacritty/alacritty.toml".source =
     if currentHostName == "X1c"
-    then ./homeconfig/alacritty/alacritty-X1c.toml
-    else ./homeconfig/alacritty/alacritty.toml;
+    then ./homeConfig/alacritty/alacritty-X1c.toml
+    else ./homeConfig/alacritty/alacritty.toml;
 
   # Fcitx5 外观
-  xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeconfig/fcitx5ui.conf;
+  xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5ui.conf;
 
   # Rofi
-  xdg.configFile."rofi/config.rasi".source = ./homeconfig/rofi/config.rasi;
-  xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeconfig/rofi/rounded-nord-dark.rasi;
-  xdg.configFile."rofi/template/rounded-template.rasi".source = ./homeconfig/rofi/rounded-template.rasi;
+  xdg.configFile."rofi/config.rasi".source = ./homeConfig/rofi/config.rasi;
+  xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeConfig/rofi/rounded-nord-dark.rasi;
+  xdg.configFile."rofi/template/rounded-template.rasi".source = ./homeConfig/rofi/rounded-template.rasi;
 
   # Starship
-  xdg.configFile."starship.toml".source = ./homeconfig/starship.toml;
+  xdg.configFile."starship.toml".source = ./homeConfig/starship.toml;
 
   # Helix
-  xdg.configFile."helix/config.toml".source = ./homeconfig/helix.toml;
+  xdg.configFile."helix/config.toml".source = ./homeConfig/helix.toml;
   
   programs.home-manager.enable = true;
 
