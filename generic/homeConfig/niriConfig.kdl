@@ -1,6 +1,7 @@
 spawn-at-startup "dms" "run"
 spawn-at-startup "udiskie" "--smart-tray"
 spawn-at-startup "ydotoold"
+spawn-at-startup "ghostty" "&"
 
 window-rule {
     geometry-corner-radius 14
