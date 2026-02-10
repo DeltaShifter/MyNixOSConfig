@@ -16,18 +16,13 @@ window-rule {
 }
 
 window-rule {
-    match app-id="Kitty"
+    match app-id="kitty"
     opacity 0.9
 }
 // Steam好友弹窗修复
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
-}
-
-window-rule {
-    match app-id="rofi"
-    open-floating true
 }
 
   // 去掉烦人的鼠标边角触发
@@ -48,6 +43,7 @@ input {
 
 binds {
     "Mod+D" { spawn "rofi" "-show" "combi"; }
+    "Mod+T" { spawn "kitty"; }
     "Mod+WheelScrollUp"   cooldown-ms=150 { focus-column-left; }
     "Mod+WheelScrollDown" cooldown-ms=150 { focus-column-right; }
 }

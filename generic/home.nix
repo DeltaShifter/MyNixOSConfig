@@ -28,6 +28,10 @@ in
     then ./homeConfig/alacritty/alacritty-X1c.toml
     else ./homeConfig/alacritty/alacritty.toml;
 
+  # Kitty
+  xdg.configFile."kitty/kitty.conf".source = ./homeConfig/kitty/kitty.conf;
+  xdg.configFile."kitty/theme.conf".source = ./homeConfig/kitty/theme.conf;
+
   # Fcitx5 外观
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5ui.conf;
 
