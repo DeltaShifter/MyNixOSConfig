@@ -5,6 +5,7 @@
     enable = true;
     interactiveShellInit = "zoxide init fish | source";
     shellAliases = {
+      ls = "eza --icons --group-directories-first";
       nixadd = "hx ~/.MyNixConf/generic/modules/programs.nix:(math (grep -n '# ---PkgsEnd---' ~/.MyNixConf/generic/modules/programs.nix | cut -d: -f1) - 1)";
       nixupd = "nh os switch ~/.MyNixConf/";
       flakeupd = "nix flake update --flake ~/.MyNixConf/";

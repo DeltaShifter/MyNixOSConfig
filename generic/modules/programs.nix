@@ -115,8 +115,13 @@
     
   # ---PkgsEnd--- 
     ];
-    
- 
+     
 services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
+
+environment.variables = {
+    EDITOR = "hx";
+    VISUAL = "hx";
+    SUDO_EDITOR = "hx";
+  };
 
 }
