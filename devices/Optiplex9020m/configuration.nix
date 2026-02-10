@@ -53,8 +53,8 @@
   programs.niri.enable = true;
 
   # Bluetooth
-  hardware.bluetooth.enable = true;
-  services.blueman.enable = true;
+  hardware.bluetooth.enable = false;
+  services.blueman.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
