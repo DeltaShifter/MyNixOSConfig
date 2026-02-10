@@ -101,7 +101,6 @@
   ];
 
   environment.sessionVariables = {
-    EDITOR = "${pkgs.helix}/bin/hx";
     MOZ_ENABLE_WAYLAND = "1";
     WLR_NO_HARDWARE_CURSORS = "1";
   };

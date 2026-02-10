@@ -1,8 +1,9 @@
+  // niri启动时运行
 spawn-at-startup "dms" "run"
 spawn-at-startup "udiskie" "--smart-tray"
-spawn-at-startup "ydotoold"
-spawn-at-startup "ghostty" "&"
 
+  // 窗口规则
+  // 总体设置窗口圆角并关掉窗口背景填充方便透明
 window-rule {
     geometry-corner-radius 14
     clip-to-geometry true
@@ -15,21 +16,28 @@ window-rule {
 }
 
 window-rule {
-    match app-id="Ghostty"
+    match app-id="Kitty"
     opacity 0.9
 }
-
+// Steam好友弹窗修复
 window-rule {
     match app-id="steam" title=r#"^notificationtoasts_\d+_desktop$"#
     default-floating-position x=10 y=10 relative-to="bottom-right"
 }
 
+window-rule {
+    match app-id="rofi"
+    open-floating true
+}
+
+  // 去掉烦人的鼠标边角触发
 gestures {
     hot-corners {
       off
     }
 }
 
+  // 重新定义右Alt方便快捷键
 input {
     keyboard {
         xkb {
@@ -47,7 +55,7 @@ binds {
 animations {
     // damping-ratio (阻尼): 越小越弹。1.0 是不弹，0.5 会弹得很厉害。
     // stiffness (刚度): 越大越快。
-    
+
     horizontal-view-movement {
         spring damping-ratio=0.8 stiffness=700 epsilon=0.0001
     }
