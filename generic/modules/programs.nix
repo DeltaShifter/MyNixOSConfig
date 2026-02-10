@@ -89,7 +89,6 @@
     qq
     wechat
     clapper
-    ghostty
     loupe
     papirus-icon-theme
     wpsoffice-cn
