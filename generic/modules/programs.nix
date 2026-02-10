@@ -112,10 +112,14 @@
     baidupcs-go
     telegram-desktop
     clapper-enhancers
-    
+    ventoy-full
   # ---PkgsEnd--- 
     ];
      
+nixpkgs.config.permittedInsecurePackages = [
+    "ventoy-1.1.10"
+  ];
+
 services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
 
 environment.variables = {
