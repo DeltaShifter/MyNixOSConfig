@@ -64,6 +64,7 @@
       exec ${pkgs.alacritty}/bin/alacritty "$@"
     '')
     alacritty
+    ghostty
     nur.repos.xddxdd.baidunetdisk
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts
