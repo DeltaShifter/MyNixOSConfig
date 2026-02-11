@@ -41,6 +41,10 @@ input {
     }
 }
 
+cursor {
+    hide-when-typing
+}
+
 binds {
     "Mod+D" { spawn "rofi" "-show" "combi"; }
     "Mod+T" { spawn "kitty"; }
