@@ -26,6 +26,8 @@
   };
 
   environment.systemPackages = [
+    pkgs.qt6.qtwebsockets
+    pkgs.qt6.qtbase
     inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
