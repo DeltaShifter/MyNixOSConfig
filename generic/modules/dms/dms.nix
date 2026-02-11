@@ -6,6 +6,19 @@
     inputs.dms.nixosModules.greeter
   ];
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      # 针对 dms 进行包装以支持qt6环境
+      dms-shell = prev.dms-shell.overrideAttrs (oldAttrs: {
+        nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [ pkgs.makeWrapper ];
+        postFixup = (oldAttrs.postFixup or "") + ''
+          wrapProgram $out/bin/DankMaterialShell \
+            --prefix QML2_IMPORT_PATH : "${pkgs.qt6.qtwebsockets}/lib/qt-6/qml"
+        '';
+      });
+    })
+  ];
+
   programs.dank-material-shell.greeter = {
     enable = false;
     compositor.name = "niri";  # Or "hyprland" or "sway"
