@@ -95,16 +95,20 @@ while true; do
     MENU=".. (上级目录)"$'\n'"$CLEAN_LIST"
 
     # 调用 fzf
-    SELECTED=$(echo "$MENU" | fzf \
+    FZF_GOT=$(echo "$MENU" | fzf \
         --ansi \
         --header "当前: $PCS_WORKING | 下载至: ~/Downloads" \
         --prompt="PCS> " \
+        --expect=tab \
         --height=95% \
         --layout=reverse \
         --border \
         --delimiter='\t' \
         --with-nth=2 \
         --preview='echo "Size: {1}"')
+
+    KEY=$(echo "$FZF_GOT" | head -n 1)
+    SELECTED=$(echo "$FZF_GOT" | sed -n '2p')
 
     if [ -z "$SELECTED" ]; then
         exit 0
@@ -120,16 +124,26 @@ while true; do
 
     # 提取文件名
     FILE_NAME=$(echo "$SELECTED" | awk -F'\t' '{print $2}')
-    
     CLEAN_NAME=$(echo "$FILE_NAME" | sed 's/\/$//')
     
+    # 开始处理下载
     if [[ "$PCS_WORKING" == "/" ]]; then
         NEXT_PATH="/$CLEAN_NAME"
     else
         NEXT_PATH="$PCS_WORKING/$CLEAN_NAME"
     fi
 
-    if [[ "$FILE_NAME" == */ ]]; then
+    # 按下Tab时不导航直接下载（用来下载目录）
+    if [[ "$KEY" == "tab" ]]; then
+        echo -e "\n准备下载: ${GREEN}$FILE_NAME${NC}"
+        read -p "确认下载到 $DOWNLOAD_DIR? (y/n) " -n 1 -r
+        echo
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+            $PCS_CMD d "$NEXT_PATH" --saveto "$DOWNLOAD_DIR"
+            read -p "下载结束，按键继续..." -n 1
+        fi
+    
+    elif [[ "$FILE_NAME" == */ ]]; then
         # === 是目录 (名字以 / 结尾) ===
         PCS_WORKING="$NEXT_PATH"
     else
