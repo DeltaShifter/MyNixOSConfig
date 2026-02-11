@@ -32,6 +32,9 @@ in
   xdg.configFile."kitty/kitty.conf".source = ./homeConfig/kitty/kitty.conf;
   xdg.configFile."kitty/theme.conf".source = ./homeConfig/kitty/theme.conf;
 
+  # yazi
+  xdg.configFile."yazi/yazi.toml".source = ./homeConfig/yazi/yazi.toml;
+  
   # Fcitx5 外观
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5ui.conf;
 
