@@ -1,7 +1,7 @@
 configuration {
     /* --- 基础行为 --- */
     modi: "combi,run,calc,power:rofi-power-menu";
-    combi-mode: drun;
+    combi-mode: "drun";
     show-icons: true;
     icon-theme: "Papirus";
     terminal: "kitty";
@@ -12,7 +12,6 @@ configuration {
     scroll-method: 0;
     disable-history: false;
     sort:true;
-    sorting-method: "fzf";
     drun-match-fields:"name,generic,exec";
     
     /* --- 显示设置 --- */
