@@ -4,7 +4,7 @@ let
   lyrics-src = pkgs.fetchFromGitHub {
     owner = "KangweiZhu";
     repo = "lyrics-on-panel";
-    rev = "main"; 
+    rev = "2.0"; 
     sha256 = "sha256-brdHTft2DaH+0w/QoJCrUkYBiTRDakQT2lcSVwV7QuQ="; 
   };
 
@@ -38,7 +38,7 @@ in {
     # 环境变量注入
     environment = {
       PYTHONPATH = "${lyrics-src}/backend/src";
-      PYTHONUNBUFFERED = "0";
+      PYTHONUNBUFFERED = "1";
     };
   };
 }
