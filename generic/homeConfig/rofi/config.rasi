@@ -1,6 +1,7 @@
 configuration {
     /* --- 基础行为 --- */
-    modi: "drun,run,calc,power:rofi-power-menu";
+    modi: "combi,run,calc,power:rofi-power-menu";
+    combi-mode: drun;
     show-icons: true;
     icon-theme: "Papirus";
     terminal: "kitty";
