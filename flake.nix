@@ -37,17 +37,18 @@
       url = "git+https://github.com/LierB/fastfetch.git";
       flake = false;
     };
+   
   };
 
-    yesplaymusic = {
-      url = "path:.pkgs/yesplaymusic";
-    };
     
-  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,yesplaymusic,nixos-hardware,home-manager,nur, ... }@inputs: 
+  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,nixos-hardware,home-manager,nur, ... }@inputs: 
 
   let
     system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
 
+    yesplaymusic = pkgs.callPackage ./pkgs/yesplaymusic/default.nix { };
+    
     # 自动扫描 modules 目录下的所有 .nix 文件
     lib = nixpkgs.lib;
     configDir = ./generic/modules;
@@ -92,7 +93,7 @@
        imports = [inputs.nur.modules.nixos.default];
        };
 
-  in
+   in
   
   {
     nixosConfigurations.Optiplex = nixpkgs.lib.nixosSystem {
@@ -124,6 +125,7 @@
         ./devices/AlienwareAlpha/configuration.nix
         homeManagerConfig
         nurModule
+        ({ ... }: { nixpkgs.overlays = [ self.overlays.default ]; })
       ] ++ generatedModules; 
     };
 
