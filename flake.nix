@@ -29,11 +29,11 @@
     };
     
     yazi-plugins = {
-      url = "github:sxyazi/plugins";
+      url = "git+https://github.com/yazi-rs/plugins.git";
       flake = false;
     };
     yazi-plugins-openwith = {
-      url = "github:Ape/open-with-cmd.yazi";
+      url = "git+https://github.com/Ape/open-with-cmd.yazi.git";
       flake = false;
     };
   

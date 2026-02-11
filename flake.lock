@@ -181,7 +181,41 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nur": "nur",
-        "quickshell": "quickshell_2"
+        "quickshell": "quickshell_2",
+        "yazi-plugins": "yazi-plugins",
+        "yazi-plugins-openwith": "yazi-plugins-openwith"
+      }
+    },
+    "yazi-plugins": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1770380477,
+        "narHash": "sha256-0K6qGgbGt8N6HgGNEmn2FDLar6hCPiPBbvOsrTjSubM=",
+        "ref": "refs/heads/main",
+        "rev": "88990a6cf1d31afd9d8db1a0d74bf37ef50d6786",
+        "revCount": 235,
+        "type": "git",
+        "url": "https://github.com/yazi-rs/plugins.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/yazi-rs/plugins.git"
+      }
+    },
+    "yazi-plugins-openwith": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767706872,
+        "narHash": "sha256-vN7zQeGuYN8TPKlA/6+SNFTVsA607z1DJPKXlNFJ9YM=",
+        "ref": "refs/heads/master",
+        "rev": "e3d430f8b12cb314a1d5744bcf8f76dd56b071e7",
+        "revCount": 11,
+        "type": "git",
+        "url": "https://github.com/Ape/open-with-cmd.yazi.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://github.com/Ape/open-with-cmd.yazi.git"
       }
     }
   },

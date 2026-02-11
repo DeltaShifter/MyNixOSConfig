@@ -34,15 +34,14 @@ in
 
   # yazi配置
   xdg.configFile."yazi/yazi.toml".source = ./homeConfig/yazi/yazi.toml;
+  xdg.configFile."yazi/keymap.toml".source = ./homeConfig/yazi/keymap.toml;
 
   # yazi插件
   xdg.configFile = {
-    "yazi/plugins/open-with-cmd.yazi".source = "${inputs.yazi-plugins-openwith}/open-with-cmd.yazi";
+    "yazi/plugins/open-with-cmd.yazi/main.lua".source = "${inputs.yazi-plugins-openwith}/main.lua";
     "yazi/plugins/smart-enter.yazi".source = "${inputs.yazi-plugins}/smart-enter.yazi";
   };
 
-
-  
   # Fcitx5 外观
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5ui.conf;
 
