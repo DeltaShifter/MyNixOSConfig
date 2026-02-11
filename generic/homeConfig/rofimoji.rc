@@ -1,0 +1,4 @@
+action = type
+skin-tone = light
+hidden-descriptions = true
+selector = rofi
