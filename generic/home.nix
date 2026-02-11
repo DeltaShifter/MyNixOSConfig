@@ -1,22 +1,10 @@
-{ osConfig, pkgs, lib, ... }:
+{ osConfig, inputs, pkgs, lib, ... }:
 
 let
   
    # 调取主机名，方便以后的判断
     currentHostName = osConfig.networking.hostName;
-  
-    yazi-plugins-repo = pkgs.fetchFromGitHub {
-      owner = "sxyazi";
-      repo = "plugins";
-      rev = "master"; 
-      hash = "sha256-R2A/NreCAs4v+u3lF85X65tEofv0/5CgO9pT5+x6N8U="; 
-      };
-    yazi-plugins-openwith = pkgs.fetchFromGitHub {
-      owner = "Ape";
-      repo = "open-with-cmd.yazi";
-      rev = "master";
-      hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
-    };
+
 in
 
 {
@@ -49,8 +37,8 @@ in
 
   # yazi插件
   xdg.configFile = {
-    "yazi/plugins/open-with-cmd.yazi".source = "${yazi-plugins-openwith}/open-with-cmd.yazi";
-    "yazi/plugins/smart-enter.yazi".source = "${yazi-plugins-repo}/smart-enter.yazi";
+    "yazi/plugins/open-with-cmd.yazi".source = "${inputs.yazi-plugins-openwith}/open-with-cmd.yazi";
+    "yazi/plugins/smart-enter.yazi".source = "${inputs.yazi-plugins}/smart-enter.yazi";
   };
 
 

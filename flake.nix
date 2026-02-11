@@ -23,14 +23,23 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-      nur = {
+    nur = {
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
+    yazi-plugins = {
+      url = "github:sxyazi/plugins";
+      flake = false;
+    };
+    yazi-plugins-openwith = {
+      url = "github:Ape/open-with-cmd.yazi";
+      flake = false;
+    };
+  
   };
 
-  outputs = { self, nixpkgs,nixpkgs-stable,nixos-hardware,home-manager,nur, ... }@inputs: 
+  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,yazi-plugins-openwith,nixos-hardware,home-manager,nur, ... }@inputs: 
 
   let
     system = "x86_64-linux";
