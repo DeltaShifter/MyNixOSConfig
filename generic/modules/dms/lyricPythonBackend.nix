@@ -38,7 +38,7 @@ in {
     # 环境变量注入
     environment = {
       PYTHONPATH = "${lyrics-src}/backend/src";
-      PYTHONUNBUFFERED = "1";
+      PYTHONUNBUFFERED = "0";
     };
   };
 }
