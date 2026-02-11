@@ -45,7 +45,7 @@
   nixpkgs.overlays = [ # 应用行为
   
   (final: prev: { 
-    spacedrive = prev.symlinkJoin { # 修正spacedrive显示问题和路径问题
+    spacedrive-wrapper = prev.symlinkJoin { # 修正spacedrive显示问题和路径问题
       name = "spacedrive";
       paths = [ prev.spacedrive ]; 
       nativeBuildInputs = [ final.makeWrapper ];
