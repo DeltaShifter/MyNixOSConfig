@@ -40,7 +40,7 @@
   };
 
     yesplaymusic = {
-      path = ".pkgs/yesplaymusic";
+      url = "path:.pkgs/yesplaymusic";
     };
     
   outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,yesplaymusic,nixos-hardware,home-manager,nur, ... }@inputs: 
