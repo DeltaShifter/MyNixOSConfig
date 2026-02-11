@@ -32,14 +32,10 @@
       url = "git+https://github.com/yazi-rs/plugins.git";
       flake = false;
     };
-    yazi-plugins-openwith = {
-      url = "git+https://github.com/Ape/open-with-cmd.yazi.git";
-      flake = false;
-    };
   
   };
 
-  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,yazi-plugins-openwith,nixos-hardware,home-manager,nur, ... }@inputs: 
+  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,nixos-hardware,home-manager,nur, ... }@inputs: 
 
   let
     system = "x86_64-linux";

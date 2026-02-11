@@ -38,7 +38,6 @@ in
 
   # yazi插件
   xdg.configFile = {
-    "yazi/plugins/open-with-cmd.yazi/main.lua".source = "${inputs.yazi-plugins-openwith}/main.lua";
     "yazi/plugins/smart-enter.yazi".source = "${inputs.yazi-plugins}/smart-enter.yazi";
   };
 
