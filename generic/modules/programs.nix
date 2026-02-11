@@ -115,6 +115,7 @@
     ventoy-full
     foliate
     splayer
+
   # ---PkgsEnd--- 
     ];
      

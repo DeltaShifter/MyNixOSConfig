@@ -4,7 +4,7 @@ let
   lyrics-src = pkgs.fetchFromGitHub {
     owner = "KangweiZhu";
     repo = "lyrics-on-panel";
-    rev = "2.0dev"; 
+    rev = "main"; 
     sha256 = "sha256-brdHTft2DaH+0w/QoJCrUkYBiTRDakQT2lcSVwV7QuQ="; 
   };
 
