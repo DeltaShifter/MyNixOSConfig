@@ -2,7 +2,7 @@
 , gtk3, nss, alsa-lib, at-spi2-atk, atk, cairo, cups, dbus, expat
 , fontconfig, freetype, gdk-pixbuf, glib, libdrm, libglvnd, libnotify
 , libpulseaudio, libuuid, libxkbcommon, mesa, nspr, pango, systemd
-, xorg
+, xorg , zstd
 }:
 
 stdenv.mkDerivation rec {
@@ -14,7 +14,7 @@ stdenv.mkDerivation rec {
     sha256 = "e93b279cf2e916be661586990390b272c471ba1405ff665a27246c3fa1efac9f";
   };
 
-  nativeBuildInputs = [ autoPatchelfHook makeWrapper libarchive ];
+  nativeBuildInputs = [ autoPatchelfHook makeWrapper libarchive zstd ];
 
   buildInputs = [
     gtk3 nss alsa-lib at-spi2-atk atk cairo cups dbus expat fontconfig
@@ -25,23 +25,22 @@ stdenv.mkDerivation rec {
     xorg.libXtst xorg.libxcb xorg.libxshmfence
   ];
 
-  # 模仿 PKGBUILD 的 package() 逻辑
+  unpackPhase = ''
+    tar -xvf $src
+  '';
+
   installPhase = ''
     runHook preInstall
 
-    # 创建目标目录（模仿 /opt）
-    mkdir -p $out/opt/YesPlayMusic
-    cp -r . $out/opt/YesPlayMusic/
+    mkdir -p $out/opt
+    mkdir -p $out/share
+    cp -r opt/YesPlayMusic $out/opt/
+    cp -r usr/share/* $out/share/
 
-    # 清理 Arch 专用的元数据文件
     rm -f $out/opt/YesPlayMusic/{.PKGINFO,.MTREE,.INSTALL}
 
-    # 安装图标和桌面文件（从 opt 挪到标准路径）
-    mkdir -p $out/share/applications
-    cp -r usr/share/icons $out/share/ 2>/dev/null || true
-    cp usr/share/applications/yesplaymusic.desktop $out/share/applications/
+    chmod +x $out/opt/YesPlayMusic/yesplaymusic
 
-    # 模仿 PKGBUILD 的 sed 修改逻辑
     substituteInPlace $out/share/applications/yesplaymusic.desktop \
       --replace 'Exec=/opt/YesPlayMusic/yesplaymusic' "Exec=$out/bin/yesplaymusic" \
       --replace 'Categories=Music;' 'Categories=Music;AudioVideo;Player;'
