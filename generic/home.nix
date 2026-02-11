@@ -41,9 +41,10 @@ in
     "yazi/plugins/smart-enter.yazi".source = "${inputs.yazi-plugins}/smart-enter.yazi";
   };
 
-  # Fcitx5 外观
+  # Fcitx5
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5ui.conf;
-
+  xdg.dataFile."fcitx5/rime/default.custom.yaml".source = ./homeConfig/fcitx5/rime.default.custom.yaml;
+  
   # Rofi
   xdg.configFile."rofi/config.rasi".source = ./homeConfig/rofi/config.rasi;
   xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeConfig/rofi/rounded-nord-dark.rasi;
