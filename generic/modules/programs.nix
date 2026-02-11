@@ -113,6 +113,8 @@
     telegram-desktop
     clapper-enhancers
     ventoy-full
+    foliate
+    splayer
   # ---PkgsEnd--- 
     ];
      
