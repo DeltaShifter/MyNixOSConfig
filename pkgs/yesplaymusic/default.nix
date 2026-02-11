@@ -2,7 +2,7 @@
 , gtk3, nss, alsa-lib, at-spi2-atk, atk, cairo, cups, dbus, expat
 , fontconfig, freetype, gdk-pixbuf, glib, libdrm, libglvnd, libnotify
 , libpulseaudio, libuuid, libxkbcommon, mesa, nspr, pango, systemd
-, xorg , zstd
+, xorg , zstd , libappindicator-gtk3 , ffmpeg , libvpx , snappy
 }:
 
 stdenv.mkDerivation rec {
@@ -22,7 +22,8 @@ stdenv.mkDerivation rec {
     libuuid libxkbcommon mesa nspr pango systemd
     xorg.libX11 xorg.libXcomposite xorg.libXcursor xorg.libXdamage
     xorg.libXext xorg.libXfixes xorg.libXi xorg.libXrandr xorg.libXrender
-    xorg.libXtst xorg.libxcb xorg.libxshmfence
+    xorg.libXtst xorg.libxcb xorg.libxshmfence libappindicator-gtk3
+    ffmpeg libvpx snappy
   ];
 
   unpackPhase = ''
@@ -49,7 +50,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     makeWrapper $out/opt/YesPlayMusic/yesplaymusic $out/bin/yesplaymusic \
       --argv0 "yesplaymusic" \
-      --add-flags "--enable-features=UseOzonePlatform --ozone-platform=wayland"
 
     runHook postInstall
   '';
