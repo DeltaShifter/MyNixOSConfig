@@ -42,7 +42,7 @@ in
   };
 
   # Fcitx5
-  xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5ui.conf;
+  xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5/fcitx5ui.conf;
   xdg.dataFile."fcitx5/rime/default.custom.yaml".source = ./homeConfig/fcitx5/rime.default.custom.yaml;
   
   # Rofi
