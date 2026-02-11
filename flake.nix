@@ -39,7 +39,11 @@
     };
   };
 
-  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,nixos-hardware,home-manager,nur, ... }@inputs: 
+    yesplaymusic = {
+      path = ".pkgs/yesplaymusic";
+    };
+    
+  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,yesplaymusic,nixos-hardware,home-manager,nur, ... }@inputs: 
 
   let
     system = "x86_64-linux";

@@ -115,7 +115,7 @@
     ventoy-full
     foliate
     splayer
-
+    yesplaymusic
   # ---PkgsEnd--- 
     ];
      

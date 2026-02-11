@@ -1,29 +1,27 @@
-{ pkgs, lib, ... }:
+{ lib, stdenv, fetchurl, autoPatchelfHook, makeWrapper, libarchive
+, gtk3, nss, alsa-lib, at-spi2-atk, atk, cairo, cups, dbus, expat
+, fontconfig, freetype, gdk-pixbuf, glib, libdrm, libglvnd, libnotify
+, libpulseaudio, libuuid, libxkbcommon, mesa, nspr, pango, systemd
+, xorg
+}:
 
-pkgs.stdenv.mkDerivation rec {
+stdenv.mkDerivation rec {
   pname = "yesplaymusic";
   version = "0.4.10";
 
-  # 直接使用你给出的那个 pacman 包链接
-  src = pkgs.fetchurl {
+  src = fetchurl {
     url = "https://github.com/qier222/YesPlayMusic/releases/download/v${version}/YesPlayMusic-${version}.pacman";
     sha256 = "e93b279cf2e916be661586990390b272c471ba1405ff665a27246c3fa1efac9f";
   };
 
-  # pacman 包本质是压缩包，nix 会自动处理解压，但可能需要指定解压工具
-  nativeBuildInputs = with pkgs; [ 
-    autoPatchelfHook 
-    makeWrapper 
-    libarchive # 用于处理复杂的压缩格式
-  ];
+  nativeBuildInputs = [ autoPatchelfHook makeWrapper libarchive ];
 
-  # 补充 PKGBUILD 里没写全但 Electron 必带的运行库
-  buildInputs = with pkgs; [
-    gtk3 nss alsa-lib at-spi2-atk atk cairo cups dbus expat fontconfig 
-    freetype gdk-pixbuf glib libdrm libglvnd libnotify libpulseaudio 
+  buildInputs = [
+    gtk3 nss alsa-lib at-spi2-atk atk cairo cups dbus expat fontconfig
+    freetype gdk-pixbuf glib libdrm libglvnd libnotify libpulseaudio
     libuuid libxkbcommon mesa nspr pango systemd
-    xorg.libX11 xorg.libXcomposite xorg.libXcursor xorg.libXdamage 
-    xorg.libXext xorg.libXfixes xorg.libXi xorg.libXrandr xorg.libXrender 
+    xorg.libX11 xorg.libXcomposite xorg.libXcursor xorg.libXdamage
+    xorg.libXext xorg.libXfixes xorg.libXi xorg.libXrandr xorg.libXrender
     xorg.libXtst xorg.libxcb xorg.libxshmfence
   ];
 
