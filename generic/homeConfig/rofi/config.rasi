@@ -1,10 +1,9 @@
 configuration {
     /* --- 基础行为 --- */
-    modi: "combi,run,calc,power:rofi-power-menu";
-    combi-modi: "drun,emoji:rofimoji";
+    modi: "drun,run,calc,power:rofi-power-menu";
     show-icons: true;
     icon-theme: "Papirus";
-    terminal: "alacritty";
+    terminal: "kitty";
     font: "JetBrainsMono Nerd Font 12";
     
     /* --- 搜索逻辑 --- */

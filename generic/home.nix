@@ -40,7 +40,6 @@ in
 
   # Rofi
   xdg.configFile."rofi/config.rasi".source = ./homeConfig/rofi/config.rasi;
-  xdg.configFile."rofimoji.rc".source = ./homeConfig/rofi/rofimoji.rc;
   xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeConfig/rofi/rounded-nord-dark.rasi;
   xdg.configFile."rofi/template/rounded-template.rasi".source = ./homeConfig/rofi/rounded-template.rasi;
 
