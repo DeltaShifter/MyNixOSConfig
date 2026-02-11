@@ -55,6 +55,9 @@ in
   # Helix
   xdg.configFile."helix/config.toml".source = ./homeConfig/helix.toml;
   
+  # Fastfetch预设
+  xdg.dataFile.source."fastfetch" = inputs.fastfetch-presets;
+  
   programs.home-manager.enable = true;
 
   home.activation = {

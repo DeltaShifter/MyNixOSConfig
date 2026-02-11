@@ -33,9 +33,13 @@
       flake = false;
     };
   
+    fastfetch-presets = {
+      url = "git+https://github.com/LierB/fastfetch.git";
+      flake = false;
+    };
   };
 
-  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,nixos-hardware,home-manager,nur, ... }@inputs: 
+  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,nixos-hardware,home-manager,nur, ... }@inputs: 
 
   let
     system = "x86_64-linux";
