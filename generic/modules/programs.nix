@@ -92,7 +92,6 @@
     qq
     wechat
     clapper
-    loupe
     papirus-icon-theme
     wpsoffice-cn
     ouch

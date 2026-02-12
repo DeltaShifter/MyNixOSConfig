@@ -12,6 +12,7 @@ configuration {
     scroll-method: 0;
     disable-history: false;
     sort:true;
+    sorting-method:"fzf";
     drun-match-fields:"name,generic,exec";
     
     /* --- 显示设置 --- */
