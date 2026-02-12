@@ -68,6 +68,7 @@
     drivers = with pkgs; [
     cups-filters
     cups-browsed
+    pantum-driver
     ];
   };
   services.avahi = {
