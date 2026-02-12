@@ -123,7 +123,6 @@
         ./devices/AlienwareAlpha/configuration.nix
         homeManagerConfig
         nurModule
-        ({ ... }: { nixpkgs.overlays = [ self.overlays.default ]; })
       ] ++ generatedModules; 
     };
 
