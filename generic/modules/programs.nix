@@ -115,6 +115,7 @@
     ventoy-full
     foliate
     splayer
+    (pkgs.callPackage ../../pkgs/yesplaymusic.nix {})
   # ---PkgsEnd--- 
     ];
      
