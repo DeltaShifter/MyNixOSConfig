@@ -45,12 +45,7 @@
 
   let
     system = "x86_64-linux";
-    pkgs = nixpkgs.legacyPackages.${system};
-
-    ypm-overlay = final: prev: {
-      yesplaymusic = final.callPackage ./pkgs/yesplaymusic/default.nix { };
-    };
-    
+  
     # 自动扫描 modules 目录下的所有 .nix 文件
     lib = nixpkgs.lib;
     configDir = ./generic/modules;
@@ -98,9 +93,7 @@
    in
   
   {
-
-    overlays.default = ypm-overlay;
-    
+  
     nixosConfigurations.Optiplex = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = { inherit inputs nixpkgs-stable; }; # 继承全部变量传递给inputs
