@@ -91,7 +91,9 @@ buildInputs = [
   appendRunpaths = ["${placeholder "out"}/lib/pantum"];
 
   postFixup = ''
-    find $out -type f -executable -exec autoPatchelf {} +
+    find $out -type f -executable | while read -r file; do
+      autoPatchelf "$file"
+    done
   '';
 
   meta = with lib; {
