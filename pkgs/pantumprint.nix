@@ -69,7 +69,7 @@ buildInputs = [
     mkdir -p $out/share/cups/model/pantum
     mkdir -p $out/share/cups/mime/
     
-    cp -r filter/* $out/lib/
+    cp -r filter/* $out/lib/cups/filter/
     cp -r lib/* $out/lib/pantum/
     cp -r scripts/* $out/lib/pantum/scripts/
     cp -r ppd/* $out/share/cups/model/pantum/
@@ -91,6 +91,7 @@ buildInputs = [
   appendRunpaths = ["${placeholder "out"}/lib/pantum"];
 
   postFixup = ''
+    addAutoPatchelfSearchPath $out/lib
     find $out -type f -executable | while read -r file; do
       autoPatchelf "$file"
     done
