@@ -45,6 +45,8 @@ buildInputs = [
     mv opt/pantum/com.pantum.pantumprint/lib/* lib
     mv usr/share/cups/model/pantum/* ppd
     mv usr/share/cups/mime/* mime
+    ls -R
+    echo "test dic tree========================"
   '';
 
   installPhase = ''
@@ -52,6 +54,7 @@ buildInputs = [
     mkdir -p $out/lib/cups/filter
     mkdir -p $out/lib/pantum
     mkdir -p $out/share/cups/model/pantum
+    mkdir -p $out/share/cups/mime/
     
     cp -r filter/* $out/lib/cups/filter/
     cp -r lib/* $out/lib/pantum/
