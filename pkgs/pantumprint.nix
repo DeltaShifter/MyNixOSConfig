@@ -20,6 +20,7 @@
 , imagemagick
 , coreutils
 , gnused
+, gnugrep
 , ...
 } @ args:
 stdenv.mkDerivation rec {
@@ -48,6 +49,7 @@ buildInputs = [
   poppler-utils
   imagemagick
   coreutils
+  gnugrep
   ];
   unpackPhase = ''
     tar -xzvf $src
@@ -77,23 +79,24 @@ buildInputs = [
 
     # 重写ppd文件中的硬编码路径
     for f in $out/share/cups/model/pantum/*.ppd; do
+      echo "Surgery on PPD: $(basename $f)"
       substituteInPlace "$f" \
-      --replace-quiet "pantumprint-commandtodev" "$out/lib/cups/filter/pantumprint-commandtodev" \
-      --replace-quiet "pantumprint-pcltobackend" "$out/lib/cups/filter/pantumprint-pcltobackend" \
-      --replace-quiet "pantumprint-pdftopcl" "$out/lib/cups/filter/pantumprint-pdftopcl" \
-      --replace-quiet "pantumprint-pdftopdf" "$out/lib/cups/filter/pantumprint-pdftopdf" \
-      --replace-quiet "pantumprint-rastertogdi_m" "$out/lib/cups/filter/pantumprint-rastertogdi_m" \
-      --replace-quiet "pantumprint-rastertogdi_s" "$out/lib/cups/filter/pantumprint-rastertogdi_s"
+        --replace 'pantumprint-pdftopcl"' "$out/lib/cups/filter/pantumprint-pdftopcl\"" \
+        --replace 'pantumprint-pdftopdf"' "$out/lib/cups/filter/pantumprint-pdftopdf\""
     done
        
     # 重写pdfscale.sh的硬编码路径
-    substituteInPlace $out/lib/pantum/scripts/pdfscale.sh \
-      --replace 'GSBIN=""' 'GSBIN="${ghostscript}/bin/gs"' \
-      --replace 'BCBIN=""' 'BCBIN="${bc}/bin/bc"' \
-      --replace 'PDFINFOBIN=""' 'PDFINFOBIN="${poppler-utils}/bin/pdfinfo"' \
-      --replace 'IDBIN=""' 'IDBIN="${imagemagick}/bin/identify"'
+    local pdfscale="$out/lib/pantum/scripts/pdfscale.sh"
+    substituteInPlace "$pdfscale" \
+      --replace 'GSBIN="$(which gs 2>/dev/null)"' 'GSBIN="${ghostscript}/bin/gs"' \
+      --replace 'BCBIN="$(which bc 2>/dev/null)"' 'BCBIN="${bc}/bin/bc"' \
+      --replace 'PDFINFOBIN="$(which pdfinfo 2>/dev/null)"' 'PDFINFOBIN="${poppler-utils}/bin/pdfinfo"' \
+      --replace 'IDBIN=$(which identify 2>/dev/null)' 'IDBIN="${imagemagick}/bin/identify"' \
+      --replace 'GREPBIN="$(which grep 2>/dev/null)"' 'GREPBIN="${gnugrep}/bin/grep"'
+    patchShebangs $out/lib/pantum/scripts/
+      
+    find $out/lib -type f -exec sed -i "s|/opt/pantum/com.pantum.pantumprint|$out/lib/pantum|g" {} +
 
-    find $out -type f -exec sed -i "s|/opt/pantum/com.pantum.pantumprint|$out/lib/pantum|g" {} +
     for f in $out/lib/cups/filter/*; do
       if [ -f "$f" ] && [ -x "$f" ]; then
         wrapProgram "$f" \
