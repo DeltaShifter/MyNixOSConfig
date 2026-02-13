@@ -20,6 +20,7 @@
 , imagemagick
 , coreutils
 , gnugrep
+, libredirect
 , ...
 } @ args:
 stdenv.mkDerivation rec {
@@ -35,7 +36,6 @@ buildInputs = [
   cups
   dbus
   libusb1
-  stdenv
   jbigkit
   xz
   dbus-glib
@@ -43,72 +43,57 @@ buildInputs = [
   libice
   libx11
   libxext
-  ghostscript
-  bc
-  poppler-utils
-  imagemagick
-  coreutils
-  gnugrep
+  libredirect
   ];
   unpackPhase = ''
     tar -xzvf $src
-    mkdir -p filter lib scripts ppd mime
-    mv opt/pantum/com.pantum.pantumprint/bin/* filter
-    mv opt/pantum/com.pantum.pantumprint/lib/* lib
-    mv opt/pantum/com.pantum.pantumprint/scripts/* scripts
-    mv usr/share/cups/model/pantum/* ppd
-    mv usr/share/cups/mime/* mime
   '';
 
   installPhase = ''
-  runHook preInstall
-    mkdir -p $out/lib/cups/filter
-    mkdir -p $out/lib/pantum
-    mkdir -p $out/lib/pantum/scripts/
-    mkdir -p $out/share/cups/model/pantum
-    mkdir -p $out/share/cups/mime/
-    
-    cp -r filter/* $out/lib/cups/filter/
-    cp -r lib/* $out/lib/pantum/
-    cp -r scripts/* $out/lib/pantum/scripts/
-    cp -r ppd/* $out/share/cups/model/pantum/
-    cp -r mime/* $out/share/cups/mime/
+    runHook preInstall
 
-    # 换掉报错二进制文件中的硬编码路径
-    sed -i 's|/opt/pantum|/tmp/pantum|g' $out/lib/cups/filter/pantumprint-pdftopdf
-    sed -i 's|/opt/pantum|/tmp/pantum|g' $out/lib/cups/filter/pantumprint-pdftopcl
-        
+    cp -r opt usr $out
+    mkdir -p $out/lib/cups/filter
+    cp -r $out/opt/pantum/com.pantum.pantumprint/bin/* $out/lib/cups/filter/
+    
     # 重写pdfscale.sh的硬编码路径
-    local pdfscale="$out/lib/pantum/scripts/pdfscale.sh"
-    substituteInPlace "$pdfscale" \
+    local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
+    substituteInPlace "$scriptsDir/pdfscale.sh" \
       --replace 'GSBIN="$(which gs 2>/dev/null)"' 'GSBIN="${ghostscript}/bin/gs"' \
       --replace 'BCBIN="$(which bc 2>/dev/null)"' 'BCBIN="${bc}/bin/bc"' \
       --replace 'PDFINFOBIN="$(which pdfinfo 2>/dev/null)"' 'PDFINFOBIN="${poppler-utils}/bin/pdfinfo"' \
       --replace 'IDBIN=$(which identify 2>/dev/null)' 'IDBIN="${imagemagick}/bin/identify"' \
       --replace 'GREPBIN="$(which grep 2>/dev/null)"' 'GREPBIN="${gnugrep}/bin/grep"'
-    patchShebangs $out/lib/pantum/scripts/
+    patchShebangs "$scriptsDir/"
 
+    # 重定向二进制文件的搜索路径
     for bin in $out/lib/cups/filter/*; do
       if [ -f "$bin" ] && [ ! -L "$bin" ]; then
         filename=$(basename "$bin")
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
+        # /opt/pantum -> Nix Store 里的 opt 目录
+        # /usr/lib/cups -> Nix Store 里的 cups 库
+        local redirects="/opt/pantum=$out/opt/pantum:/usr/lib/cups=${cups}/lib/cups"
+
         makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
           --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups ]}" \
+          --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
+          --set NIX_REDIRECTS "$redirects" \
           --run '${coreutils}/bin/mkdir -p /tmp/pantum/com.pantum.pantumprint' \
-          --run '${coreutils}/bin/ln -sfn '$out'/lib/pantum/scripts /tmp/pantum/com.pantum.pantumprint/scripts' \
-          --run '${coreutils}/bin/mkdir -p /tmp/pnt' \
-          --run '${coreutils}/bin/ln -sfn ${cups}/lib/cups /tmp/pnt/cups'
+          --run '${coreutils}/bin/ln -sfn '$out'/opt/pantum/com.pantum.pantumprint/scripts /tmp/pantum/com.pantum.pantumprint/scripts'
       fi
     done
       
   runHook postInstall
     '';
 
-  appendRunpaths = ["${placeholder "out"}/lib/pantum"];
+  # 声明私有库
+  appendRunpaths = [ "$out/opt/pantum/com.pantum.pantumprint/lib" ];
 
   postFixup = ''
-    addAutoPatchelfSearchPath $out/lib
-    addAutoPatchelfSearchPath $out/lib/pantum
+    # 把私有库暴露出来
+    addAutoPatchelfSearchPath $out/opt/pantum/com.pantum.pantumprint/lib
+    # 修依赖
     find $out -type f -executable | while read -r file; do
       autoPatchelf "$file"
     done
