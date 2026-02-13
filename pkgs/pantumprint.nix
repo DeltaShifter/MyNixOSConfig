@@ -59,8 +59,6 @@ buildInputs = [
     mv opt/pantum/com.pantum.pantumprint/scripts/* scripts
     mv usr/share/cups/model/pantum/* ppd
     mv usr/share/cups/mime/* mime
-    ls -R
-    echo "test dic tree========================"
   '';
 
   installPhase = ''
@@ -71,20 +69,12 @@ buildInputs = [
     mkdir -p $out/share/cups/model/pantum
     mkdir -p $out/share/cups/mime/
     
-    cp -r filter/* $out/lib/cups/filter/
+    cp -r filter/* $out/lib/
     cp -r lib/* $out/lib/pantum/
     cp -r scripts/* $out/lib/pantum/scripts/
     cp -r ppd/* $out/share/cups/model/pantum/
     cp -r mime/* $out/share/cups/mime/
 
-    # 重写ppd文件中的硬编码路径
-    for f in $out/share/cups/model/pantum/*.ppd; do
-      echo "Surgery on PPD: $(basename $f)"
-      substituteInPlace "$f" \
-        --replace 'pantumprint-pdftopcl"' "$out/lib/cups/filter/pantumprint-pdftopcl\"" \
-        --replace 'pantumprint-pdftopdf"' "$out/lib/cups/filter/pantumprint-pdftopdf\""
-    done
-       
     # 重写pdfscale.sh的硬编码路径
     local pdfscale="$out/lib/pantum/scripts/pdfscale.sh"
     substituteInPlace "$pdfscale" \
@@ -95,24 +85,17 @@ buildInputs = [
       --replace 'GREPBIN="$(which grep 2>/dev/null)"' 'GREPBIN="${gnugrep}/bin/grep"'
     patchShebangs $out/lib/pantum/scripts/
       
-    find $out/lib -type f -exec sed -i "s|/opt/pantum/com.pantum.pantumprint|$out/lib/pantum|g" {} +
-
-    for f in $out/lib/cups/filter/*; do
-      if [ -f "$f" ] && [ -x "$f" ]; then
-        wrapProgram "$f" \
-          --prefix PATH : "${lib.makeBinPath [ ghostscript bc poppler-utils imagemagick coreutils gnused ]}" \
-          --prefix LD_LIBRARY_PATH : "$out/lib/pantum:${lib.makeLibraryPath buildInputs}"
-      fi
-    done
-    
   runHook postInstall
     '';
 
   appendRunpaths = ["${placeholder "out"}/lib/pantum"];
 
+  postFixup = ''
+    find $out -type f -executable -exec autoPatchelf {} +
+  '';
+
   meta = with lib; {
     description = "Pantum printer driver (based on UOS deb package)";
     platforms = platforms.linux;
-    license = licenses.unfree;
     };
   }
