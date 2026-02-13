@@ -40,12 +40,11 @@ buildInputs = [
   ];
   unpackPhase = ''
     tar -xzvf $src
-    mkdir -p filter lib ppd
-    echo "--- Current directory content ---"
-    ls -R
+    mkdir -p filter lib ppd mime
     mv opt/pantum/com.pantum.pantumprint/bin/* filter
     mv opt/pantum/com.pantum.pantumprint/lib/* lib
     mv usr/share/cups/model/pantum/* ppd
+    mv usr/share/cups/mime/* mime
   '';
 
   installPhase = ''
@@ -57,11 +56,17 @@ buildInputs = [
     cp -r filter/* $out/lib/cups/filter/
     cp -r lib/* $out/lib/pantum/
     cp -r ppd/* $out/share/cups/model/pantum/
+    cp -r mime/* $out/share/cups/mime
 
     # 重写ppd文件中的硬编码路径
     for f in $out/share/cups/model/pantum/*.ppd; do
       substituteInPlace "$f" \
-        --replace 'pantumprint-pdftopcl' "$out/lib/cups/filter/pantumprint-pdftopcl"
+      --replace-quiet "pantumprint-commandtodev" "$out/lib/cups/filter/pantumprint-commandtodev" \
+      --replace-quiet "pantumprint-pcltobackend" "$out/lib/cups/filter/pantumprint-pcltobackend" \
+      --replace-quiet "pantumprint-pdftopcl" "$out/lib/cups/filter/pantumprint-pdftopcl" \
+      --replace-quiet "pantumprint-pdftopdf" "$out/lib/cups/filter/pantumprint-pdftopdf" \
+      --replace-quiet "pantumprint-rastertogdi_m" "$out/lib/cups/filter/pantumprint-rastertogdi_m" \
+      --replace-quiet "pantumprint-rastertogdi_s" "$out/lib/cups/filter/pantumprint-rastertogdi_s"
     done
        
   runHook postInstall
