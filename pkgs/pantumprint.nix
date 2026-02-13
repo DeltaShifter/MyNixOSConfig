@@ -47,6 +47,7 @@ buildInputs = [
   ];
   unpackPhase = ''
     tar -xzvf $src
+    mkdir -p $out
   '';
 
   installPhase = ''
