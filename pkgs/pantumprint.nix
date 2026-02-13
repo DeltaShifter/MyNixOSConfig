@@ -4,20 +4,21 @@
 , makeWrapper
 , lib
 , callPackage
-, dpkg
 , ...
 } @ args:
 stdenv.mkDerivation rec {
   pname = "pantumprint";
   version = "2.0.4-1+uos";
   src = fetchurl {
-    url = "https://github.com/DeltaShifter/CM1115ADN-printer-assets/raw/refs/heads/main/pantum-cm1115-assets.tar.gz";
-    sha256 = "sha256-kK6K2I7PKtzCrJOijNPU+o6lgZ4Aq4fHrDtwoeLK5l4=";
+    url = "https://raw.githubusercontent.com/DeltaShifter/CM1115ADN-printer-assets/refs/heads/main/pantum-cm1115-assets.tar.gz";
+    sha256 = "sha256-kitxqt9oEm8+PfliN6iau64j2he5Te9Ps1gcl4Xf4BA=";
   };
 
-nativeBuildInputs = [ autoPatchelfHook makeWrapper dpkg ];
+nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
   unpackPhase = ''
-    dpkg -x $src .
+    tar -xzvf $src
+    echo "--- Current directory content ---"
+    ls -R
     mv opt/pantum/com.pantum.pantumprint/bin/* filter
     mv opt/pantum/com.pantum.pantumprint/lib/* lib
     mv usr/share/cups/model/pantum/* ppd
