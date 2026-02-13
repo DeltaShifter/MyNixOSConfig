@@ -58,6 +58,7 @@ buildInputs = [
     cp -r opt usr $out
     mkdir -p $out/lib/cups/filter
     cp -r $out/opt/pantum/com.pantum.pantumprint/bin/* $out/lib/cups/filter/
+    cp -r $out/usr/share $out
     
     # 重写pdfscale.sh的硬编码路径
     local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
@@ -76,7 +77,7 @@ buildInputs = [
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
         # /opt/pantum -> Nix Store 里的 opt 目录
         # /usr/lib/cups -> Nix Store 里的 cups 库
-        local redirects="/opt/pantum=$out/opt/pantum:/usr/lib/cups=${cups}/lib/cups"
+        local redirects="/opt/pantum=$out/opt/pantum:/usr/lib=${cups}/lib:/usr/share=$out/share"
 
         makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
           --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups ]}" \
