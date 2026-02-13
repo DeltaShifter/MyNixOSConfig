@@ -19,7 +19,6 @@
 , poppler-utils
 , imagemagick
 , coreutils
-, gnused
 , gnugrep
 , ...
 } @ args:
@@ -75,6 +74,10 @@ buildInputs = [
     cp -r ppd/* $out/share/cups/model/pantum/
     cp -r mime/* $out/share/cups/mime/
 
+    # 换掉报错二进制文件中的硬编码路径
+    sed -i 's|/opt/pantum|/tmp/pantum|g' $out/lib/cups/filter/pantumprint-pdftopdf
+    sed -i 's|/opt/pantum|/tmp/pantum|g' $out/lib/cups/filter/pantumprint-pdftopcl
+        
     # 重写pdfscale.sh的硬编码路径
     local pdfscale="$out/lib/pantum/scripts/pdfscale.sh"
     substituteInPlace "$pdfscale" \
@@ -84,6 +87,19 @@ buildInputs = [
       --replace 'IDBIN=$(which identify 2>/dev/null)' 'IDBIN="${imagemagick}/bin/identify"' \
       --replace 'GREPBIN="$(which grep 2>/dev/null)"' 'GREPBIN="${gnugrep}/bin/grep"'
     patchShebangs $out/lib/pantum/scripts/
+
+    for bin in $out/lib/cups/filter/*; do
+      if [ -f "$bin" ] && [ ! -L "$bin" ]; then
+        filename=$(basename "$bin")
+        mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
+        makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
+          --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups ]}" \
+          --run '${coreutils}/bin/mkdir -p /tmp/pantum/com.pantum.pantumprint' \
+          --run '${coreutils}/bin/ln -sfn '$out'/lib/pantum/scripts /tmp/pantum/com.pantum.pantumprint/scripts' \
+          --run '${coreutils}/bin/mkdir -p /tmp/pnt' \
+          --run '${coreutils}/bin/ln -sfn ${cups}/lib/cups /tmp/pnt/cups'
+      fi
+    done
       
   runHook postInstall
     '';
@@ -92,6 +108,7 @@ buildInputs = [
 
   postFixup = ''
     addAutoPatchelfSearchPath $out/lib
+    addAutoPatchelfSearchPath $out/lib/pantum
     find $out -type f -executable | while read -r file; do
       autoPatchelf "$file"
     done
