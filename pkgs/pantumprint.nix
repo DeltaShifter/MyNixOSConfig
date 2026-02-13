@@ -64,7 +64,7 @@ stdenv.mkDerivation rec {
 
     # 赋予执行权限以便 Patchelf 处理
     chmod +x $out/lib/cups/filter/*
-    find $out/opt/pantum/com.pantum.pantumprint/lib -name "*.so*" -exec chmod +x {} +
+   # find $out/opt/pantum/com.pantum.pantumprint/lib -name "*.so*" -exec chmod +x {} +
 
     # 脚本路径修复
     local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
