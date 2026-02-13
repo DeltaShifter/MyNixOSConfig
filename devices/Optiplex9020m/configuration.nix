@@ -68,7 +68,6 @@
     drivers = with pkgs; [
     cups-filters
     cups-browsed
-    pantum-driver
     (pkgs.callPackage ../../pkgs/pantumprint.nix{})
     ];
   };
