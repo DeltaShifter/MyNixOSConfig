@@ -81,6 +81,7 @@ buildInputs = [
 
         makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
           --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups ]}" \
+          --prefix LD_LIBRARY_PATH : "$out/opt/pantum/com.pantum.pantumprint/lib:$out/opt/pantum/com.pantum.pantumprint/lib/product_modules" \
           --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
           --set NIX_REDIRECTS "$redirects" \
           --run '${coreutils}/bin/mkdir -p /tmp/pantum/com.pantum.pantumprint' \
