@@ -4,6 +4,16 @@
 , makeWrapper
 , lib
 , callPackage
+, cups
+, dbus
+, jbigkit
+, xz
+, dbus-glib
+, libusb1
+, libsm
+, libice
+, libx11
+, libxext
 , ...
 } @ args:
 stdenv.mkDerivation rec {
@@ -15,6 +25,19 @@ stdenv.mkDerivation rec {
   };
 
 nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
+buildInputs = [
+  cups
+  dbus
+  libusb1
+  stdenv
+  jbigkit
+  xz
+  dbus-glib
+  libsm
+  libice
+  libx11
+  libxext
+  ];
   unpackPhase = ''
     tar -xzvf $src
     mkdir -p filter lib ppd
