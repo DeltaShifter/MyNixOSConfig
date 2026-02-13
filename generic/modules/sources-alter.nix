@@ -6,7 +6,7 @@
     substituters = lib.mkForce [
       "https://mirrors.tuna.tsinghua.edu.cn/nix-channels/store"
       "https://mirrors.ustc.edu.cn/nix-channels/store"
-      "https://dale-nix-chacex.cachix.org"
+      "https://dale-nix-cachix.cachix.org"
       "https://nix-community.cachix.org"
       "https://cache.nixos.org/"
     ];
