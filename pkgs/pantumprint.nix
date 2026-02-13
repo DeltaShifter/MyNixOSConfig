@@ -56,7 +56,7 @@ buildInputs = [
     cp -r filter/* $out/lib/cups/filter/
     cp -r lib/* $out/lib/pantum/
     cp -r ppd/* $out/share/cups/model/pantum/
-    cp -r mime/* $out/share/cups/mime
+    cp -r mime/* $out/share/cups/mime/
 
     # 重写ppd文件中的硬编码路径
     for f in $out/share/cups/model/pantum/*.ppd; do
