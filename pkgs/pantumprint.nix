@@ -11,12 +11,13 @@ stdenv.mkDerivation rec {
   version = "2.0.4-1+uos";
   src = fetchurl {
     url = "https://raw.githubusercontent.com/DeltaShifter/CM1115ADN-printer-assets/refs/heads/main/pantum-cm1115-assets.tar.gz";
-    sha256 = "sha256-kitxqt9oEm8+PfliN6iau64j2he5Te9Ps1gcl4Xf4BA=";
+    sha256 = "sha256-i9DOxGR5JXW4lt6yFJ4tVImLfFHoieE9VjUTyx/X2Og=";
   };
 
 nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
   unpackPhase = ''
     tar -xzvf $src
+    mkdir -p filter lib ppd
     echo "--- Current directory content ---"
     ls -R
     mv opt/pantum/com.pantum.pantumprint/bin/* filter
