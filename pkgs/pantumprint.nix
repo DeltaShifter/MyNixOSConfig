@@ -21,6 +21,7 @@
 , coreutils
 , gnugrep
 , libredirect
+, libjpeg
 , ...
 } @ args:
 stdenv.mkDerivation rec {
@@ -44,6 +45,7 @@ buildInputs = [
   libx11
   libxext
   libredirect
+  libjpeg
   ];
   unpackPhase = ''
     tar -xzvf $src
