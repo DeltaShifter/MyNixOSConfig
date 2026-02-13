@@ -14,6 +14,12 @@
 , libice
 , libx11
 , libxext
+, ghostscript
+, bc
+, poppler-utils
+, imagemagick
+, coreutils
+, gnused
 , ...
 } @ args:
 stdenv.mkDerivation rec {
@@ -21,7 +27,7 @@ stdenv.mkDerivation rec {
   version = "2.0.4-1+uos";
   src = fetchurl {
     url = "https://raw.githubusercontent.com/DeltaShifter/CM1115ADN-printer-assets/refs/heads/main/pantum-cm1115-assets.tar.gz";
-    sha256 = "sha256-i9DOxGR5JXW4lt6yFJ4tVImLfFHoieE9VjUTyx/X2Og=";
+    sha256 = "sha256-GdNduxwEuVkO6j6Qvqqu1k9pFJ3LwzjUxQdlIt2dLcw=";
   };
 
 nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
@@ -37,12 +43,18 @@ buildInputs = [
   libice
   libx11
   libxext
+  ghostscript
+  bc
+  poppler-utils
+  imagemagick
+  coreutils
   ];
   unpackPhase = ''
     tar -xzvf $src
-    mkdir -p filter lib ppd mime
+    mkdir -p filter lib scripts ppd mime
     mv opt/pantum/com.pantum.pantumprint/bin/* filter
     mv opt/pantum/com.pantum.pantumprint/lib/* lib
+    mv opt/pantum/com.pantum.pantumprint/scripts/* scripts
     mv usr/share/cups/model/pantum/* ppd
     mv usr/share/cups/mime/* mime
     ls -R
@@ -53,11 +65,13 @@ buildInputs = [
   runHook preInstall
     mkdir -p $out/lib/cups/filter
     mkdir -p $out/lib/pantum
+    mkdir -p $out/lib/pantum/scripts/
     mkdir -p $out/share/cups/model/pantum
     mkdir -p $out/share/cups/mime/
     
     cp -r filter/* $out/lib/cups/filter/
     cp -r lib/* $out/lib/pantum/
+    cp -r scripts/* $out/lib/pantum/scripts/
     cp -r ppd/* $out/share/cups/model/pantum/
     cp -r mime/* $out/share/cups/mime/
 
@@ -72,6 +86,22 @@ buildInputs = [
       --replace-quiet "pantumprint-rastertogdi_s" "$out/lib/cups/filter/pantumprint-rastertogdi_s"
     done
        
+    # 重写pdfscale.sh的硬编码路径
+    substituteInPlace $out/lib/pantum/scripts/pdfscale.sh \
+      --replace 'GSBIN=""' 'GSBIN="${ghostscript}/bin/gs"' \
+      --replace 'BCBIN=""' 'BCBIN="${bc}/bin/bc"' \
+      --replace 'PDFINFOBIN=""' 'PDFINFOBIN="${poppler-utils}/bin/pdfinfo"' \
+      --replace 'IDBIN=""' 'IDBIN="${imagemagick}/bin/identify"'
+
+    find $out -type f -exec sed -i "s|/opt/pantum/com.pantum.pantumprint|$out/lib/pantum|g" {} +
+    for f in $out/lib/cups/filter/*; do
+      if [ -f "$f" ] && [ -x "$f" ]; then
+        wrapProgram "$f" \
+          --prefix PATH : "${lib.makeBinPath [ ghostscript bc poppler-utils imagemagick coreutils gnused ]}" \
+          --prefix LD_LIBRARY_PATH : "$out/lib/pantum:${lib.makeLibraryPath buildInputs}"
+      fi
+    done
+    
   runHook postInstall
     '';
 
