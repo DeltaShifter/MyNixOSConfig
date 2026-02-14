@@ -19,6 +19,10 @@
 , gnugrep
 , libredirect
 , libjpeg
+, libsm
+, libice
+, libx11
+, libxext
 , ...
 }:
 
@@ -52,17 +56,24 @@ stdenv.mkDerivation {
     libredirect
     libjpeg
     cups-filters
+    libsm
+    libice
+    libx11
+    libxext
   ];
 
   unpackPhase = ''
     ls -R
     dpkg -x $src .
-    rm -rf $out/opt/apps/
+    rm -rf opt/apps
     '';
 
   installPhase = ''
     runHook preInstall
     mkdir -p $out
+    echo "test-----------------"
+    ls -R
+    echo "endtest"
     [ -d opt ] && cp -r opt $out/
     [ -d usr ] && cp -r usr $out/
     
