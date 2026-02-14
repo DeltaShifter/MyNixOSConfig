@@ -67,7 +67,8 @@ stdenv.mkDerivation {
     '';
 
   installPhase = ''
-    runHook preInstall
+  runHook preInstall
+    
     mkdir -p $out
     cp -r opt usr $out/
         
@@ -84,7 +85,6 @@ stdenv.mkDerivation {
 
     # 脚本路径修复
     local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
-    if [ -d "$scriptsDir" ]; then
       substituteInPlace "$scriptsDir/pdfscale.sh" \
         --replace 'GSBIN="$(which gs 2>/dev/null)"' "GSBIN=${ghostscript}/bin/gs" \
         --replace 'BCBIN="$(which bc 2>/dev/null)"' "BCBIN=${bc}/bin/bc" \
@@ -92,28 +92,37 @@ stdenv.mkDerivation {
         --replace 'IDBIN=$(which identify 2>/dev/null)' "IDBIN=${imagemagick}/bin/identify" \
         --replace 'GREPBIN="$(which grep 2>/dev/null)"' "GREPBIN=${gnugrep}/bin/grep"
       patchShebangs "$scriptsDir/"
-    fi
+
     runHook postInstall
   '';
 
 
   postFixup = ''
-    local sys_pdftopdf="$out/opt/pantum/com.pantum.pantumprint/bin/pantumprint-pdftopdf"
+    local pdftopdf="$out/opt/pantum/com.pantum.pantumprint/bin/pantumprint-pdftopdf"
     
     # 路径重定向映射
     local r_opt="/opt/pantum=$out/opt/pantum"
     local r_mime="/usr/share/cups=$out/share/cups"
-    local r_filter="/usr/lib/cups/filter/pdftopdf=$sys_pdftopdf"
-    local redirects="$r_opt:$r_mime:$r_filter"
+    local r_filter="/usr/lib/cups/filter/pdftopdf=$pdftopdf"
+    local redirects="$r_opt:$r_mime:$r_filter" 
 
     for bin in $out/lib/cups/filter/*; do
+      filename=$(basename "$bin")
       if [ -f "$bin" ] && [ ! -L "$bin" ]; then
-        filename=$(basename "$bin")
-        
+
+        # 这里的花招是，把原文件改名，再包装他们
+        # 这样生成的包装文件就会替换掉原二进制文件
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
+
+        # 如果修补的是pdftopdf，不要动它自己的路径避免递归错误
+        if [ "$filename" = "pantumprint-pdftopdf" ];then
+          local redirects="$r_opt:$r_mime" 
+        else
+          local redirects="$r_opt:$r_mime:$r_filter"
+        fi
         
         makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
-          --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups ]}" \
+          --prefix PATH : "${lib.makeBinPath [ coreutils cups ghostscript bc poppler-utils imagemagick gnugrep ]}" \
           --prefix LD_LIBRARY_PATH : "$out/opt/pantum/com.pantum.pantumprint/lib" \
           --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
           --set NIX_REDIRECTS "$redirects" \
