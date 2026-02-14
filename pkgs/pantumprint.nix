@@ -3,13 +3,17 @@
 , autoPatchelfHook
 , makeWrapper
 , lib
-, dpkg
 , cups
-, xz
-, dbus-glib
+, cups-filters
 , dbus
 , jbigkit
+, xz
+, dbus-glib
 , libusb1
+, libsm
+, libice
+, libx11
+, libxext
 , ghostscript
 , bc
 , poppler-utils
@@ -18,78 +22,53 @@
 , gnugrep
 , libredirect
 , libjpeg
-, libsm
-, libice
-, libx11
-, libxext
-, cups-filters
 , ...
 }:
 
-stdenv.mkDerivation {
+stdenv.mkDerivation rec {
   pname = "pantumprint";
   version = "2.0.4-1+uos";
 
   src = fetchurl {
-    url = "https://raw.githubusercontent.com/DeltaShifter/CM1115ADN-printer-assets/main/signed_com_pantum_pantumprint_2_0_4-1%2Buos_amd64.deb";
-    sha256 = "sha256-RBnClfDzOlszOW3RUMP6Q0C1eK6U+6pbtO3XNh5uNGk=";
+    url = "https://raw.githubusercontent.com/DeltaShifter/CM1115ADN-printer-assets/refs/heads/main/pantum-cm1115-assets.tar.gz";
+    sha256 = "sha256-GdNduxwEuVkO6j6Qvqqu1k9pFJ3LwzjUxQdlIt2dLcw=";
   };
 
   sourceRoot = ".";
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
-  autoPatchelfIgnoreMissingDeps = [
-  ];
-  appendRunpaths = [
-    "$out/usr/lib/x86_64-linux-gnu/sane/"
-    "$out/local/lib/sane/"
-    "$out/opt/pantum/com.pantum.pantumprint/lib/"
-    "$out/opt/pantum/com.pantum.pantumprint/lib/product_modules/" 
-  ];
 
   buildInputs = [
-    cups
-    dbus
-    dpkg
-    libusb1
-    jbigkit
-    libredirect
-    libjpeg
-    libsm
-    libice
-    libx11
-    libxext
-    xz
-    dbus-glib
+    cups dbus libusb1 jbigkit xz dbus-glib libsm libice 
+    libx11 libxext libredirect libjpeg cups-filters
   ];
 
-  unpackPhase = ''
-    dpkg -x $src .
-    rm -rf opt/apps
-    '';
-
   installPhase = ''
-  runHook preInstall
-    
+    runHook preInstall
     mkdir -p $out
-    mkdir -p $out/lib/cups/filter
-    mkdir -p $out/share/cups/mime/
-    cp -r opt $out/
-    cp -r usr $out/
-    for file in $out/opt/pantum/com.pantum.pantumprint/bin/*; do
-      ln -s "$file" "$out/lib/cups/filter/$(basename "$file")"
-    done
-
-    for file in $out/usr/share/cups/mime/*; do
-      ln -s "$file" "$out/share/cups/mime/$(basename "$file")"
-    done
+    [ -d opt ] && cp -r opt $out/
+    [ -d usr ] && cp -r usr $out/
     
+    mkdir -p $out/lib/cups/filter
+    if [ -d "$out/opt/pantum/com.pantum.pantumprint/bin" ]; then
+      cp -r $out/opt/pantum/com.pantum.pantumprint/bin/* $out/lib/cups/filter/
+    fi
+
+    mkdir -p $out/share/cups/mime
+    [ -d usr/share/cups/mime ] && cp usr/share/cups/mime/* $out/share/cups/mime/
+
+    mkdir -p $out/share/cups/model/pantum
+    if [ -d "usr/share/cups/model/pantum" ]; then
+      cp usr/share/cups/model/pantum/* $out/share/cups/model/pantum/
+    fi
+
     # 赋予执行权限以便 Patchelf 处理
-    find $out/opt/pantum/com.pantum.pantumprint/bin/* -exec chmod +x {} +
-    find $out/ -name "*.so*" -exec chmod +x {} +
+    chmod +x $out/lib/cups/filter/*
+    find $out/opt/pantum/com.pantum.pantumprint/lib -name "*.so*" -exec chmod +x {} +
 
     # 脚本路径修复
-    scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts/"
+    local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
+    if [ -d "$scriptsDir" ]; then
       substituteInPlace "$scriptsDir/pdfscale.sh" \
         --replace 'GSBIN="$(which gs 2>/dev/null)"' "GSBIN=${ghostscript}/bin/gs" \
         --replace 'BCBIN="$(which bc 2>/dev/null)"' "BCBIN=${bc}/bin/bc" \
@@ -97,10 +76,14 @@ stdenv.mkDerivation {
         --replace 'IDBIN=$(which identify 2>/dev/null)' "IDBIN=${imagemagick}/bin/identify" \
         --replace 'GREPBIN="$(which grep 2>/dev/null)"' "GREPBIN=${gnugrep}/bin/grep"
       patchShebangs "$scriptsDir/"
-
-  runHook postInstall
+    fi
+    runHook postInstall
   '';
 
+  appendRunpaths = [ 
+    "$out/opt/pantum/com.pantum.pantumprint/lib" 
+    "$out/opt/pantum/com.pantum.pantumprint/lib/product_modules"
+  ];
 
   postFixup = ''
     # 查找真正的系统 pdftopdf 路径（cups-filters 包提供）
@@ -131,6 +114,4 @@ stdenv.mkDerivation {
       fi
     done
   '';
-  
 }
-
