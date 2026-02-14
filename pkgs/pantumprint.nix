@@ -5,11 +5,10 @@
 , lib
 , dpkg
 , cups
-, cups-filters
-, dbus
-, jbigkit
 , xz
 , dbus-glib
+, dbus
+, jbigkit
 , libusb1
 , ghostscript
 , bc
@@ -51,15 +50,14 @@ stdenv.mkDerivation {
     dpkg
     libusb1
     jbigkit
-    xz
-    dbus-glib
     libredirect
     libjpeg
-    cups-filters
     libsm
     libice
     libx11
     libxext
+    xz
+    dbus-glib
   ];
 
   unpackPhase = ''
@@ -71,9 +69,8 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
     mkdir -p $out
-    [ -d opt ] && cp -r opt $out/
-    [ -d usr ] && cp -r usr $out/
-    
+    cp -r opt usr $out/
+        
     mkdir -p $out/lib/cups/filter
     mkdir -p $out/share/cups/mime
     mkdir -p $out/share/cups/model/pantum
@@ -101,8 +98,7 @@ stdenv.mkDerivation {
 
 
   postFixup = ''
-    # 查找真正的系统 pdftopdf 路径（cups-filters 包提供）
-    local sys_pdftopdf="${cups-filters}/lib/cups/filter/pdftopdf"
+    local sys_pdftopdf="$out/opt/pantum/com.pantum.pantumprint/bin/pantumprint-pdftopdf"
     
     # 路径重定向映射
     local r_opt="/opt/pantum=$out/opt/pantum"
@@ -117,7 +113,7 @@ stdenv.mkDerivation {
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
         
         makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
-          --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups cups-filters ]}" \
+          --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups ]}" \
           --prefix LD_LIBRARY_PATH : "$out/opt/pantum/com.pantum.pantumprint/lib" \
           --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
           --set NIX_REDIRECTS "$redirects" \
