@@ -37,11 +37,14 @@
       url = "git+https://github.com/LierB/fastfetch.git";
       flake = false;
     };
+
+    nix-index-database.url = "github:nix-community/nix-index-database";
+    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
    
   };
 
     
-  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,nixos-hardware,home-manager,nur, ... }@inputs: 
+  outputs = { self, nixpkgs,nixpkgs-stable,yazi-plugins,fastfetch-presets,nixos-hardware,home-manager,nur, nix-index-database, ... }@inputs: 
 
   let
     system = "x86_64-linux";
@@ -101,6 +104,7 @@
         ./devices/Optiplex9020m/configuration.nix
         homeManagerConfig
         nurModule
+        nix-index-database.nixosModules.default
       ] ++ generatedModules; 
     };
   

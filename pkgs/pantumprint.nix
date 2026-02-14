@@ -22,6 +22,7 @@
 , libice
 , libx11
 , libxext
+, cups-filters
 , ...
 }:
 
@@ -90,7 +91,7 @@ stdenv.mkDerivation {
     cp -rf usr/lib/* $out/usr/lib
     
     # 赋予执行权限以便 Patchelf 处理
-    chmod +x $out/lib/cups/filter/*
+    find $out/lib/cups/filter/* -exec chmod +x {} +
     find $out/ -name "*.so*" -exec chmod +x {} +
 
     # 脚本路径修复
@@ -103,13 +104,12 @@ stdenv.mkDerivation {
         --replace 'GREPBIN="$(which grep 2>/dev/null)"' "GREPBIN=${gnugrep}/bin/grep"
       patchShebangs "$scriptsDir/"
 
-    runHook postInstall
+  runHook postInstall
   '';
 
 
   postFixup = ''
-  #   local pdftopdf="$out/lib/cups/filter/pantumprint-pdftopdf"
-    
+  
   #   路径重定向映射
   #   local r_opt="/opt/pantum=$out/opt/pantum"
   #   local r_mime="/usr/share/cups=$out/share/cups"
@@ -123,8 +123,9 @@ stdenv.mkDerivation {
         # 这里的花招是，把原文件改名，再包装他们
         # 这样生成的包装文件就会替换掉原二进制文件
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
-        local rdScripts="/opt/pantum/com.pantum.pantumprint/scripts/:$scriptsDir"
-        local redirects="$rdScripts"
+        local rdScripts="/opt/pantum/com.pantum.pantumprint/scripts/=$scriptsDir/"
+        local rdPdf2pdf="/usr/lib/cups/filter/pdftopdf=${cups-filters}/lib/cups/filter/pdftopdf"
+        local redirects="$rdScripts:$rdPdf2pdf"
   #       # 如果修补的是pdftopdf，不要动它自己的路径避免递归错误
   #       if [ "$filename" = "pantumprint-pdftopdf" ];then
   #         local redirects="$r_opt:$r_mime" 
@@ -133,15 +134,16 @@ stdenv.mkDerivation {
         # fi
         
         makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
-          --prefix LD_LIBRARY_PATH : "$out/opt/pantum/com.pantum.pantumprint/lib" \
+          --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript ]}" \
+          --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
           --set NIX_REDIRECTS "$redirects" \
-          # --prefix PATH : "${lib.makeBinPath [ coreutils cups ghostscript bc poppler-utils imagemagick gnugrep ]}" \
-          # --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
+          # --prefix LD_LIBRARY_PATH : "$all_lib_dirs" \
           # --set CUPS_SERVERBIN "${cups}/lib/cups" \
           # --set CUPS_DATADIR "$out/share/cups" \
           # --run "${coreutils}/bin/mkdir -p /tmp/pantum/com.pantum.pantumprint" \
           # --run "${coreutils}/bin/ln -sfn $out/opt/pantum/com.pantum.pantumprint/scripts /tmp/pantum/com.pantum.pantumprint/scripts"
       fi
     done
+  
   '';
 }
