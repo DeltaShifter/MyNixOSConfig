@@ -78,6 +78,7 @@
       imports = [ home-manager.nixosModules.home-manager ];
            home-manager.useGlobalPkgs = true;
            home-manager.useUserPackages = true;
+           home-manager.backupFileExtension = "hmBak";
            home-manager.extraSpecialArgs = { inherit inputs; };# 别忘了继承变量传递inputs
            home-manager.users.dale = import ./generic/home.nix;
       };
