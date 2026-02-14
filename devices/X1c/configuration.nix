@@ -54,7 +54,19 @@
   };
 
   # Enable CUPS to print documents.
-  services.printing.enable = true;
+    services.printing = {
+    enable = true;
+    drivers = with pkgs; [
+    (callPackage ../../pkgs/pantumprint-alt.nix{})
+    ];
+    logLevel = "debug";
+    extraConf = "FileDevice Yes";
+  };
+  services.avahi = {
+    enable = true;
+    nssmdns4 = true;
+    openFirewall = true;
+  };
 
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
