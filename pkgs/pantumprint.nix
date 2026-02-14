@@ -71,28 +71,19 @@ stdenv.mkDerivation {
   installPhase = ''
     runHook preInstall
     mkdir -p $out
-    echo "test-----------------"
-    ls -R
-    echo "endtest"
     [ -d opt ] && cp -r opt $out/
     [ -d usr ] && cp -r usr $out/
     
     mkdir -p $out/lib/cups/filter
-    if [ -d "$out/opt/pantum/com.pantum.pantumprint/bin" ]; then
-      cp -r $out/opt/pantum/com.pantum.pantumprint/bin/* $out/lib/cups/filter/
-    fi
-
     mkdir -p $out/share/cups/mime
-    [ -d usr/share/cups/mime ] && cp usr/share/cups/mime/* $out/share/cups/mime/
-
     mkdir -p $out/share/cups/model/pantum
-    if [ -d "usr/share/cups/model/pantum" ]; then
-      cp usr/share/cups/model/pantum/* $out/share/cups/model/pantum/
-    fi
+    cp -r $out/opt/pantum/com.pantum.pantumprint/bin/* $out/lib/cups/filter/
+    cp usr/share/cups/mime/* $out/share/cups/mime/
+    cp usr/share/cups/model/pantum/* $out/share/cups/model/pantum/
 
     # 赋予执行权限以便 Patchelf 处理
     chmod +x $out/lib/cups/filter/*
-    find $out/opt/pantum/com.pantum.pantumprint/lib -name "*.so*" -exec chmod +x {} +
+    find $out/ -name "*.so*" -exec chmod +x {} +
 
     # 脚本路径修复
     local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
