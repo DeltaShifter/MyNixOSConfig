@@ -3,6 +3,7 @@
 , autoPatchelfHook
 , makeWrapper
 , lib
+, dpkg
 , cups
 , cups-filters
 , dbus
@@ -30,8 +31,8 @@ stdenv.mkDerivation {
   version = "2.0.4-1+uos";
 
   src = fetchurl {
-    url = "https://raw.githubusercontent.com/DeltaShifter/CM1115ADN-printer-assets/refs/heads/main/pantum-cm1115-assets.tar.gz";
-    sha256 = "sha256-GdNduxwEuVkO6j6Qvqqu1k9pFJ3LwzjUxQdlIt2dLcw=";
+    url = "https://github.com/DeltaShifter/CM1115ADN-printer-assets/blob/main/signed_com_pantum_pantumprint_2_0_4-1%2Buos_amd64.deb";
+    sha256 = "sha256-94rIlY59xr6xf19BsRZqkUUZ/ZI7sXOwimPYF3D20LU=";
   };
 
   sourceRoot = ".";
@@ -53,6 +54,10 @@ stdenv.mkDerivation {
     libjpeg
     cups-filters
   ];
+
+  unpackPhase = ''
+    dpkg -x signed_com_pantum_pantumprint_2_0_4-1+uos_amd64.deb
+    '';
 
   installPhase = ''
     runHook preInstall
