@@ -60,7 +60,7 @@
     (callPackage ../../pkgs/pantumprint-alt.nix{})
     ];
     logLevel = "debug";
-    extraConf = "FileDevice Yes";
+    extraFilesConf = "FileDevice Yes";
   };
   services.avahi = {
     enable = true;

@@ -74,9 +74,12 @@ stdenv.mkDerivation {
     
     mkdir -p $out
     mkdir -p $out/lib/cups/filter
-    mkdir -p $out/share/cups/mime/
+    mkdir -p $out/share/cups/mime
+    mkdir -p $out/share/cups/model/pantum
+    
     cp -r opt $out/
     cp -r usr $out/
+
     for file in $out/opt/pantum/com.pantum.pantumprint/bin/*; do
       ln -s "$file" "$out/lib/cups/filter/$(basename "$file")"
     done
@@ -84,6 +87,11 @@ stdenv.mkDerivation {
     for file in $out/usr/share/cups/mime/*; do
       ln -s "$file" "$out/share/cups/mime/$(basename "$file")"
     done
+    
+    for file in $out/usr/share/cups/model/pantum/*; do
+      ln -s "$file" "$out/share/cups/model/pantum/$(basename "$file")"
+    done
+
     
     # 赋予执行权限以便 Patchelf 处理
     find $out/opt/pantum/com.pantum.pantumprint/bin/* -exec chmod +x {} +
@@ -108,15 +116,15 @@ stdenv.mkDerivation {
     local sys_pdftopdf="${cups-filters}/lib/cups/filter/pdftopdf"
     
     # 路径重定向映射
-    local r_opt="/opt/pantum=$out/opt/pantum"
-    local r_mime="/usr/share/cups=$out/share/cups"
-    local r_filter="/usr/lib/cups/filter/pdftopdf=$sys_pdftopdf"
-    local redirects="$r_opt:$r_mime:$r_filter"
+    local rdScript="/opt/pantum/com.pantum.pantumprint/scripts=$out/opt/pantum/com.pantum.pantumprint/scripts"
+    local rdOpt="/opt/pantum=$out/opt/pantum"
+    local rdMime="/usr/share/cups=$out/share/cups"
+    local rdFilter="/usr/lib/cups/filter/pdftopdf=$sys_pdftopdf"
+    local redirects="$rdScript:$rdOpt:$rdMime:$rdFilter"
 
     for bin in $out/lib/cups/filter/*; do
       if [ -f "$bin" ] && [ ! -L "$bin" ]; then
         filename=$(basename "$bin")
-        echo "Wrapping $filename..."
         
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
         
@@ -124,11 +132,7 @@ stdenv.mkDerivation {
           --prefix PATH : "${lib.makeBinPath [ coreutils ghostscript bc poppler-utils cups cups-filters ]}" \
           --prefix LD_LIBRARY_PATH : "$out/opt/pantum/com.pantum.pantumprint/lib" \
           --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
-          --set NIX_REDIRECTS "$redirects" \
-          --set CUPS_SERVERBIN "${cups}/lib/cups" \
-          --set CUPS_DATADIR "$out/share/cups" \
-          --run "${coreutils}/bin/mkdir -p /tmp/pantum/com.pantum.pantumprint" \
-          --run "${coreutils}/bin/ln -sfn $out/opt/pantum/com.pantum.pantumprint/scripts /tmp/pantum/com.pantum.pantumprint/scripts"
+          --set NIX_REDIRECTS "$redirects"
       fi
     done
   '';
