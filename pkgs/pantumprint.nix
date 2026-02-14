@@ -25,7 +25,7 @@
 , ...
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "pantumprint";
   version = "2.0.4-1+uos";
 
@@ -39,8 +39,19 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
 
   buildInputs = [
-    cups dbus libusb1 jbigkit xz dbus-glib libsm libice 
-    libx11 libxext libredirect libjpeg cups-filters
+    cups
+    dbus
+    libusb1
+    jbigkit
+    xz
+    dbus-glib
+    libsm
+    libice 
+    libx11
+    libxext
+    libredirect
+    libjpeg
+    cups-filters
   ];
 
   installPhase = ''
@@ -64,7 +75,7 @@ stdenv.mkDerivation rec {
 
     # 赋予执行权限以便 Patchelf 处理
     chmod +x $out/lib/cups/filter/*
-   # find $out/opt/pantum/com.pantum.pantumprint/lib -name "*.so*" -exec chmod +x {} +
+    find $out/opt/pantum/com.pantum.pantumprint/lib -name "*.so*" -exec chmod +x {} +
 
     # 脚本路径修复
     local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
@@ -82,7 +93,6 @@ stdenv.mkDerivation rec {
 
   appendRunpaths = [ 
     "$out/opt/pantum/com.pantum.pantumprint/lib" 
-    "$out/opt/pantum/com.pantum.pantumprint/lib/product_modules"
   ];
 
   postFixup = ''
@@ -98,7 +108,6 @@ stdenv.mkDerivation rec {
     for bin in $out/lib/cups/filter/*; do
       if [ -f "$bin" ] && [ ! -L "$bin" ]; then
         filename=$(basename "$bin")
-        echo "Wrapping $filename..."
         
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
         
