@@ -39,7 +39,9 @@ stdenv.mkDerivation {
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
   autoPatchelfIgnoreMissingDeps = [
   ];
-  appendRunpaths = [ 
+  appendRunpaths = [
+    "$out/usr/lib/x86_64-linux-gnu/sane/"
+    "$out/local/lib/sane/"
     "$out/opt/pantum/com.pantum.pantumprint/lib/"
     "$out/opt/pantum/com.pantum.pantumprint/lib/product_modules/" 
   ];
@@ -61,7 +63,6 @@ stdenv.mkDerivation {
   ];
 
   unpackPhase = ''
-    ls -R
     dpkg -x $src .
     rm -rf opt/apps
     '';
@@ -70,21 +71,30 @@ stdenv.mkDerivation {
   runHook preInstall
     
     mkdir -p $out
-    cp -r opt usr $out/
-        
-    mkdir -p $out/lib/cups/filter
-    mkdir -p $out/share/cups/mime
-    mkdir -p $out/share/cups/model/pantum
-    cp -r $out/opt/pantum/com.pantum.pantumprint/bin/* $out/lib/cups/filter/
-    cp usr/share/cups/mime/* $out/share/cups/mime/
-    cp usr/share/cups/model/pantum/* $out/share/cups/model/pantum/
+    mkdir -p $out/lib/cups/filter/
+    mkdir -p $out/share/cups/mime/
+    mkdir -p $out/share/cups/model/pantum/
+    mkdir -p $out/opt/scripts # 在报错日志发行scripts后处理这些
+    
+    cp -rf opt/pantum/com.pantum.pantumprint/bin/* $out/lib/cups/filter/
+    cp -rf usr/share/cups/mime/* $out/share/cups/mime/
+    cp -rf usr/share/cups/model/pantum/* $out/share/cups/model/pantum/
+    cp -rf opt/pantum/com.pantum.pantumprint/scripts/* $out/opt/scripts/
 
+    mkdir -p $out/opt/pantum/com.pantum.pantumprint/lib # 处理私有库，保持文件夹结构
+    mkdir -p $out/usr/local/lib
+    mkdir -p $out/usr/lib
+
+    cp -rf opt/pantum/com.pantum.pantumprint/lib/* $out/opt/pantum/com.pantum.pantumprint/lib
+    cp -rf usr/local/lib/* $out/usr/local/lib
+    cp -rf usr/lib/* $out/usr/lib
+    
     # 赋予执行权限以便 Patchelf 处理
     chmod +x $out/lib/cups/filter/*
     find $out/ -name "*.so*" -exec chmod +x {} +
 
     # 脚本路径修复
-    local scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
+    scriptsDir="$out/opt/scripts"
       substituteInPlace "$scriptsDir/pdfscale.sh" \
         --replace 'GSBIN="$(which gs 2>/dev/null)"' "GSBIN=${ghostscript}/bin/gs" \
         --replace 'BCBIN="$(which bc 2>/dev/null)"' "BCBIN=${bc}/bin/bc" \
@@ -98,13 +108,13 @@ stdenv.mkDerivation {
 
 
   postFixup = ''
-    local pdftopdf="$out/opt/pantum/com.pantum.pantumprint/bin/pantumprint-pdftopdf"
+  #   local pdftopdf="$out/lib/cups/filter/pantumprint-pdftopdf"
     
-    # 路径重定向映射
-    local r_opt="/opt/pantum=$out/opt/pantum"
-    local r_mime="/usr/share/cups=$out/share/cups"
-    local r_filter="/usr/lib/cups/filter/pdftopdf=$pdftopdf"
-    local redirects="$r_opt:$r_mime:$r_filter" 
+  #   路径重定向映射
+  #   local r_opt="/opt/pantum=$out/opt/pantum"
+  #   local r_mime="/usr/share/cups=$out/share/cups"
+  #   local r_filter="/usr/lib/cups/filter/pdftopdf=$pdftopdf"
+  #   local redirects="$r_opt:$r_mime:$r_filter" 
 
     for bin in $out/lib/cups/filter/*; do
       filename=$(basename "$bin")
@@ -113,23 +123,24 @@ stdenv.mkDerivation {
         # 这里的花招是，把原文件改名，再包装他们
         # 这样生成的包装文件就会替换掉原二进制文件
         mv "$bin" "$out/lib/cups/filter/.$filename-wrapped"
-
-        # 如果修补的是pdftopdf，不要动它自己的路径避免递归错误
-        if [ "$filename" = "pantumprint-pdftopdf" ];then
-          local redirects="$r_opt:$r_mime" 
-        else
-          local redirects="$r_opt:$r_mime:$r_filter"
-        fi
+        local rdScripts="/opt/pantum/com.pantum.pantumprint/scripts/:$scriptsDir"
+        local redirects="$rdScripts"
+  #       # 如果修补的是pdftopdf，不要动它自己的路径避免递归错误
+  #       if [ "$filename" = "pantumprint-pdftopdf" ];then
+  #         local redirects="$r_opt:$r_mime" 
+  #       else
+  #         local redirects="$r_opt:$r_mime:$r_filter"
+        # fi
         
         makeWrapper "$out/lib/cups/filter/.$filename-wrapped" "$bin" \
-          --prefix PATH : "${lib.makeBinPath [ coreutils cups ghostscript bc poppler-utils imagemagick gnugrep ]}" \
           --prefix LD_LIBRARY_PATH : "$out/opt/pantum/com.pantum.pantumprint/lib" \
-          --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
           --set NIX_REDIRECTS "$redirects" \
-          --set CUPS_SERVERBIN "${cups}/lib/cups" \
-          --set CUPS_DATADIR "$out/share/cups" \
-          --run "${coreutils}/bin/mkdir -p /tmp/pantum/com.pantum.pantumprint" \
-          --run "${coreutils}/bin/ln -sfn $out/opt/pantum/com.pantum.pantumprint/scripts /tmp/pantum/com.pantum.pantumprint/scripts"
+          # --prefix PATH : "${lib.makeBinPath [ coreutils cups ghostscript bc poppler-utils imagemagick gnugrep ]}" \
+          # --set LD_PRELOAD "${libredirect}/lib/libredirect.so" \
+          # --set CUPS_SERVERBIN "${cups}/lib/cups" \
+          # --set CUPS_DATADIR "$out/share/cups" \
+          # --run "${coreutils}/bin/mkdir -p /tmp/pantum/com.pantum.pantumprint" \
+          # --run "${coreutils}/bin/ln -sfn $out/opt/pantum/com.pantum.pantumprint/scripts /tmp/pantum/com.pantum.pantumprint/scripts"
       fi
     done
   '';
