@@ -11,10 +11,6 @@
 , xz
 , dbus-glib
 , libusb1
-, libsm
-, libice
-, libx11
-, libxext
 , ghostscript
 , bc
 , poppler-utils
@@ -31,32 +27,37 @@ stdenv.mkDerivation {
   version = "2.0.4-1+uos";
 
   src = fetchurl {
-    url = "https://github.com/DeltaShifter/CM1115ADN-printer-assets/blob/main/signed_com_pantum_pantumprint_2_0_4-1%2Buos_amd64.deb";
-    sha256 = "sha256-94rIlY59xr6xf19BsRZqkUUZ/ZI7sXOwimPYF3D20LU=";
+    url = "https://raw.githubusercontent.com/DeltaShifter/CM1115ADN-printer-assets/main/signed_com_pantum_pantumprint_2_0_4-1%2Buos_amd64.deb";
+    sha256 = "sha256-RBnClfDzOlszOW3RUMP6Q0C1eK6U+6pbtO3XNh5uNGk=";
   };
 
   sourceRoot = ".";
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
+  autoPatchelfIgnoreMissingDeps = [
+  ];
+  appendRunpaths = [ 
+    "$out/opt/pantum/com.pantum.pantumprint/lib/"
+    "$out/opt/pantum/com.pantum.pantumprint/lib/product_modules/" 
+  ];
 
   buildInputs = [
     cups
     dbus
+    dpkg
     libusb1
     jbigkit
     xz
     dbus-glib
-    libsm
-    libice 
-    libx11
-    libxext
     libredirect
     libjpeg
     cups-filters
   ];
 
   unpackPhase = ''
-    dpkg -x signed_com_pantum_pantumprint_2_0_4-1+uos_amd64.deb
+    ls -R
+    dpkg -x $src .
+    rm -rf $out/opt/apps/
     '';
 
   installPhase = ''
@@ -96,9 +97,6 @@ stdenv.mkDerivation {
     runHook postInstall
   '';
 
-  appendRunpaths = [ 
-    "$out/opt/pantum/com.pantum.pantumprint/lib" 
-  ];
 
   postFixup = ''
     # 查找真正的系统 pdftopdf 路径（cups-filters 包提供）
