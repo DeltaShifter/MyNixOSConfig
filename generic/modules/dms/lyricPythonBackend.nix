@@ -15,11 +15,20 @@ let
     requests
     pygobject3
   ]);
-
+  
+  # 因为自身逆天占用，设置黑名单在部分机器上禁用
+  manualStart = [
+    "X1c"
+  ];
+  
 in {
   # 定义服务
   systemd.user.services.lyrics-on-panel-backend = {
     description = "Lyrics-on-Panel MPRIS2 Backend";
+
+    # elem 获取主机名并对比黑名单，不匹配则返回true，实现黑名单
+    enable = !(builtins.elem config.networking.hostName manualStart);
+    
     # 保活，跟着桌面的生命周期
     after = [ "graphical-session.target" ];
     partOf = [ "graphical-session.target" ];
@@ -33,6 +42,7 @@ in {
       
       Restart = "on-failure";
       RestartSec = 5;
+
     };
 
     # 环境变量注入
