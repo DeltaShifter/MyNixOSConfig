@@ -59,6 +59,9 @@ in
   # Fastfetch预设
   xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
   
+  # PhotoshopGIMP
+  home.file.".config/GIMP/3.0".source = ./homeConfig/photoGIMP;
+  
   programs.home-manager.enable = true;
 
   home.activation = {
