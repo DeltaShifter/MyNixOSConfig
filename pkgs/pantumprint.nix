@@ -97,14 +97,14 @@ stdenv.mkDerivation {
     done
 
     # 脚本路径修复
-    scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
-      substituteInPlace "$scriptsDir/pdfscale.sh" \
-        --replace 'GSBIN="$(which gs 2>/dev/null)"' "GSBIN=${ghostscript}/bin/gs" \
-        --replace 'BCBIN="$(which bc 2>/dev/null)"' "BCBIN=${bc}/bin/bc" \
-        --replace 'PDFINFOBIN="$(which pdfinfo 2>/dev/null)"' "PDFINFOBIN=${poppler-utils}/bin/pdfinfo" \
-        --replace 'IDBIN=$(which identify 2>/dev/null)' "IDBIN=${imagemagick}/bin/identify" \
-        --replace 'GREPBIN="$(which grep 2>/dev/null)"' "GREPBIN=${gnugrep}/bin/grep"
-      patchShebangs "$scriptsDir/"
+    # scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
+    #   substituteInPlace "$scriptsDir/pdfscale.sh" \
+    #     --replace 'GSBIN="$(which gs 2>/dev/null)"' "GSBIN=${ghostscript}/bin/gs" \
+    #     --replace 'BCBIN="$(which bc 2>/dev/null)"' "BCBIN=${bc}/bin/bc" \
+    #     --replace 'PDFINFOBIN="$(which pdfinfo 2>/dev/null)"' "PDFINFOBIN=${poppler-utils}/bin/pdfinfo" \
+    #     --replace 'IDBIN=$(which identify 2>/dev/null)' "IDBIN=${imagemagick}/bin/identify" \
+    #     --replace 'GREPBIN="$(which grep 2>/dev/null)"' "GREPBIN=${gnugrep}/bin/grep"
+    #   patchShebangs "$scriptsDir/"
 
   runHook postInstall
   '';
