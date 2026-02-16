@@ -115,7 +115,7 @@
     foliate
     splayer
     (pkgs.callPackage ../../pkgs/yesplaymusic.nix {})
-    graphite
+    gimp-with-plugins
   # ---PkgsEnd--- 
     ];
      
