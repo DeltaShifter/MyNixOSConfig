@@ -115,6 +115,7 @@
     foliate
     splayer
     (pkgs.callPackage ../../pkgs/yesplaymusic.nix {})
+    graphite
   # ---PkgsEnd--- 
     ];
      

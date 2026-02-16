@@ -115,11 +115,9 @@ stdenv.mkDerivation {
     local sysPdftopdf="${cups-filters}/lib/cups/filter/pdftopdf"
     
     # 路径重定向映射
-    local rdScript="/opt/pantum/com.pantum.pantumprint/scripts=$out/opt/pantum/com.pantum.pantumprint/scripts"
     local rdOpt="/opt/pantum=$out/opt/pantum"
-    local rdMime="/usr/share/cups=$out/share/cups"
     local rdFilter="/usr/lib/cups/filter/pdftopdf=$sysPdftopdf"
-    local redirects="$rdScript:$rdOpt:$rdMime:$rdFilter"
+    local redirects="$rdOpt:$rdFilter"
     local filterFiled="$out/opt/pantum/com.pantum.pantumprint/bin"
 
     for bin in $filterFiled/*; do
