@@ -75,7 +75,6 @@ stdenv.mkDerivation {
     mkdir -p $out/
     cp -r opt $out/
     cp -r usr $out/
-    ls -R $out
     # 赋予执行权限以便 Patchelf 处理
     find $out/opt/pantum/com.pantum.pantumprint/bin/* -exec chmod +x {} +
     find $out/ -type f -name "*.so*" -exec chmod +x {} +
