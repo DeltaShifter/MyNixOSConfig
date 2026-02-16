@@ -77,7 +77,8 @@ in
    # PhotoshopGIMP配置文件
    linkPhotoGIMP = lib.hm.dag.entryAfter ["writeBoundary"] ''
      mkdir -p $HOME/.config/GIMP/3.0
-     ln -sfn "./homeConfig/photoGIMP" "$HOME/.config/GIMP/3.0"
+     ln -sfn "./homeConfig/photoGIMP/.config" "$HOME/.config/GIMP/3.0/.config"
+     ln -sfn "./homeConfig/photoGIMP/.local" "$HOME/.config/GIMP/3.0/.local"
    '';   
    };
     
