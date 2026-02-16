@@ -59,8 +59,7 @@ in
   # Fastfetch预设
   xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
   
-  # PhotoshopGIMP
-  home.file.".config/GIMP/3.0".source = ./homeConfig/photoGIMP;
+  home.file.".config/GIMP/3.0".source = ./homeConfig/photoGIMP/.;
   
   programs.home-manager.enable = true;
 
@@ -75,6 +74,11 @@ in
         fi
       fi
     '';
+   # PhotoshopGIMP配置文件
+   linkPhotoGIMP = lib.hm.dag.entryAfter ["writeBoundary"] ''
+     mkdir -p $HOME/.config/GIMP/3.0
+     ln -sfn "./homeConfig/photoGIMP" "$HOME/.config/GIMP/3.0"
+   '';   
    };
     
 }
