@@ -67,20 +67,23 @@ stdenv.mkDerivation {
   unpackPhase = ''
     dpkg -x $src .
     rm -rf opt/apps
+    rm -rf usr/lib/cups/filter
     '';
 
   installPhase = ''
   runHook preInstall
-    
+    mkdir -p $out/
     cp -r opt $out/
     cp -r usr $out/
+    ls -R $out
+    # 赋予执行权限以便 Patchelf 处理
+    find $out/opt/pantum/com.pantum.pantumprint/bin/* -exec chmod +x {} +
+    find $out/ -type f -name "*.so*" -exec chmod +x {} +
+    
     mkdir -p $out/lib/cups/filter
     mkdir -p $out/share/cups/mime
     mkdir -p $out/share/cups/model/pantum
     
-    # 赋予执行权限以便 Patchelf 处理
-    find $out/opt/pantum/com.pantum.pantumprint/bin/* -exec chmod +x {} +
-    find $out/ -name "*.so*" -exec chmod +x {} +
     
     for file in $out/opt/pantum/com.pantum.pantumprint/bin/*; do
       ln -s "$file" "$out/lib/cups/filter/$(basename "$file")"
@@ -95,7 +98,7 @@ stdenv.mkDerivation {
     done
 
     # 脚本路径修复
-    scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts/"
+    scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts"
       substituteInPlace "$scriptsDir/pdfscale.sh" \
         --replace 'GSBIN="$(which gs 2>/dev/null)"' "GSBIN=${ghostscript}/bin/gs" \
         --replace 'BCBIN="$(which bc 2>/dev/null)"' "BCBIN=${bc}/bin/bc" \
