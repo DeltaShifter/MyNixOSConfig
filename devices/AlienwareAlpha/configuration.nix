@@ -56,9 +56,8 @@
     services.printing = {
     enable = true;
     drivers = with pkgs; [
-    (callPackage ../../pkgs/pantumprint-alt.nix{})
+    (callPackage ../../pkgs/pantumprint.nix{})
     ];
-    logLevel = "debug";
     extraFilesConf = "FileDevice Yes";
   };
   services.avahi = {

@@ -78,6 +78,10 @@ stdenv.mkDerivation {
     mkdir -p $out/share/cups/mime
     mkdir -p $out/share/cups/model/pantum
     
+    # 赋予执行权限以便 Patchelf 处理
+    find $out/opt/pantum/com.pantum.pantumprint/bin/* -exec chmod +x {} +
+    find $out/ -name "*.so*" -exec chmod +x {} +
+    
     for file in $out/opt/pantum/com.pantum.pantumprint/bin/*; do
       ln -s "$file" "$out/lib/cups/filter/$(basename "$file")"
     done
@@ -89,11 +93,6 @@ stdenv.mkDerivation {
     for file in $out/usr/share/cups/model/pantum/*; do
       ln -s "$file" "$out/share/cups/model/pantum/$(basename "$file")"
     done
-
-    
-    # 赋予执行权限以便 Patchelf 处理
-    find $out/opt/pantum/com.pantum.pantumprint/bin/* -exec chmod +x {} +
-    find $out/ -name "*.so*" -exec chmod +x {} +
 
     # 脚本路径修复
     scriptsDir="$out/opt/pantum/com.pantum.pantumprint/scripts/"
