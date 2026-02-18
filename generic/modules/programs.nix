@@ -60,7 +60,7 @@
   ];
   
   environment.systemPackages = with pkgs; [
-    (pkgs.writeShellScriptBinll "xterm" ''
+    (pkgs.writeShellScriptBin "xterm" ''
       exec ${pkgs.kitty}/bin/kitty "$@"
     '')
     kitty
