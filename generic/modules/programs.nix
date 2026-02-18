@@ -60,10 +60,9 @@
   ];
   
   environment.systemPackages = with pkgs; [
-    (pkgs.writeShellScriptBin "xterm" ''  # 伪装xterm解决某些顽固的默认开启问题
-      exec ${pkgs.alacritty}/bin/alacritty "$@"
+    (pkgs.writeShellScriptBinll "xterm" ''
+      exec ${pkgs.kitty}/bin/kitty "$@"
     '')
-    alacritty
     kitty
     kitty-img
     kitty-themes
@@ -115,6 +114,7 @@
     foliate
     splayer
     (pkgs.callPackage ../../pkgs/yesplaymusic.nix {})
+    (pkgs.callPackage ../../pkgs/alacritty-smooth.nix{})
     gimp-with-plugins
   # ---PkgsEnd--- 
     ];
