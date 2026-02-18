@@ -5,18 +5,36 @@
 , cmake
 , freetype
 , fontconfig
-, libX11
-, libXi
-, libXcursor
-, libXrandr
 , libxcb
 , libxkbcommon
 , scdoc
 , installShellFiles
 , makeWrapper
+, wayland
+, libxxf86vm
+, libxcursor
+, libxi
+, expat
+, libGL
+, libx11
+, xdg-utils
 }:
-
-rustPlatform.buildRustPackage rec {
+let
+  rpathLibs=[
+    expat
+    fontconfig
+    freetype
+    libGL
+    libx11
+    libxcursor
+    libxi
+    libxxf86vm
+    libxcb
+    libxkbcommon
+    wayland
+  ];
+in  
+rustPlatform.buildRustPackage {
   pname = "alacritty-smooth-cursor";
   version = "0.17.0.2464"; # 对应 PKGBUILD 的 pkgver
 
@@ -39,44 +57,31 @@ rustPlatform.buildRustPackage rec {
     makeWrapper
   ];
 
-  buildInputs = [
-    freetype
-    fontconfig
-    libX11
-    libXi
-    libXcursor
-    libXrandr
-    libxcb
-    libxkbcommon
-  ];
-
-  # 对应 PKGBUILD 的 build/check 逻辑
-  # Nix 默认会进行 cargo build --release --locked
+  buildInputs = rpathLibs;
+  dontPatchELF = true;
   doCheck = true;
 
   postInstall = ''
-    # 1. 安装图标 (参考你之前安装 AppImage 的图标提取逻辑)
     install -Dm644 extra/logo/alacritty-term.svg $out/share/pixmaps/Alacritty.svg
     install -Dm644 extra/logo/compat/alacritty-term.png $out/share/pixmaps/Alacritty.png
 
-    # 2. 安装 Desktop 文件
     install -Dm644 extra/linux/Alacritty.desktop -t $out/share/applications/
     install -Dm644 extra/linux/org.alacritty.Alacritty.appdata.xml -t $out/share/appdata/
 
-    # 3. 生成并安装 Manpages (对应 PKGBUILD 中的 scdoc | gzip 逻辑)
     install -dm 755 "$out/share/man/man1"
     install -dm 755 "$out/share/man/man5"
 
-    # scdoc < extra/man/alacritty.1.scd | gzip -c > $out/share/man/man1/alacritty.1.gz
-    # scdoc < extra/man/alacritty-msg.1.scd | gzip -c > $out/share/man/man1/alacritty-msg.1.gz
-    # scdoc < extra/man/alacritty.5.scd | gzip -c > $out/share/man/man5/alacritty.5.gz
-    # scdoc < extra/man/alacritty-bindings.5.scd | gzip -c > $out/share/man/man5/alacritty-bindings.5.gz
+    $STRIP -S $out/bin/alacritty
+    patchelf --add-rpath "${lib.makeLibraryPath rpathLibs}" $out/bin/alacritty
 
-
-    # 4. 安装补全脚本
     installShellCompletion --bash extra/completions/alacritty.bash
     installShellCompletion --zsh extra/completions/_alacritty
     installShellCompletion --fish extra/completions/alacritty.fish
+  '';
+
+  postPatch = ''
+    substituteInPlace alacritty/src/config/ui_config.rs \
+      --replace xdg-open ${xdg-utils}/bin/xdg-open
   '';
 
   meta = with lib; {
