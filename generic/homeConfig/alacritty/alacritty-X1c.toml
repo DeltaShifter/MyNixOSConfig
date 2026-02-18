@@ -21,6 +21,9 @@ style = "Regular"
 x = 0
 y = 0
 
+[font]
+size = 12.0
+
 [cursor]
 style = { shape = "Block", blinking = "On" }
 smooth_motion = true
