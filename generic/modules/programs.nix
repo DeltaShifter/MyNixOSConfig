@@ -22,7 +22,7 @@
   services.v2raya.enable = true;
   services.v2raya.cliPackage = pkgs.xray;
   
-  programs.thunar = {
+  programs.thunar = { # 文管
     enable = true;
     plugins = with pkgs;[
       thunar-archive-plugin
@@ -35,6 +35,12 @@
   services.tumbler.enable = true; # 解决文管缩略图显示
   services.gvfs.enable = true;
   services.xserver.desktopManager.xterm.enable = false;
+
+  programs.nh = { # nh更新器
+    enable = true;
+    clean.enable = true;
+    clean.extraArgs = "--keep-since 4d --keep 3";
+  };
   
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
@@ -96,7 +102,6 @@
     ouch
     file-roller
     intel-undervolt
-    nh
     thunderbird
     zenity
     glide-media-player
