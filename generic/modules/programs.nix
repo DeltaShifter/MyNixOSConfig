@@ -121,6 +121,7 @@
     (pkgs.callPackage ../../pkgs/yesplaymusic.nix {})
     (pkgs.callPackage ../../pkgs/alacritty-smooth.nix{})
     gimp-with-plugins
+    shotcut
   # ---PkgsEnd--- 
     ];
      
