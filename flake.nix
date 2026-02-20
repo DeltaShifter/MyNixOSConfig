@@ -14,7 +14,7 @@
     };
 
     niri = {
-      url = "github:YaLTeR/niri";
+      url = "github:YaLTeR/niri/wip-branch";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
