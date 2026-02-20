@@ -13,11 +13,13 @@ window-rule {
 window-rule {
     match app-id="Alacritty"
     opacity 0.9
+    blur {on}
 }
 
 window-rule {
     match app-id="kitty"
     opacity 0.9
+    blur {on}
 }
 // Steam好友弹窗修复
 window-rule {
@@ -67,4 +69,11 @@ animations {
     window-close {
         spring damping-ratio=1.0 stiffness=1000 epsilon=0.0001
     }
+}
+
+blur{
+    passes 3
+    offset 3
+    noise 0.02
+    saturation 1.5
 }
