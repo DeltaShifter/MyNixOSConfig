@@ -42,9 +42,6 @@
     clean.extraArgs = "--keep-since 4d --keep 3";
   };
 
-  programs.adb.enable = true;
-  users.users.dale.extraGroups = ["adbusers"];
-  
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
   ];
@@ -77,6 +74,7 @@
     kitty-themes
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts
+    android-tools
     vim
     wget
     git
