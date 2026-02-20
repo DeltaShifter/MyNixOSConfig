@@ -1,6 +1,7 @@
 { config, pkgs, lib, ... }:
 
 {
+
   nix.settings = {
     # 优先使用国内镜像站
     substituters = lib.mkForce [
