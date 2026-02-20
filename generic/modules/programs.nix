@@ -41,6 +41,9 @@
     clean.enable = true;
     clean.extraArgs = "--keep-since 4d --keep 3";
   };
+
+  programs.adb.enable = true;
+  users.users.dale.extraGroups = ["adbusers"];
   
   fonts.packages = with pkgs; [
     nerd-fonts.jetbrains-mono
