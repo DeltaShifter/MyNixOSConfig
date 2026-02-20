@@ -3,7 +3,11 @@
 {
   virtualisation.waydroid.enable = true;
   virtualisation.lxc.enable = true;
-  networking.firewall.trustedInterfaces = [ "waydroid0" ];
+  nixpkgs.config.packageOverrides = pkgs: {
+    waydroid = pkgs.waydroid.override {
+      withNftables = true;
+    };
+  };
   environment.systemPackages = with pkgs; [
     waydroid-helper
   ];
