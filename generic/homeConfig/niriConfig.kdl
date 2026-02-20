@@ -8,31 +8,17 @@ window-rule {
     geometry-corner-radius 14
     clip-to-geometry true
     draw-border-with-background false
-    background-effect {
-        blur{
-            on
-        }
-    }
 }
 
 window-rule {
     match app-id="Alacritty"
-    opacity 0.8
-    background-effect {
-      blur {
-          on
-      }
-    }
-}
-
-window-rule {
     match app-id="kitty"
     opacity 0.8
     background-effect {
       blur {
           on
       }
-  }
+    }
 }
 
 layer-rule {

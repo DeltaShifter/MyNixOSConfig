@@ -46,6 +46,8 @@
   # Enable Niri WM
   programs.niri.enable = true;
 
+  hardware.openrazer.enable = true;
+  
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "cn";
@@ -90,7 +92,7 @@
   users.users.dale = {
     isNormalUser = true;
     description = "dale";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "openrazer" ];
     packages = with pkgs; [
     #  thunderbird
     ];
@@ -110,6 +112,7 @@
   fuzzel
   swaybg
   xwayland-satellite
+  polychromatic
   ];
 
   environment.sessionVariables = {
