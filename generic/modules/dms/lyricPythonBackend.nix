@@ -5,7 +5,7 @@ let
     owner = "KangweiZhu";
     repo = "lyrics-on-panel";
     rev = "main"; 
-    sha256 = "sha256-brdHTft2DaH+0w/QoJCrUkYBiTRDakQT2lcSVwV7QuQ="; 
+    sha256 = "sha256-IRmbfNzVgHC2uEzVOdIvYqEhx1wouWTB0zKPppiNTms="; 
   };
 
   # 依赖处理
