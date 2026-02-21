@@ -14,14 +14,15 @@ window-rule {
     match app-id="Alacritty"
     match app-id="kitty"
     match app-id="clapper"
+    match app-id="Telegram"
+    match app-id="wps"
     match app-id="glide"
     match app-id="yesplayer"
     match app-id="splayer"
     opacity 0.8
     background-effect {
-      blur {
-          on
-      }
+      xray true
+      blur true
     }
 }
 
@@ -29,9 +30,8 @@ layer-rule {
     match namespace="rofi"
     geometry-corner-radius 24
     background-effect {
-      blur {
-          on
-      }
+      xray false
+      blur true
     }
     opacity 0.8
 }
