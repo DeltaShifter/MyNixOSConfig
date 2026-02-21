@@ -123,6 +123,7 @@
     (pkgs.callPackage ../../pkgs/alacritty-smooth.nix{})
     gimp-with-plugins
     shotcut
+    lx-music-desktop
   # ---PkgsEnd--- 
     ];
      
