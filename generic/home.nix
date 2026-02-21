@@ -37,9 +37,9 @@ in
   xdg.configFile."yazi/keymap.toml".source = ./homeConfig/yazi/keymap.toml;
 
   # yazi插件
-  xdg.configFile = {
-    "yazi/plugins/smart-enter.yazi".source = "${inputs.yazi-plugins}/smart-enter.yazi";
-  };
+  # xdg.configFile = {
+    # "yazi/plugins/smart-enter.yazi".source = "${inputs.yazi-plugins}/smart-enter.yazi";
+  # };
 
   # Fcitx5
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5/fcitx5ui.conf;
