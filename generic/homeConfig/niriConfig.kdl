@@ -13,6 +13,10 @@ window-rule {
 window-rule {
     match app-id="Alacritty"
     match app-id="kitty"
+    match app-id="clapper"
+    match app-id="glide"
+    match app-id="yesplayer"
+    match app-id="splayer"
     opacity 0.8
     background-effect {
       blur {
