@@ -8,6 +8,15 @@ let
     sha256 = "sha256-IRmbfNzVgHC2uEzVOdIvYqEhx1wouWTB0zKPppiNTms="; 
   };
 
+  lyrics-src-perfected = pkgs.runCommand "lyrics-on-panel-patched" { } ''
+    cp -r ${lyrics-src} $out
+    chmod -R +w $out
+    
+    substituteInPlace $out/backend/src/server.py \
+      --replace "await websocket.send(json.dumps(state))" \
+                "await asyncio.sleep(0.05); await websocket.send(json.dumps(state))"
+    '';
+
   # 依赖处理
   lyrics-python = pkgs.python3.withPackages (ps: with ps; [
     dbus-python
@@ -37,7 +46,7 @@ in {
     # 服务配置
     serviceConfig = {
       Type = "simple";
-      WorkingDirectory = "${lyrics-src}/backend";
+      WorkingDirectory = "${lyrics-src-perfected}/backend";
       ExecStart = "${lyrics-python}/bin/python src/server.py";
       
       Restart = "on-failure";
@@ -50,5 +59,6 @@ in {
       PYTHONPATH = "${lyrics-src}/backend/src";
       PYTHONUNBUFFERED = "1";
     };
+
   };
 }
