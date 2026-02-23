@@ -99,7 +99,6 @@
     wechat
     clapper
     papirus-icon-theme
-    wpsoffice-cn
     ouch
     file-roller
     intel-undervolt
