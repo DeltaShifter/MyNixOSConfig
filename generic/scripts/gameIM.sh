@@ -18,9 +18,3 @@ if [ -z "$TEXT" ]; then
 fi
 
 echo -n "$TEXT" | wl-copy
-if command -v wtype &>/dev/null; then
-    sleep 0.5
-    wtype -M ctrl v -m ctrl
-else
-    echo -n  "复制成功" "已存入剪贴板，请在游戏中手动粘贴"
-fi
