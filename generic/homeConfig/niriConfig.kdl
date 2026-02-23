@@ -15,7 +15,6 @@ window-rule {
     match app-id="kitty"
     match app-id="clapper"
     match app-id="Telegram"
-    match app-id="wps"
     match app-id="glide"
     match app-id="yesplayer"
     match app-id="splayer"
@@ -25,6 +24,17 @@ window-rule {
       blur true
     }
 }
+
+window-rule {
+    match app-id="wps"
+    opacity 0.95
+    background-effect {
+      xray true
+      blur true
+    }
+}
+
+
 
 layer-rule {
     match namespace="rofi"
