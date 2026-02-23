@@ -9,7 +9,7 @@
         postFixup = (oldAttrs.postFixup or "") + ''
           for bin in $out/bin/*; do
             wrapProgram "$bin" \
-              --set QT_FONT_DPI "144" \
+              --set QT_FONT_DPI "144"
           done
         '';
       })
