@@ -9,7 +9,7 @@
   enable = true;
   settings = {
     background = {
-      path = ../asset/Night.png;
+      path = ../assets/wallpapers/Night.png;
       fit = "Cover";
     };
     GTK = {

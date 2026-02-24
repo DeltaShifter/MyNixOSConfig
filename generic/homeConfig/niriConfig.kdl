@@ -91,7 +91,7 @@ cursor {
 
 binds {
     "Mod+D" { spawn "rofi" "-show" "combi"; }
-    "Mod+T" { spawn "alacritty"; }
+    "Mod+T" { spawn "kitty"; }
     "Mod+WheelScrollUp"   cooldown-ms=150 { focus-column-left; }
     "Mod+WheelScrollDown" cooldown-ms=150 { focus-column-right; }
 }
