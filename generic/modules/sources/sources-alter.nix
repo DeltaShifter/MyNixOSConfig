@@ -22,6 +22,9 @@
     
     connect-timeout = 5;
     fallback = true;
+
+    http2 = true;
+    cores = 0;
     
      # 自动优化存储，节省空间
      auto-optimise-store = true;

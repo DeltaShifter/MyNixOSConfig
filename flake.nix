@@ -89,7 +89,7 @@
       };
 
      # Nix-Stable
-     nixpkgs-stable = import nixpkgs-stable {
+     pkgs-stable = import nixpkgs-stable {
        inherit system;
        config.allowUnfree = true;
      };
@@ -105,7 +105,7 @@
   
     nixosConfigurations.Optiplex = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs nixpkgs-stable; }; # 继承全部变量传递给inputs
+      specialArgs = { inherit inputs pkgs-stable; }; # 继承全部变量传递给inputs
       modules = [
         ./devices/Optiplex9020m/configuration.nix
         homeManagerConfig
@@ -117,7 +117,7 @@
 
     nixosConfigurations.X1c = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs nixpkgs-stable; }; # 继承全部变量传递给inputs
+      specialArgs = { inherit inputs pkgs-stable; }; # 继承全部变量传递给inputs
       modules = [
         ./devices/X1c/configuration.nix
         nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
@@ -128,7 +128,7 @@
     
     nixosConfigurations.AlienwareAlpha = nixpkgs.lib.nixosSystem {
       inherit system;
-      specialArgs = { inherit inputs nixpkgs-stable; }; # 继承全部变量传递给inputs
+      specialArgs = { inherit inputs pkgs-stable; }; # 继承全部变量传递给inputs
       modules = [
         ./devices/AlienwareAlpha/configuration.nix
         homeManagerConfig

@@ -1,4 +1,4 @@
-{ config, pkgs, inputs, lib, ... }:
+{ config, pkgs, inputs, lib, pkgs-stable, ... }:
 
 {
   imports = [
@@ -30,6 +30,7 @@
     pkgs.qt6.qtbase
     inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
+
 
   environment.variables = {
     QML2_IMPORT_PATH = [
