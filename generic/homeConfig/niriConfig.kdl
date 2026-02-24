@@ -46,7 +46,7 @@ window-rule {
     focus-ring {
         off
     }
-    exclude-from-layout true
+    center-on-monitor false
 }
 
 
