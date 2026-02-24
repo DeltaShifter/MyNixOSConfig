@@ -47,6 +47,7 @@
   fonts = {
     fontDir.enable = true; # 启用旧版字体路径兼容
     packages = with pkgs; [
+      ../../generic/assets/fonts
       corefonts
       cascadia-code
       noto-fonts 
@@ -58,6 +59,7 @@
     ];
  
     fontconfig = {
+      enable = true;
       defaultFonts = {
         sansSerif = [ "Noto Sans CJK SC" "DejaVu Sans" ];
         serif = [ "Noto Serif CJK SC" "DejaVu Serif" ];
