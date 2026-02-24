@@ -27,11 +27,22 @@ window-rule {
 
 window-rule {
     match app-id="wps"
+    match app-id="et"
+    match app-id="wpp"
     opacity 0.95
     background-effect {
       xray true
       blur true
     }
+}
+window-rule {
+    match app-id="wps"
+    match app-id="et"
+    match app-id="wpp"
+    exclude title="WPS文字"
+    exclude title="WPS表格"
+    exclude title="WPS演示"
+    open-floating true
 }
 
 
