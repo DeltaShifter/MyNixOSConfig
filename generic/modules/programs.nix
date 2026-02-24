@@ -86,7 +86,7 @@
     cachix
     lsd
     mousepad
-    ristretto
+    loupe
     gsettings-desktop-schemas
     adwaita-icon-theme
     bibata-cursors-translucent

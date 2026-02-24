@@ -21,7 +21,6 @@ let
   manualStart = [
     "X1c"
     "AlienwareAlpha"
-    "Optiplex"
   ];
   
 in {
