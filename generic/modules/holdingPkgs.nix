@@ -1,6 +1,9 @@
 { lib, pkgs-stable , ...}:
-{
- environment.systemPackages = lib.mkForce[
-   pkgs-stable.khal
- ]; 
-}
+  {
+    nixpkgs.overlays = [
+      (final: prev: {
+        khal = pkgs-stable.khal;
+        dwarfs = pkgs-stable.dwarfs;
+      })
+    ];
+  }

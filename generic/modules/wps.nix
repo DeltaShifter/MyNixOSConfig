@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, pkgs-stable, lib, ... }:
 
 {
   nixpkgs.overlays = [
@@ -18,6 +18,6 @@
 ];
 
   environment.systemPackages = [
-    pkgs.wpsoffice-cn
+    pkgs-stable.wpsoffice-cn
   ];
 }
