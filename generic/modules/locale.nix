@@ -47,6 +47,7 @@
   fonts = {
     fontDir.enable = true; # 启用旧版字体路径兼容
     packages = with pkgs; [
+      corefonts
       cascadia-code
       noto-fonts 
       noto-fonts-cjk-sans
