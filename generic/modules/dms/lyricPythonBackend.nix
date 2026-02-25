@@ -19,8 +19,6 @@ let
   
   # 因为自身逆天占用，设置黑名单在部分机器上禁用
   manualStart = [
-    "X1c"
-    "AlienwareAlpha"
   ];
   
 in {
