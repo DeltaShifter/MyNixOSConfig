@@ -123,6 +123,7 @@
     gimp-with-plugins
     shotcut
     lx-music-desktop
+    quickemu
   # ---PkgsEnd--- 
     ];
      

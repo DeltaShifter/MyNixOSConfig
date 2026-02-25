@@ -45,7 +45,8 @@ in {
       Restart = "on-failure";
       RestartSec = 5;
 
-      CPUWeight = 1;
+      AllowedCPUs = "0";
+      CPUQuota = "0.5%";
       CPUSchedulingPolicy = "idle";
       IOSchedulingClass = "idle";
 
