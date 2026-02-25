@@ -124,6 +124,7 @@
     shotcut
     lx-music-desktop
     quickemu
+    quickgui
   # ---PkgsEnd--- 
     ];
      
