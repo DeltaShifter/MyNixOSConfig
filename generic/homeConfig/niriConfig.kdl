@@ -39,6 +39,8 @@ window-rule {
     match app-id="wps"
     match app-id="et"
     match app-id="wpp"
+    match app-id="thunar"
+    exclude title="- Thunar$"
     exclude title="WPS文字"
     exclude title="WPS表格"
     exclude title="WPS演示"
