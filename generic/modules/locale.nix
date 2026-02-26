@@ -63,7 +63,8 @@
       defaultFonts = {
         sansSerif = [ "Noto Sans CJK SC" "DejaVu Sans" ];
         serif = [ "Noto Serif CJK SC" "DejaVu Serif" ];
-        monospace = [ "Cascadia Code" "Noto Sans Mono CJK SC" ];
+        monospace = [ "Noto Sans Mono CJK SC" "DejaVu Sans Mono" ];
+        emoji = ["Noto Color Emoji"];
       };
     };
   };
