@@ -34,6 +34,7 @@ in {
       WorkingDirectory = "${lyrics-src}/backend";
       ExecStart = "${lyrics-python}/bin/python src/server.py";
       
+      CPUQuota = "0.5%";
       Nice = 19;
       CPUSchedulingPolicy = "idle";
       
