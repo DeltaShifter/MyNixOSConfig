@@ -49,11 +49,6 @@ in {
       Restart = "on-failure";
       RestartSec = 5;
 
-      AllowedCPUs = 0;
-      CPUWeight = 1;
-      CPUSchedulingPolicy = "idle";
-      IOSchedulingClass = "idle";
-
     };
 
     # 环境变量注入
