@@ -75,6 +75,7 @@
     nur.repos.chillcicada.ttf-ms-win10-sc-sup
     nur.repos.chillcicada.ttf-wps-fonts
     android-tools
+    btop
     vim
     wget
     git
