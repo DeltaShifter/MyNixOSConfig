@@ -19,7 +19,7 @@ let
   
   start-script = pkgs.writeShellScript "start-lyrics-backend" ''
   cat ${lyrics-src}/backend/src/server.py | \
-  sed '/async for message in websocket:/a \                await asyncio.sleep(0.2)' | \
+  sed '/async for message in websocket:/a \                last_msg = None\n                try:\n                    while True: last_msg = await asyncio.wait_for(websocket.recv(), timeout=0)\n                except: pass\n                if last_msg: message = last_msg\n                await asyncio.sleep(0.1)'
   ${lyrics-python}/bin/python -
   '';
  
