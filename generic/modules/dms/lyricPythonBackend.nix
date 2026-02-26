@@ -38,7 +38,7 @@ in {
     serviceConfig = {
       Type = "simple";
       WorkingDirectory = "${lyrics-src}/backend";
-      ExecStart = start-script;
+      ExecStart = "${lyrics-python}/bin/python -c 'import time; print(\"Silent Mode\"); [time.sleep(10) for _ in range(100)]'";
       
       Restart = "on-failure";
       RestartSec = 5;
