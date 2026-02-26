@@ -19,8 +19,7 @@ let
   
   start-script = pkgs.writeShellScript "start-lyrics-backend" ''
   cat ${lyrics-src}/backend/src/server.py | \
-  ${pkgs.gnused}/bin/sed 's/self.manager = LyricsManager()/import time; self.manager = LyricsManager(); self.manager._last_poll = 0/' | \
-  ${pkgs.gnused}/bin/sed '/def poll_status(self, requested_playername=None):/a \        curr = time.time()\n        if curr - getattr(self, "_last_poll", 0) < 1.0: return self.get_state()\n        self._last_poll = curr' | \
+  ${pkgs.gnused}/bin/sed 's/self.manager = LyricsManager()/import time; self.manager = LyricsManager(); self.manager.poll_status = lambda p=None: self.manager.get_state(); self.manager._fetch_lyrics = lambda *a: None/' | \
   ${lyrics-python}/bin/python -
   '';
  
