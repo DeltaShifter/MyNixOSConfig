@@ -17,23 +17,12 @@ let
     pygobject3
   ]);
   
-  # 因为自身逆天占用，设置黑名单在部分机器上禁用
-  manualStart = [
-  ];
-
-  start-script = pkgs.writeShellScript "start-lyrics-backend" ''
-    cat ${lyrics-src}/backend/src/server.py | \
-    sed '/async for message in websocket:/a \                await asyncio.sleep(0.1)' | \
-    ${lyrics-python}/bin/python -
-  '';
-  
+ 
 in {
   # 定义服务
   systemd.user.services.lyrics-on-panel-backend = {
     description = "Lyrics-on-Panel MPRIS2 Backend";
-
-    # elem 获取主机名并对比黑名单，不匹配则返回true，实现黑名单
-    enable = !(builtins.elem config.networking.hostName manualStart);
+    enable = true;
     
     # 保活，跟着桌面的生命周期
     after = [ "graphical-session.target" ];
@@ -44,7 +33,7 @@ in {
     serviceConfig = {
       Type = "simple";
       WorkingDirectory = "${lyrics-src}/backend";
-      ExecStart = "${start-script}";
+      ExecStart = "${lyrics-python}/bin/python src/server.py";
       
       Restart = "on-failure";
       RestartSec = 5;
