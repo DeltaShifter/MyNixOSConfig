@@ -94,6 +94,7 @@
     gparted
     spacedrive
     google-chrome
+    microsoft-edge
     gopeed
     qq
     wechat
