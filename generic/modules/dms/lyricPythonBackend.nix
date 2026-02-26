@@ -17,6 +17,11 @@ let
     pygobject3
   ]);
   
+  start-script = pkgs.writeShellScript "start-lyrics-backend" ''
+  cat ${lyrics-src}/backend/src/server.py | \
+  sed '/async for message in websocket:/a \                await asyncio.sleep(0.2)' | \
+  ${lyrics-python}/bin/python -
+  '';
  
 in {
   # 定义服务
@@ -33,7 +38,7 @@ in {
     serviceConfig = {
       Type = "simple";
       WorkingDirectory = "${lyrics-src}/backend";
-      ExecStart = "${lyrics-python}/bin/python src/server.py";
+      ExecStart = start-script;
       
       Restart = "on-failure";
       RestartSec = 5;
