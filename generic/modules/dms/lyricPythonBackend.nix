@@ -19,8 +19,7 @@ let
   
   start-script = pkgs.writeShellScript "start-lyrics-backend" ''
   cat ${lyrics-src}/backend/src/server.py | \
-  # sed '/async for message in websocket:/a \                last_msg = None\n                try:\n                    while True: last_msg = await asyncio.wait_for(websocket.recv(), timeout=0)\n                except: pass\n                if last_msg: message = last_msg\n                await asyncio.sleep(0.5)\n                if not message: continue' | \
-  sed 's/await loop.run_in_executor(None, self.manager.poll_status/await asyncio.sleep(0.5); await loop.run_in_executor(None, self.manager.poll_status/'
+  sed 's/await loop.run_in_executor(None, self.manager.poll_status/await asyncio.sleep(1.5); await loop.run_in_executor(None, self.manager.poll_status/'
   ${lyrics-python}/bin/python -
   '';
  
