@@ -38,7 +38,10 @@ in {
     serviceConfig = {
       Type = "simple";
       WorkingDirectory = "${lyrics-src}/backend";
-      ExecStart = "${lyrics-python}/bin/python -c 'import time; print(\"Silent Mode\"); [time.sleep(10) for _ in range(100)]'";
+      ExecStart = "${pkgs.python3}/bin/python -c 'import time; print(\"Sleeping\"); [time.sleep(60) for _ in range(1000)]'";
+
+      Nice = 19;
+      CPUSchedulingPolicy = "other";
       
       Restart = "on-failure";
       RestartSec = 5;
