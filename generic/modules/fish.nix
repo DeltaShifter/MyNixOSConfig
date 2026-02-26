@@ -10,7 +10,7 @@
       nixupd = "nh os switch ~/.MyNixConf/ && nixsync";
       flakeupd = "nix flake update --flake ~/.MyNixConf/";
       nixclean = "sudo nix-collect-garbage -d";
-      nixsync = "GEN=$(ls -1 /nix/var/nix/profiles/system-*-link | wc -l) && git -C $HOME/.MyNixConf add -A && git -C $HOME/.MyNixConf commit -m \"Update (Gen $GEN) $(date +'%Y-%m-%d %H:%M:%S')\" && git -C $HOME/.MyNixConf push";
+      nixsync = "set GEN $(ls -1 /nix/var/nix/profiles/system-*-link | wc -l) && git -C $HOME/.MyNixConf add -A && git -C $HOME/.MyNixConf commit -m \"Update (Gen $GEN) $(date +'%Y-%m-%d %H:%M:%S')\" && git -C $HOME/.MyNixConf push";
       nixcachix =''nix path-info -r /run/current-system | cachix push dale-nix-cachix'';
       proxyon = "export http_proxy=http://127.0.0.1:20172 https_proxy=http://127.0.0.1:20172 && curl -I --connect-timeout 3 https://www.google.com";
       ff = "fastfetch --config hypr.jsonc";
