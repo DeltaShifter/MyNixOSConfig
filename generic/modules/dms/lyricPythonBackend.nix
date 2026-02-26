@@ -20,6 +20,12 @@ let
   # 因为自身逆天占用，设置黑名单在部分机器上禁用
   manualStart = [
   ];
+
+  start-script = pkgs.writeShellScript "start-lyrics-backend" ''
+    cat ${lyrics-src}/backend/src/server.py | \
+    sed '/async for message in websocket:/a \                await asyncio.sleep(0.1)' | \
+    ${lyrics-python}/bin/python -
+  '';
   
 in {
   # 定义服务
@@ -38,7 +44,7 @@ in {
     serviceConfig = {
       Type = "simple";
       WorkingDirectory = "${lyrics-src}/backend";
-      ExecStart = "${lyrics-python}/bin/python src/server.py";
+      ExecStart = "${start-script}";
       
       Restart = "on-failure";
       RestartSec = 5;
