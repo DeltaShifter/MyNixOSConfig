@@ -19,8 +19,8 @@ let
   
   start-script = pkgs.writeShellScript "start-lyrics-backend" ''
   cat ${lyrics-src}/backend/src/server.py | \
-  ${pkgs.gnused}/bin/sed 's/self.manager = LyricsManager()/self.manager = LyricsManager(); import time; _orig = self.manager.poll_status; self.manager.poll_status = lambda p: (time.sleep(2.0) or _orig(p))/' | \
-  ${pkgs.gnused}/bin/sed 's/state = await loop.run_in_executor(None, self.manager.poll_status, requested_player)/await asyncio.sleep(2.0); state = await loop.run_in_executor(None, self.manager.poll_status, requested_player)/' | \
+  ${pkgs.gnused}/bin/sed 's/self.manager = LyricsManager()/import time; self.manager = LyricsManager(); self.manager._last_poll = 0/' | \
+  ${pkgs.gnused}/bin/sed '/def poll_status(self, requested_playername=None):/a \        curr = time.time()\n        if curr - getattr(self, "_last_poll", 0) < 1.0: return self.get_state()\n        self._last_poll = curr' | \
   ${lyrics-python}/bin/python -
   '';
  
