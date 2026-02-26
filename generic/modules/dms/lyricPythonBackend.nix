@@ -19,8 +19,8 @@ let
   
   start-script = pkgs.writeShellScript "start-lyrics-backend" ''
   cat ${lyrics-src}/backend/src/server.py | \
-  ${pkgs.gnused}/bin/sed '/self._connection_paths = {}/a \        self.last_poll_time = 0' | \
-  ${pkgs.gnused}/bin/sed '/async for message in websocket:/a \                curr_time = asyncio.get_event_loop().time()\n                if curr_time - self.last_poll_time < 2.0: continue\n                self.last_poll_time = curr_time' | \
+  ${pkgs.gnused}/bin/sed 's/self.manager = LyricsManager()/self.manager = LyricsManager(); import time; _orig = self.manager.poll_status; self.manager.poll_status = lambda p: (time.sleep(2.0) or _orig(p))/' | \
+  ${pkgs.gnused}/bin/sed 's/state = await loop.run_in_executor(None, self.manager.poll_status, requested_player)/await asyncio.sleep(2.0); state = await loop.run_in_executor(None, self.manager.poll_status, requested_player)/' | \
   ${lyrics-python}/bin/python -
   '';
  
