@@ -19,7 +19,7 @@ let
   
   start-script = pkgs.writeShellScript "start-lyrics-backend" ''
   cat ${lyrics-src}/backend/src/server.py | \
-  # sed 's/await loop.run_in_executor(None, self.manager.poll_status/await asyncio.sleep(2.0); await loop.run_in_executor(None, self.manager.poll_status/'
+  sed 's/await loop.run_in_executor(None, self.manager.poll_status/await asyncio.sleep(5.0); await loop.run_in_executor(None, self.manager.poll_status/'
   ${lyrics-python}/bin/python -
   '';
  
