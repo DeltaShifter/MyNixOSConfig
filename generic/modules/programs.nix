@@ -46,7 +46,7 @@
     nerd-fonts.jetbrains-mono
   ];
 
-  documentation.man.generateCaches = false; #关闭man cache加快构建速度
+  # documentation.man.generateCaches = false; #关闭man cache加快构建速度
 
   nixpkgs.overlays = [ # 应用行为
   
