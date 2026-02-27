@@ -10,7 +10,7 @@ let
 
 
   # 依赖处理
-  lyrics-python = pkgs.python3.withPackages (ps: with ps; [
+  lyrics-python = pkgs.python313.withPackages (ps: with ps; [
     dbus-python
     websockets
   ]);
