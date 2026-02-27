@@ -32,7 +32,7 @@ in {
       WorkingDirectory = "${lyrics-src}/backend";
       ExecStart = "${lyrics-python}/bin/python src/server.py";
       
-      CPUWeight = "10";
+      CPUWeight = "5";
       CPUSchedulingPolicy = "idle";
       
       Restart = "on-failure";
