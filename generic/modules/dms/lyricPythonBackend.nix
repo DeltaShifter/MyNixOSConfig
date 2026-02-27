@@ -33,17 +33,12 @@ in {
       ExecStart = "${lyrics-python}/bin/python src/server.py";
       
       CPUWeight = "5";
+      CPUQuota = "2%";
       CPUSchedulingPolicy = "idle";
       
       Restart = "on-failure";
       RestartSec = 5;
 
     };
-
-    # 环境变量注入
-    environment = {
-      PYTHONPATH = "${lyrics-src}/backend/src";
-    };
-
   };
 }
