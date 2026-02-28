@@ -80,6 +80,7 @@
     wget
     git
     gh
+    jq
     helix
     fastfetch
     udiskie
