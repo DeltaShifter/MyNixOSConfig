@@ -18,6 +18,6 @@
 ];
 
   environment.systemPackages = [
-    pkgs.wpsoffice-cn
+    pkgs-stable.wpsoffice-cn
   ];
 }
