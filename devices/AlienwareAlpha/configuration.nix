@@ -17,7 +17,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  boot.initrd.kernelModules = [ "nvidia" ];
 
   networking.hostName = "AlienwareAlpha"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -40,9 +39,13 @@
 
   # Enable the X11 windowing system.
   hardware.graphics.enable = true;
-  hardware.nvidia.open = false;
-  hardware.nvidia.modesetting.enable = true;
-  services.xserver.videoDriver = ["nvidia"];
+  hardware.nvidia={
+    open = false;
+    modesetting.enable = true;
+    powerManagement.enable = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    };
+  services.xserver.videoDrivers = ["nvidia"];
 
   # Enable Niri WM
   programs.niri.enable = true;
