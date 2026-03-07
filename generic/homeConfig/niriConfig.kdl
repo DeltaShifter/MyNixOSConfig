@@ -45,7 +45,6 @@ window-rule {
     exclude title="WPS表格"
     exclude title="WPS演示"
     open-floating true
-    open-focused false
     focus-ring {
         off
     }
