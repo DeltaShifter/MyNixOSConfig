@@ -16,6 +16,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_zen;
   boot.initrd.kernelModules = [ "nvidia" ];
 
   networking.hostName = "AlienwareAlpha"; # Define your hostname.
@@ -38,10 +39,10 @@
   time.timeZone = "Asia/Shanghai";
 
   # Enable the X11 windowing system.
-  services.xserver.enable = true;
   hardware.graphics.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = false;
+  hardware.nvidia.modesetting.enable = true;
+  services.xserver.videoDriver = ["nvidia"];
 
   # Enable Niri WM
   programs.niri.enable = true;
