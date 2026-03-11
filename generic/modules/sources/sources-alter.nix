@@ -17,8 +17,8 @@
     "dale-nix-cachix.cachix.org-1:N+YRpTWo6H8F1VA5hNZ3Uhl3zPiNtkiKspO9UcggJzM="
   ];
 
-    # 增大下载缓存，防止大文件下载中断 (500MB)
-    download-buffer-size = 524288000;
+    # 增大下载缓存，防止大文件下载中断
+    download-buffer-size = 1024*1024*1024;
     
     connect-timeout = 5;
     fallback = true;
