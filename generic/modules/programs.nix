@@ -103,6 +103,7 @@
     clapper
     papirus-icon-theme
     ouch
+    unrar
     file-roller
     intel-undervolt
     thunderbird
