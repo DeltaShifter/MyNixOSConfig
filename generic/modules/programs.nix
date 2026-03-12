@@ -129,7 +129,6 @@
     lx-music-desktop
     quickemu
     quickgui
-    bottles
   # ---PkgsEnd--- 
     ];
      
