@@ -129,6 +129,7 @@
     lx-music-desktop
     quickemu
     quickgui
+    protonplus
   # ---PkgsEnd--- 
     ];
      
