@@ -61,6 +61,9 @@
     (pkgs.writeShellScriptBin "xterm" ''
       exec ${pkgs.kitty}/bin/kitty "$@"
     '')
+    (pkgs.writeShellScriptBin "gnome-terminal" ''
+      exec kitty "$@"
+    '')
     kitty
     kitty-img
     kitty-themes
