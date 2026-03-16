@@ -22,14 +22,6 @@
   services.v2raya.enable = true;
   services.v2raya.cliPackage = pkgs.xray;
   
-  programs.thunar = { # 文管
-    enable = true;
-    plugins = with pkgs;[
-      thunar-archive-plugin
-      thunar-vcs-plugin
-      thunar-volman
-    ];
-  };
   programs.xfconf.enable = true;
   services.udisks2.enable = true; # 开启USB挂载
   services.tumbler.enable = true; # 解决文管缩略图显示
@@ -84,10 +76,11 @@
     helix
     fastfetch
     udiskie
+    kdePackages.dolphin
+    kdePackages.dolphin-plugins
     yazi
     cachix
     lsd
-    mousepad
     loupe
     gsettings-desktop-schemas
     adwaita-icon-theme
