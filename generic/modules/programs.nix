@@ -76,8 +76,7 @@
     helix
     fastfetch
     udiskie
-    kdePackages.dolphin
-    kdePackages.dolphin-plugins
+    nemo-with-extensions
     yazi
     cachix
     lsd
