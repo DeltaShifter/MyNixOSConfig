@@ -22,6 +22,7 @@
   environment.systemPackages = with pkgs; [
     bat
     fzf
+    fd
     eza
     fishPlugins.fzf-fish
   ];
