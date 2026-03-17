@@ -3,7 +3,7 @@
 {
   programs.fish = {
     enable = true;
-    interactiveShellInit = "zoxide init fish | source";
+    interactiveShellInit = "";
     shellAliases = {
       ls = "eza --icons --group-directories-first";
       nixadd = "hx ~/.MyNixConf/generic/modules/programs.nix:(math (grep -n '# ---PkgsEnd---' ~/.MyNixConf/generic/modules/programs.nix | cut -d: -f1) - 1)";
@@ -20,14 +20,17 @@
 
   users.users.dale.shell = pkgs.fish;
   environment.systemPackages = with pkgs; [
-    nix-output-monitor
-    starship 
-    zoxide
     bat
     fzf
     eza
+    fishPlugins.fzf-fish
   ];
 
+  programs.zoxide = {
+    enable = true;
+    enableFishIntegration = true;
+  };
+  
   programs.starship = {
     enable = true;
   };
