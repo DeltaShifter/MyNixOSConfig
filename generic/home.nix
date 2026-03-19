@@ -55,7 +55,8 @@ in
 
   # Helix
   xdg.configFile."helix/config.toml".source = ./homeConfig/helix/helix.toml;
-  xdg.configFile."helix/language.toml".source = ./homeConfig/helix/language.toml;  
+  xdg.configFile."helix/languages.toml".source = ./homeConfig/helix/languages.toml;  
+
   # Fastfetch预设
   xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
 
