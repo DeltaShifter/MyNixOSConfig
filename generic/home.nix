@@ -54,8 +54,8 @@ in
   xdg.configFile."starship.toml".source = ./homeConfig/starship.toml;
 
   # Helix
-  xdg.configFile."helix/config.toml".source = ./homeConfig/helix.toml;
-  
+  xdg.configFile."helix/config.toml".source = ./homeConfig/helix/helix.toml;
+  xdg.configFile."helix/language.toml".source = ./homeConfig/helix/language.toml;  
   # Fastfetch预设
   xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
 
