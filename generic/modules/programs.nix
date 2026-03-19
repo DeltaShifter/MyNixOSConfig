@@ -77,6 +77,8 @@
     gh
     jq
     helix
+    nixd
+    nixpkgs-fmt
     fastfetch
     udiskie
     nemo-with-extensions
@@ -109,7 +111,6 @@
     wl-clipboard
     xclip
     caligula
-    nixd
     nfs-utils
     baidupcs-go
     telegram-desktop
