@@ -129,7 +129,7 @@
     shotcut
     lx-music-desktop
     quickemu
-              quickgui
+    quickgui
     protonplus
     # ---PkgsEnd--- 
   ];
