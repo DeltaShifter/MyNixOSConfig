@@ -6,4 +6,3 @@ cursor-shape = { insert = "bar", normal = "block", select = "underline" } # å…‰æ
 true-color = true 
 lsp.display-messages = true
 bufferline = "multiple"
-auto-format = true
