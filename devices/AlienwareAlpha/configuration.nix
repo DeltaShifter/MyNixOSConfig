@@ -39,6 +39,7 @@
 
   # Enable the X11 windowing system.
   hardware.graphics.enable = true;
+  hardware.graphics.enable32Bit = true;
   hardware.nvidia={
     open = false;
     modesetting.enable = true;
