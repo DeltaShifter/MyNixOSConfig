@@ -3,10 +3,11 @@
 
 let
   wpsoffice-cn-dpi = pkgs-stable.wpsoffice-cn.overrideAttrs (oldAttrs: {
-    nativeBuildInputs = (oldAttrs.nativeBulildInputs or [ ]) ++ [ pkgs.makeWrapper ];
     postFixup = (oldAttrs.postFixup or "") + ''
-      for bin in $out/bin/*;do
-      wrapProgram "$bin" --set QT_FONT_DPI "144"
+      for file in $out/bin/*; do
+        if [ -f "$file" ] && [ ! -L "$file" ]; then
+          sed -i '2i export QT_FONT_DPI=144' "$file"
+        fi
       done
     '';
   });
