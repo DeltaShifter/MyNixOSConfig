@@ -131,6 +131,7 @@
     quickemu
     quickgui
     protonplus
+    bottles
     # ---PkgsEnd--- 
   ];
 
