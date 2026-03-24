@@ -58,7 +58,7 @@ in
   xdg.configFile."helix/languages.toml".source = ./homeConfig/helix/languages.toml;
 
   # Fastfetch预设
-  xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
+  # xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
   xdg.dataFile."fastfetch/presets/kylin.jsonc".source = ./homeConfig/fastfetch/presets-kylin.jsonc;
 
   programs.home-manager.enable = true;
