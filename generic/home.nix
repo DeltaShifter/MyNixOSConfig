@@ -1,23 +1,23 @@
 { osConfig, inputs, pkgs, lib, ... }:
 
 let
-  
-   # 调取主机名，方便以后的判断
-    currentHostName = osConfig.networking.hostName;
+
+  # 调取主机名，方便以后的判断
+  currentHostName = osConfig.networking.hostName;
 
 in
 
 {
-  home.stateVersion = "25.11"; 
+  home.stateVersion = "25.11";
 
   # 整体主题配置
   gtk = {
     enable = true;
-    iconTheme ={
+    iconTheme = {
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
-      };
     };
+  };
 
   # niri 配置相关
   xdg.configFile."niri/my-custom.kdl".source = ./homeConfig/niriConfig.kdl;
@@ -44,7 +44,7 @@ in
   # Fcitx5
   xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5/fcitx5ui.conf;
   xdg.dataFile."fcitx5/rime/default.custom.yaml".source = ./homeConfig/fcitx5/rime.default.custom.yaml;
-  
+
   # Rofi
   xdg.configFile."rofi/config.rasi".source = ./homeConfig/rofi/config.rasi;
   xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeConfig/rofi/rounded-nord-dark.rasi;
@@ -55,16 +55,17 @@ in
 
   # Helix
   xdg.configFile."helix/config.toml".source = ./homeConfig/helix/helix.toml;
-  xdg.configFile."helix/languages.toml".source = ./homeConfig/helix/languages.toml;  
+  xdg.configFile."helix/languages.toml".source = ./homeConfig/helix/languages.toml;
 
   # Fastfetch预设
   xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
+  xdg.dataFile."fastfetch/presets/kylin.jsonc".source = ./homeConfig/fastfetch/presets-kylin.jsonc;
 
   programs.home-manager.enable = true;
 
   home.activation = {
     # Niri 注入include脚本,因为Niri的配置不止一个程序管理
-    ensureNiriInclude = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    ensureNiriInclude = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       CONFIG_FILE="$HOME/.config/niri/config.kdl"
       INCLUDE_LINE='include "my-custom.kdl"'
       if [ -f "$CONFIG_FILE" ]; then
@@ -73,12 +74,12 @@ in
         fi
       fi
     '';
-   # PhotoshopGIMP配置文件
-   linkPhotoGIMP = lib.hm.dag.entryAfter ["writeBoundary"] ''
-     mkdir -p $HOME/.config/GIMP/3.0
-     ln -sfn "./homeConfig/photoGIMP/.config" "$HOME/.config/GIMP/3.0/"
-     ln -sfn "./homeConfig/photoGIMP/.local" "$HOME/.config/GIMP/3.0/"
-   '';   
-   };
-    
+    # PhotoshopGIMP配置文件
+    linkPhotoGIMP = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+      mkdir -p $HOME/.config/GIMP/3.0
+      ln -sfn "./homeConfig/photoGIMP/.config" "$HOME/.config/GIMP/3.0/"
+      ln -sfn "./homeConfig/photoGIMP/.local" "$HOME/.config/GIMP/3.0/"
+    '';
+  };
+
 }
