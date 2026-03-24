@@ -5,6 +5,7 @@
       # khal = pkgs-stable.khal;
       # dwarfs = pkgs-stable.dwarfs;
       sunshine = pkgs-stable.sunshine;
+      # inherit (pkgs-stable) sunshine;
     })
   ];
 }
