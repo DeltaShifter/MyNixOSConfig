@@ -24,6 +24,11 @@
   services.v2raya.enable = true;
   services.v2raya.cliPackage = pkgs.xray;
 
+  services.scx = {
+    enable = true;
+    scheduler = "scx_rusty";
+  };
+
   programs.xfconf.enable = true;
   services.udisks2.enable = true; # 开启USB挂载
   services.tumbler.enable = true; # 解决文管缩略图显示
