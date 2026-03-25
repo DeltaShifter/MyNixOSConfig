@@ -6,15 +6,16 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
   # Swap
-  swapDevices = [ {
+  swapDevices = [{
     device = "/var/lib/swapfile";
     size = 16 * 1024;
-  } ];
+  }];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -27,6 +28,16 @@
   # Bluetooth
   hardware.bluetooth.enable = true;
 
+  # GPU Settings
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # Steam 32位游戏必须
+    extraPackages = with pkgs; [
+      intel-media-driver
+      intel-compute-runtime
+      libva-vdpau-driver
+    ];
+  };
   # Enable flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
@@ -42,7 +53,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  hardware.graphics.enable = true;
 
   # Enable Niri WM
   programs.niri.enable = true;
@@ -54,10 +64,10 @@
   };
 
   # Enable CUPS to print documents.
-    services.printing = {
+  services.printing = {
     enable = true;
     drivers = with pkgs; [
-    (callPackage ../../pkgs/pantumprint.nix{})
+      (callPackage ../../pkgs/pantumprint.nix { })
     ];
     extraFilesConf = "FileDevice Yes";
   };
@@ -92,7 +102,7 @@
     description = "dale";
     extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -102,15 +112,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  curl
-  git
-  wget
-  alacritty
-  rofi
-  swaybg
-  xwayland-satellite
-  brightnessctl
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    curl
+    git
+    wget
+    alacritty
+    rofi
+    swaybg
+    xwayland-satellite
+    brightnessctl
   ];
 
   environment.sessionVariables = {
