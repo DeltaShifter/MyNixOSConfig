@@ -9,6 +9,10 @@ appimageTools.wrapType2 {
     hash = "sha256-q0SptU6kcXHnSsqRK9aCZKI1rscIKs2T9YhGZhYT0ow=";
   };
 
+  extraPkgs = pkgs: with pkgs; [
+    zstd
+  ];
+
   meta = with lib; {
     description = "A multi-threading async downloader based on PySide6";
     homepage = "https://github.com/XiaoYouChR/Ghost-Downloader-3";
