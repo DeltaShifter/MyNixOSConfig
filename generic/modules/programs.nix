@@ -137,6 +137,7 @@
     quickgui
     protonplus
     bottles
+    (pkgs.callPackage ../../pkgs/ghostdownloader.nix { })
     # ---PkgsEnd--- 
   ];
 
