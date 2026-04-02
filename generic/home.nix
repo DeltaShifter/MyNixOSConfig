@@ -19,6 +19,13 @@ in
     };
   };
 
+  # 默认应用关联
+  xdg.mimeApps = {
+    enable = true;
+    defaultApplications = {
+      "inode/directory" = "nemo.desktop";
+    };
+  };
   # niri 配置相关
   xdg.configFile."niri/my-custom.kdl".source = ./homeConfig/niriConfig.kdl;
 
