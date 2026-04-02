@@ -1,4 +1,4 @@
-{ osConfig, inputs, pkgs, lib, ... }:
+{ osConfig, config, inputs, pkgs, lib, ... }:
 
 let
 
@@ -16,6 +16,7 @@ in
     iconTheme = {
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
+      # gtk4.theme = config.gtk.theme;
     };
   };
 
