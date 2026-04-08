@@ -100,7 +100,6 @@
     nixpkgs-fmt
     fastfetch
     udiskie
-    nemo-with-extensions
     yazi
     cachix
     lsd
