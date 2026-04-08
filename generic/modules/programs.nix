@@ -29,6 +29,15 @@
     scheduler = "scx_rusty";
   };
 
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs.xfce; [
+      thunar-archive-plugin # 右键压缩/解压
+      thunar-volman # 自动挂载U盘
+      thunar-media-tags-plugin # 媒体文件标签
+    ];
+  };
+
   programs.xfconf.enable = true;
   services.udisks2.enable = true; # 开启USB挂载
   services.tumbler.enable = true; # 解决文管缩略图显示

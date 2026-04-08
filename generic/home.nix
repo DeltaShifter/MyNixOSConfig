@@ -24,7 +24,7 @@ in
   xdg.mimeApps = {
     enable = true;
     defaultApplications = {
-      "inode/directory" = "nemo.desktop";
+      "inode/directory" = "thunar.desktop";
     };
   };
   # niri 配置相关
