@@ -31,7 +31,7 @@
 
   programs.thunar = {
     enable = true;
-    plugins = with pkgs.xfce; [
+    plugins = with pkgs; [
       thunar-archive-plugin # 右键压缩/解压
       thunar-volman # 自动挂载U盘
       thunar-media-tags-plugin # 媒体文件标签
