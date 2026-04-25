@@ -112,7 +112,6 @@
       },
       "original": {
         "owner": "niri-wm",
-        "ref": "main",
         "repo": "niri",
         "type": "github"
       }
