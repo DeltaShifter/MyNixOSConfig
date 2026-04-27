@@ -144,7 +144,7 @@
     quickemu
     quickgui
     protonplus
-    bottles
+    # bottles
     (pkgs.callPackage ../../pkgs/ghostdownloader.nix { })
     _7zip-zstd-rar
     # ---PkgsEnd--- 
