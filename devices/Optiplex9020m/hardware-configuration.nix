@@ -5,7 +5,8 @@
 
 {
   imports =
-    [ (modulesPath + "/hardware/network/broadcom-43xx.nix")
+    [
+      (modulesPath + "/hardware/network/broadcom-43xx.nix")
       (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
@@ -14,37 +15,40 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  services.undervolt = { 
+  services.undervolt = {
     enable = true;
     coreOffset = -70;
   };
 
   fileSystems."/mnt/storagedata" = {
-  device = "/dev/disk/by-uuid/1addde49-e39d-4f40-8f12-b2f7560f49a5";
-  options = [ "nofail" "x-systemd.device-timeout=5s" ]; 
+    device = "/dev/disk/by-uuid/1addde49-e39d-4f40-8f12-b2f7560f49a5";
+    fsType = "btrfs";
+    options = [ "nofail" "x-systemd.device-timeout=5s" ];
   };
-  
+
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/06efdc89-9af3-47da-b48a-cfa2dbcb178b";
+    {
+      device = "/dev/disk/by-uuid/06efdc89-9af3-47da-b48a-cfa2dbcb178b";
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/06efdc89-9af3-47da-b48a-cfa2dbcb178b";
+    {
+      device = "/dev/disk/by-uuid/06efdc89-9af3-47da-b48a-cfa2dbcb178b";
       fsType = "btrfs";
       options = [ "subvol=@home" ];
     };
 
   fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/94C5-4017";
+    {
+      device = "/dev/disk/by-uuid/94C5-4017";
       fsType = "vfat";
       options = [ "fmask=0177" "dmask=0077" ];
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/c3d9df8b-aabe-47ff-a53d-a28eece77dbe"; }
-    ];
+    [{ device = "/dev/disk/by-uuid/c3d9df8b-aabe-47ff-a53d-a28eece77dbe"; }];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
