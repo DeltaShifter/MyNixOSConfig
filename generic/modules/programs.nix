@@ -151,7 +151,7 @@
   ];
 
   nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-1.1.10"
+    "ventoy-1.1.12"
   ];
 
   services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
