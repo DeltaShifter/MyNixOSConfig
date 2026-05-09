@@ -60,7 +60,7 @@
     , home-manager
     , nur
     , nix-index-database
-    , niri
+      # , niri
     , ...
     }@inputs:
 
