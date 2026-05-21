@@ -8,16 +8,16 @@
 
   programs.dank-material-shell.greeter = {
     enable = false;
-    compositor.name = "niri";  # Or "hyprland" or "sway"
+    compositor.name = "niri"; # Or "hyprland" or "sway"
   };
-   
+
   services.upower.enable = true;
 
   programs.dms-shell = {
     enable = true;
-    
-    quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
-    
+
+    # quickshell.package = inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.quickshell;
+
     systemd.enable = false;
     enableSystemMonitoring = true;
     enableDynamicTheming = true;
