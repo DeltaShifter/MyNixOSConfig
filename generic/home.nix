@@ -17,7 +17,7 @@ in
       name = "Papirus";
       package = pkgs.papirus-icon-theme;
     };
-    gtk4.theme = config.gtk.theme;
+    # gtk4.theme = config.gtk.theme;
   };
 
   # 默认应用关联
