@@ -20,7 +20,7 @@
 , xdg-utils
 }:
 let
-  rpathLibs=[
+  rpathLibs = [
     expat
     fontconfig
     freetype
@@ -33,7 +33,7 @@ let
     libxkbcommon
     wayland
   ];
-in  
+in
 rustPlatform.buildRustPackage {
   pname = "alacritty-smooth-cursor";
   version = "0.17.0.2464"; # 对应 PKGBUILD 的 pkgver
@@ -43,7 +43,7 @@ rustPlatform.buildRustPackage {
     repo = "alacritty";
     rev = "all-patches"; # 对应 PKGBUILD 的 branch=all-patches
     # 这里的 hash 需要你在构建报错时更新，或使用 nix-prefetch-github 获取
-    hash = "sha256-WgfXJYdCJDkcM2CJrIYWYUldpz6U/vgQIlEJKkNiFc0="; 
+    hash = "sha256-/Tu5IIE+5sPCYYwXldq0+Keb2WcH3r5KnyjpuxwhZSM=";
   };
 
   # 注意：更改源码后，必须更新此 hash

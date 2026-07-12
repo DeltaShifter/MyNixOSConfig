@@ -6,6 +6,7 @@
       # dwarfs = pkgs-stable.dwarfs;
       sunshine = pkgs-stable.sunshine;
       # inherit (pkgs-stable) sunshine;
+      gearlever = pkgs-stable.gearlever;
     })
   ];
 }

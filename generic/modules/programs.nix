@@ -109,7 +109,7 @@
     bibata-cursors-translucent
     xray
     gparted
-    spacedrive
+    # spacedrive
     google-chrome
     microsoft-edge
     gopeed
