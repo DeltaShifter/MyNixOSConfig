@@ -127,15 +127,24 @@ while true; do
     echo "正在调用 xorriso 进行刻录..."
 
     # 执行刻录
+    # 检查光盘是否有已有会话
+   HAS_SESSION=$(xorriso -dev /dev/sr0 -find / 2>/dev/null | head -1)
+
+   if [ -n "$HAS_SESSION" ]; then
+    # 有旧会话，导入并追加
+    LOAD_ARGS=("-load" "session" "1")
+   else
+    # 空盘，直接写入
+    LOAD_ARGS=()
+   fi
+
     xorriso -x -dev /dev/sr0 \
-        -joliet on \
-        -compliance no_emul_toc \
-        -rockridge on \
-        -volid "$VOLID" \
-        -load session 1 \
-        -grow_blindly unlimited \
-        "${XORRISO_ARGS[@]}" \
-        -commit -eject all
+    -joliet on \
+    -rockridge on \
+    -volid "$VOLID" \
+    "${LOAD_ARGS[@]}" \
+    "${XORRISO_ARGS[@]}" \
+    -commit -eject all
 
     if [ $? -eq 0 ]; then
         gum style --bold --foreground 82 "✅ 刻录成功！光盘已弹出。"
