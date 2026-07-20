@@ -132,6 +132,8 @@ while true; do
         -compliance no_emul_toc \
         -rockridge on \
         -volid "$VOLID" \
+        -load session 1 \
+        -grow_blindly unlimited \
         "${XORRISO_ARGS[@]}" \
         -commit -eject all
 
