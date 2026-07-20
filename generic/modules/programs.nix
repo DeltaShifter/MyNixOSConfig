@@ -57,24 +57,24 @@
 
   # documentation.man.generateCaches = false; #关闭man cache加快构建速度
 
-  nixpkgs.overlays = [
-    # 应用行为
+  # nixpkgs.overlays = [
+  # 应用行为
 
-    (final: prev: {
-      spacedrive-wrapper = prev.symlinkJoin {
-        # 修正spacedrive显示问题和路径问题
-        name = "spacedrive";
-        paths = [ prev.spacedrive ];
-        nativeBuildInputs = [ final.makeWrapper ];
-        postBuild = ''
-          wrapProgram $out/bin/spacedrive \
-            --set GDK_BACKEND x11 \
-            --set WEBKIT_DISABLE_COMPOSITING_MODE 1 \
-            --prefix XDG_DATA_DIRS : "${final.gtk3}/share/gsettings-schemas"
-        '';
-      };
-    })
-  ];
+  # (final: prev: {
+  # spacedrive-wrapper = prev.symlinkJoin {
+  # 修正spacedrive显示问题和路径问题
+  # name = "spacedrive";
+  # paths = [ prev.spacedrive ];
+  # nativeBuildInputs = [ final.makeWrapper ];
+  # postBuild = ''
+  # wrapProgram $out/bin/spacedrive \
+  # --set GDK_BACKEND x11 \
+  # --set WEBKIT_DISABLE_COMPOSITING_MODE 1 \
+  # --prefix XDG_DATA_DIRS : "${final.gtk3}/share/gsettings-schemas"
+  # '';
+  # };
+  # })
+  # ];
 
   environment.systemPackages = with pkgs; [
     (pkgs.writeShellScriptBin "xterm" ''
