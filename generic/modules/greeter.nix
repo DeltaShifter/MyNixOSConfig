@@ -1,27 +1,27 @@
-{ config, pkgs , lib, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   environment.systemPackages = with pkgs;[
     materia-theme
   ];
-  
+
   programs.regreet = {
-  enable = true;
-  settings = {
-    background = {
-      path = ../assets/wallpapers/Night.png;
-      fit = "Cover";
-    };
-    GTK = {
-      application_prefer_dark_theme = true;
-      cursor_theme_name = "Adwaita";
-      theme_name = lib.mkForce "Materia"; 
-    };
-    widget.clock = {
-      format = "%a %H:%M";
-      resolution = "500ms";
+    enable = false;
+    settings = {
+      background = {
+        path = ../assets/wallpapers/Night.png;
+        fit = "Cover";
+      };
+      GTK = {
+        application_prefer_dark_theme = true;
+        cursor_theme_name = "Adwaita";
+        theme_name = lib.mkForce "Materia";
+      };
+      widget.clock = {
+        format = "%a %H:%M";
+        resolution = "500ms";
+      };
     };
   };
-};
 
- }
+}

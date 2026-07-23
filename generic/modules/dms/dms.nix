@@ -3,11 +3,10 @@
 {
   imports = [
     inputs.dms.nixosModules.default
-    inputs.dms.nixosModules.greeter
   ];
 
-  programs.dank-material-shell.greeter = {
-    enable = false;
+  services.displayManager.dms-greeter = {
+    enable = true;
     compositor.name = "niri"; # Or "hyprland" or "sway"
   };
 
