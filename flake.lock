@@ -25,11 +25,27 @@
         ]
       },
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785174034,
         "narHash": "sha256-OiA8Bg/6V3P0+fTfVObWlt3mLDzYfQBVg+jndsiHgJA=",
         "owner": "AvengeMedia",
         "repo": "DankMaterialShell",
         "rev": "64461c534fb9faef30ac1c7aaabe64ce48ebc2fe",
+=======
+        "lastModified": 1783312500,
+        "narHash": "sha256-p8hDGzp02ZcRTMSEjrJguIO8ZNBaD61BlgESMJqhI9Q=",
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "rev": "583e46f2f07714d968c6aadf3ddce604b287c7cf",
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1783312500,
+        "narHash": "sha256-p8hDGzp02ZcRTMSEjrJguIO8ZNBaD61BlgESMJqhI9Q=",
+        "owner": "AvengeMedia",
+        "repo": "DankMaterialShell",
+        "rev": "583e46f2f07714d968c6aadf3ddce604b287c7cf",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -98,11 +114,27 @@
         ]
       },
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785306346,
         "narHash": "sha256-DScBkW0fOgpGPK2trNoX3ryLTlaC14+gglFo/BhGJ4g=",
         "owner": "nix-community",
         "repo": "home-manager",
         "rev": "e705714e918c3b11affcdd15db2cbe3a070420a0",
+=======
+        "lastModified": 1783222121,
+        "narHash": "sha256-E/ElL373TO8lQ2aMvYyzN+k4xkVaUGoRqoa8AtM71tI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "a1645f40777620c4bd2b6d854b290c2fc354a266",
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1783222121,
+        "narHash": "sha256-E/ElL373TO8lQ2aMvYyzN+k4xkVaUGoRqoa8AtM71tI=",
+        "owner": "nix-community",
+        "repo": "home-manager",
+        "rev": "a1645f40777620c4bd2b6d854b290c2fc354a266",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -118,11 +150,27 @@
         ]
       },
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785046085,
         "narHash": "sha256-UiK+mmZJuLWQVhJ5b2wDzogIYWAesyRm6LA3h3Ulh3Y=",
         "owner": "nix-community",
         "repo": "nix-index-database",
         "rev": "11665045df8b9938ef811a3bfdc65cffb02b4b70",
+=======
+        "lastModified": 1783233851,
+        "narHash": "sha256-jzisD+3wWZPC4QvAsKtYguiGsmlH2SN3Mjx5LWd68Ok=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "fab14c7b63499d57cb6673d5690168c3ec42b99a",
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1783233851,
+        "narHash": "sha256-jzisD+3wWZPC4QvAsKtYguiGsmlH2SN3Mjx5LWd68Ok=",
+        "owner": "nix-community",
+        "repo": "nix-index-database",
+        "rev": "fab14c7b63499d57cb6673d5690168c3ec42b99a",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -136,11 +184,27 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785232496,
         "narHash": "sha256-65EQYIRRpTdpH8lUiB6Mvo5uBkG60aBIzAJuALfx+O0=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
         "rev": "2e790b0a6be8ec2b76174ac0931b8ff11919ec98",
+=======
+        "lastModified": 1782562157,
+        "narHash": "sha256-a7+T6QSeowynwZ1ZJJbP8T8ntAytvrui8kFGJmIZt2c=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "a9cf7546a938c737b079e738de73934a13de9784",
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1782562157,
+        "narHash": "sha256-a7+T6QSeowynwZ1ZJJbP8T8ntAytvrui8kFGJmIZt2c=",
+        "owner": "NixOS",
+        "repo": "nixos-hardware",
+        "rev": "a9cf7546a938c737b079e738de73934a13de9784",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -181,11 +245,27 @@
     },
     "nixpkgs_2": {
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785090369,
         "narHash": "sha256-m0pDuRJG7EDo9ri+4Ksu83VsI+PlxNC9lNBfydejce4=",
         "owner": "nixos",
         "repo": "nixpkgs",
         "rev": "624af665418d3c65d544145b4d34ad696439570e",
+=======
+        "lastModified": 1783224372,
+        "narHash": "sha256-8i/87eeoqiGE4yOTjwSA3Eh/ziJRQEmd/unYU+K27sk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1783224372,
+        "narHash": "sha256-8i/87eeoqiGE4yOTjwSA3Eh/ziJRQEmd/unYU+K27sk=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "d407951447dcd00442e97087bf374aad70c04cea",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -203,11 +283,27 @@
         ]
       },
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785317515,
         "narHash": "sha256-p/gN6EcRmrCFymgWDNIiSTjC0vRTiG5QwHCoKcUbE5A=",
         "owner": "nix-community",
         "repo": "NUR",
         "rev": "e963e941b936c5379e9c87b7106ce4d3e3603605",
+=======
+        "lastModified": 1783324823,
+        "narHash": "sha256-6zbMFpq9Ww4KZKaoeRr4EmnCjrunnJIDObXmhX0/kPs=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "7c9211208b7ff6c2ee2b23da0b85b2670da81175",
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1783324823,
+        "narHash": "sha256-6zbMFpq9Ww4KZKaoeRr4EmnCjrunnJIDObXmhX0/kPs=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "7c9211208b7ff6c2ee2b23da0b85b2670da81175",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -223,11 +319,27 @@
         ]
       },
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785134238,
         "narHash": "sha256-bv5gar+ZAXZCJH7UOv0eRFILKt5RKA/3px/XbVR98Cg=",
         "owner": "quickshell-mirror",
         "repo": "quickshell",
         "rev": "43d4fa9e883cb03239b3d578c9c57070f4fbd281",
+=======
+        "lastModified": 1783212316,
+        "narHash": "sha256-tknenPoA90o+Z7woiHchSAHiQzI8s0qYWlB87lIVPEc=",
+        "owner": "quickshell-mirror",
+        "repo": "quickshell",
+        "rev": "4f2c62486b0c939f7fc1f7cea68037173813dbfe",
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1783212316,
+        "narHash": "sha256-tknenPoA90o+Z7woiHchSAHiQzI8s0qYWlB87lIVPEc=",
+        "owner": "quickshell-mirror",
+        "repo": "quickshell",
+        "rev": "4f2c62486b0c939f7fc1f7cea68037173813dbfe",
+>>>>>>> Stashed changes
         "type": "github"
       },
       "original": {
@@ -253,11 +365,27 @@
     "yazi-plugins": {
       "flake": false,
       "locked": {
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
         "lastModified": 1785033839,
         "narHash": "sha256-XakVwNsH/OUCHftW8kTL/VNmVnY/S9xjpMXI79GXZPA=",
         "ref": "refs/heads/main",
         "rev": "4c63ed34bae678b0dfaae44c33bf3fbb5fdda5a6",
         "revCount": 273,
+=======
+        "lastModified": 1783246245,
+        "narHash": "sha256-f4y952sUF/lrHMX6enQts/obk2DeatqAcaVHfjTD65k=",
+        "ref": "refs/heads/main",
+        "rev": "8cd50c622898d3ace3ca821f540241965308289a",
+        "revCount": 267,
+>>>>>>> Stashed changes
+=======
+        "lastModified": 1783246245,
+        "narHash": "sha256-f4y952sUF/lrHMX6enQts/obk2DeatqAcaVHfjTD65k=",
+        "ref": "refs/heads/main",
+        "rev": "8cd50c622898d3ace3ca821f540241965308289a",
+        "revCount": 267,
+>>>>>>> Stashed changes
         "type": "git",
         "url": "https://github.com/yazi-rs/plugins.git"
       },
