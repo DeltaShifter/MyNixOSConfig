@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -16,7 +17,7 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_zen;
+  # boot.kernelPackages = pkgs.linux_zen;
 
   networking.hostName = "AlienwareAlpha"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -40,19 +41,19 @@
   # Enable the X11 windowing system.
   hardware.graphics.enable = true;
   hardware.graphics.enable32Bit = true;
-  hardware.nvidia={
+  hardware.nvidia = {
     open = false;
     modesetting.enable = true;
     powerManagement.enable = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
-    };
-  services.xserver.videoDrivers = ["nvidia"];
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+  };
+  services.xserver.videoDrivers = [ "nvidia" ];
 
   # Enable Niri WM
   programs.niri.enable = true;
 
-  hardware.openrazer.enable = true;
-  
+  # hardware.openrazer.enable = true;
+
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "cn";
@@ -60,10 +61,10 @@
   };
 
   # Enable CUPS to print documents.
-    services.printing = {
+  services.printing = {
     enable = true;
     drivers = with pkgs; [
-    (callPackage ../../pkgs/pantumprint.nix{})
+      (callPackage ../../pkgs/pantumprint.nix { })
     ];
     extraFilesConf = "FileDevice Yes";
   };
@@ -99,7 +100,7 @@
     description = "dale";
     extraGroups = [ "networkmanager" "wheel" "openrazer" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -109,13 +110,13 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  curl
-  git
-  wget
-  swaybg
-  xwayland-satellite
-  polychromatic
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    curl
+    git
+    wget
+    swaybg
+    xwayland-satellite
+    polychromatic
   ];
 
   environment.sessionVariables = {
