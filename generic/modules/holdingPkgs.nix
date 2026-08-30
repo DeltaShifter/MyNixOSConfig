@@ -4,9 +4,9 @@
     (final: prev: {
       # khal = pkgs-stable.khal;
       # dwarfs = pkgs-stable.dwarfs;
-      sunshine = pkgs-stable.sunshine;
+      # sunshine = pkgs-stable.sunshine;
       # inherit (pkgs-stable) sunshine;
-      gearlever = pkgs-stable.gearlever;
+      # gearlever = pkgs-stable.gearlever;
     })
   ];
 }

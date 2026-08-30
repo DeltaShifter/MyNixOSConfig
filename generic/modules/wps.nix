@@ -2,7 +2,7 @@
 
 
 let
-  wpsoffice-cn-dpi = pkgs-stable.wpsoffice-cn.overrideAttrs (oldAttrs: {
+  wpsoffice-cn-dpi = pkgs.wpsoffice-cn.overrideAttrs (oldAttrs: {
     postFixup = (oldAttrs.postFixup or "") + ''
       for file in $out/bin/*; do
         if [ -f "$file" ] && [ ! -L "$file" ]; then
@@ -19,6 +19,6 @@ in
     then
       wpsoffice-cn-dpi
     else
-      pkgs-stable.wpsoffice-cn)
+      pkgs.wpsoffice-cn)
   ];
 }

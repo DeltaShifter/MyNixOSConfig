@@ -2,9 +2,9 @@
   description = "Dale`s NixOS configuration with auto-module loading";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
-    nixpkgs-stable.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
 
@@ -24,7 +24,7 @@
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -53,7 +53,7 @@
   outputs =
     { self
     , nixpkgs
-    , nixpkgs-stable
+    , nixpkgs-unstable
     , yazi-plugins
     , fastfetch-presets
     , nixos-hardware
@@ -104,7 +104,7 @@
       };
 
       # Nix-Stable
-      pkgs-stable = import nixpkgs-stable {
+      pkgs-unstable = import nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
@@ -120,7 +120,7 @@
 
       nixosConfigurations.Optiplex = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs-stable; }; # 继承全部变量传递给inputs
+        specialArgs = { inherit inputs pkgs-unstable; }; # 继承全部变量传递给inputs
         modules = [
           ./devices/Optiplex9020m/configuration.nix
           homeManagerConfig
@@ -132,7 +132,7 @@
 
       nixosConfigurations.X1c = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs-stable; }; # 继承全部变量传递给inputs
+        specialArgs = { inherit inputs pkgs-unstable; }; # 继承全部变量传递给inputs
         modules = [
           ./devices/X1c/configuration.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
@@ -143,7 +143,7 @@
 
       nixosConfigurations.AlienwareAlpha = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs pkgs-stable; }; # 继承全部变量传递给inputs
+        specialArgs = { inherit inputs pkgs-unstable; }; # 继承全部变量传递给inputs
         modules = [
           ./devices/AlienwareAlpha/configuration.nix
           homeManagerConfig

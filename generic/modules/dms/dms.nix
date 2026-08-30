@@ -30,9 +30,6 @@
     inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 
-
-  services.displayManager.regreet.enable = lib.mkOverride 49 false;
-
   environment.variables = {
     QML2_IMPORT_PATH = [
       "${pkgs.qt6.qtwebsockets}/lib/qt-6/qml"

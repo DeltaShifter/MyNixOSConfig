@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgs, pkgs-unstable, lib, ... }:
 
 
 {
@@ -91,7 +91,7 @@
     gparted
     google-chrome
     microsoft-edge
-    qq
+    pkgs-unstable.qq
     wechat
     clapper
     papirus-icon-theme
@@ -111,7 +111,7 @@
     baidupcs-go
     telegram-desktop
     clapper-enhancers
-    ventoy-full
+    # pkgs-unstable.ventoy-full
     foliate
     splayer
     (pkgs.callPackage ../../pkgs/alacritty-smooth.nix { })
@@ -126,6 +126,7 @@
 
   nixpkgs.config.permittedInsecurePackages = [
     "ventoy-1.1.17"
+    "ventoy-1.1.12"
   ];
 
   services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
