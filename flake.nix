@@ -115,7 +115,7 @@
         inherit system;
         specialArgs = { inherit inputs pkgs-unstable; }; # 继承全部变量传递给inputs
         modules = [
-          ./devices/Optiplex9020m/configuration.nix
+          ./hosts/Optiplex9020m/configuration.nix
           homeManagerConfig
           nurModule
           nix-index-database.nixosModules.default
@@ -127,7 +127,7 @@
         inherit system;
         specialArgs = { inherit inputs pkgs-unstable; }; # 继承全部变量传递给inputs
         modules = [
-          ./devices/X1c/configuration.nix
+          ./hosts/X1c/configuration.nix
           nixos-hardware.nixosModules.lenovo-thinkpad-x1-10th-gen
           homeManagerConfig
           nurModule
@@ -138,7 +138,7 @@
         inherit system;
         specialArgs = { inherit inputs pkgs-unstable; }; # 继承全部变量传递给inputs
         modules = [
-          ./devices/AlienwareAlpha/configuration.nix
+          ./hosts/AlienwareAlpha/configuration.nix
           homeManagerConfig
           nurModule
         ] ++ generatedModules;
