@@ -62,7 +62,7 @@
 
       # 自动扫描 modules 目录下的所有 .nix 文件
       lib = nixpkgs.lib;
-      configDir = ./generic/modules;
+      configDir = ./common/modules;
       findAllNixFiles = path:
         let
           content = builtins.readDir path;
@@ -93,7 +93,7 @@
         home-manager.useUserPackages = true;
         home-manager.backupFileExtension = "hmBak";
         home-manager.extraSpecialArgs = { inherit inputs; }; # 别忘了继承变量传递inputs
-        home-manager.users.dale = import ./generic/home.nix;
+        home-manager.users.dale = import ./common/home.nix;
       };
 
       # Nix-Stable
