@@ -6,7 +6,7 @@
     interactiveShellInit = "";
     shellAliases = {
       ls = "eza --icons --group-directories-first";
-      nixadd = "hx ~/.MyNixConf/generic/modules/programs.nix:(math (grep -n '# ---PkgsEnd---' ~/.MyNixConf/generic/modules/programs.nix | cut -d: -f1) - 1)";
+      nixadd = "hx ~/.MyNixConf/common/modules/programs.nix:(math (grep -n '# ---PkgsEnd---' ~/.MyNixConf/generic/modules/programs.nix | cut -d: -f1) - 1)";
       nixupd = "nh os switch ~/.MyNixConf/ && nixsync";
       flakeupd = "nix flake update --flake ~/.MyNixConf/";
       nixclean = "sudo nix-collect-garbage -d";
