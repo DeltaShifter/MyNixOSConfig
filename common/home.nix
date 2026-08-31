@@ -28,21 +28,21 @@ in
     };
   };
   # niri 配置相关
-  xdg.configFile."niri/my-custom.kdl".source = ./homeConfig/niriConfig.kdl;
+  xdg.configFile."niri/my-custom.kdl".source = ./home/niriConfig.kdl;
 
   # Alacritty 相关
   xdg.configFile."alacritty/alacritty.toml".source =
     if currentHostName == "X1c"
-    then ./homeConfig/alacritty/alacritty-X1c.toml
-    else ./homeConfig/alacritty/alacritty.toml;
+    then ./home/alacritty/alacritty-X1c.toml
+    else ./home/alacritty/alacritty.toml;
 
   # Kitty
-  xdg.configFile."kitty/kitty.conf".source = ./homeConfig/kitty/kitty.conf;
-  xdg.configFile."kitty/theme.conf".source = ./homeConfig/kitty/theme.conf;
+  xdg.configFile."kitty/kitty.conf".source = ./home/kitty/kitty.conf;
+  xdg.configFile."kitty/theme.conf".source = ./home/kitty/theme.conf;
 
   # yazi配置
-  xdg.configFile."yazi/yazi.toml".source = ./homeConfig/yazi/yazi.toml;
-  xdg.configFile."yazi/keymap.toml".source = ./homeConfig/yazi/keymap.toml;
+  xdg.configFile."yazi/yazi.toml".source = ./home/yazi/yazi.toml;
+  xdg.configFile."yazi/keymap.toml".source = ./home/yazi/keymap.toml;
 
   # yazi插件
   xdg.configFile = {
@@ -50,24 +50,24 @@ in
   };
 
   # Fcitx5
-  xdg.configFile."fcitx5/conf/classicui.conf".source = ./homeConfig/fcitx5/fcitx5ui.conf;
-  xdg.dataFile."fcitx5/rime/default.custom.yaml".source = ./homeConfig/fcitx5/rime.default.custom.yaml;
+  xdg.configFile."fcitx5/conf/classicui.conf".source = ./home/fcitx5/fcitx5ui.conf;
+  xdg.dataFile."fcitx5/rime/default.custom.yaml".source = ./home/fcitx5/rime.default.custom.yaml;
 
   # Rofi
-  xdg.configFile."rofi/config.rasi".source = ./homeConfig/rofi/config.rasi;
-  xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./homeConfig/rofi/rounded-nord-dark.rasi;
-  xdg.configFile."rofi/template/rounded-template.rasi".source = ./homeConfig/rofi/rounded-template.rasi;
+  xdg.configFile."rofi/config.rasi".source = ./home/rofi/config.rasi;
+  xdg.configFile."rofi/rounded-nord-dark.rasi".source = ./home/rofi/rounded-nord-dark.rasi;
+  xdg.configFile."rofi/template/rounded-template.rasi".source = ./home/rofi/rounded-template.rasi;
 
   # Starship
-  xdg.configFile."starship.toml".source = ./homeConfig/starship.toml;
+  xdg.configFile."starship.toml".source = ./home/starship.toml;
 
   # Helix
-  xdg.configFile."helix/config.toml".source = ./homeConfig/helix/helix.toml;
-  xdg.configFile."helix/languages.toml".source = ./homeConfig/helix/languages.toml;
+  xdg.configFile."helix/config.toml".source = ./home/helix/helix.toml;
+  xdg.configFile."helix/languages.toml".source = ./home/helix/languages.toml;
 
   # Fastfetch预设
   # xdg.dataFile."fastfetch".source = inputs.fastfetch-presets;
-  xdg.dataFile."fastfetch/presets/kylin.jsonc".source = ./homeConfig/fastfetch/presets-kylin.jsonc;
+  xdg.dataFile."fastfetch/presets/kylin.jsonc".source = ./home/fastfetch/presets-kylin.jsonc;
 
   programs.home-manager.enable = true;
 
