@@ -114,12 +114,12 @@
     # pkgs-unstable.ventoy-full
     foliate
     splayer
-    (pkgs.callPackage ../../pkgs/alacritty-smooth.nix { })
+    (pkgs.callPackage ../pkgs/alacritty-smooth.nix { })
     gimp-with-plugins
     shotcut
     lx-music-desktop
     protonplus
-    (pkgs.callPackage ../../pkgs/ghostdownloader.nix { })
+    (pkgs.callPackage ../pkgs/ghostdownloader.nix { })
     _7zip-zstd-rar
     # ---PkgsEnd--- 
   ];
