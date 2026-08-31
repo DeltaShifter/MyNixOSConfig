@@ -6,7 +6,8 @@
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./sunshine-stream.nix
     ];
@@ -17,10 +18,10 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.graceful = true;
   boot.supportedFilesystems = {
     nfs = true;
-  }
-  ;
+  };
 
   networking.hostName = "Optiplex"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -41,13 +42,13 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   hardware.graphics = {
-  enable = true;
-  enable32Bit = true;
-  extraPackages = with pkgs; [
-    intel-vaapi-driver
-    libvdpau-va-gl    
-  ];
-};
+    enable = true;
+    enable32Bit = true;
+    extraPackages = with pkgs; [
+      intel-vaapi-driver
+      libvdpau-va-gl
+    ];
+  };
 
   # Enable Niri WM
   programs.niri.enable = true;
@@ -66,7 +67,7 @@
   services.printing = {
     enable = true;
     drivers = with pkgs; [
-    (callPackage ../../pkgs/pantumprint.nix{})
+      (callPackage ../../pkgs/pantumprint.nix { })
     ];
   };
   services.avahi = {
@@ -100,7 +101,7 @@
     description = "dale";
     extraGroups = [ "networkmanager" "wheel" "cdrom" "optical" ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
@@ -113,12 +114,12 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  curl
-  git
-  wget
-  swaybg
-  xwayland-satellite
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    curl
+    git
+    wget
+    swaybg
+    xwayland-satellite
   ];
 
   environment.sessionVariables = {
