@@ -67,7 +67,7 @@
   services.printing = {
     enable = true;
     drivers = with pkgs; [
-      (callPackage ../../pkgs/pantumprint.nix { })
+      (callPackage ../../common/pkgs/pantumprint.nix { })
     ];
   };
   services.avahi = {
