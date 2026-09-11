@@ -123,7 +123,7 @@
     _7zip-zstd-rar
     lutris
     tlp
-    nodejs_26
+    nodejs_24
     pnpm
     # ---PkgsEnd--- 
   ];
