@@ -2,4 +2,4 @@
 
 NixOS+Niri+DMS
 在NND组合的基础上，考虑到自己的多设备同步设置需要
-将配置分为通用的generic和每个设备专用的diveces
+将配置分为通用的common和每个设备专用的hosts
