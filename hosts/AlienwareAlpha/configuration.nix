@@ -60,21 +60,6 @@
     variant = "";
   };
 
-  # Enable CUPS to print documents.
-  services.printing = {
-    enable = true;
-    drivers = with pkgs; [
-      (callPackage ../../pkgs/pantumprint.nix { })
-    ];
-    extraFilesConf = "FileDevice Yes";
-  };
-  services.avahi = {
-    enable = true;
-    nssmdns4 = true;
-    openFirewall = true;
-  };
-
-
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
