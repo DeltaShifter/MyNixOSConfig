@@ -1,4 +1,4 @@
-{ lib, appimageTools, fetchurl, copyDesktopItems, makeDesktopItem }:
+{ lib, appimageTools, fetchurl, }:
 
 let
 
@@ -27,7 +27,7 @@ appimageTools.wrapType2 {
     install -m 444 -D ${appimageContents}/*.png $out/share/icons/hicolor/512x512/apps/${pname}.png
     
     substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace-fail "Exec=AppRun" "Exec=${pname}" --no-sandbox
+      --replace-fail "Exec=AppRun" "Exec=${pname}"
   '';
 
   meta = with lib; {
