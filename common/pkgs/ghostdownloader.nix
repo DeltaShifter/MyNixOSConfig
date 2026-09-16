@@ -23,11 +23,8 @@ appimageTools.wrapType2 {
   ];
 
   extraInstall = ''
-    install -m 444 -D ${appimageContents}/*.desktop $out/share/applications/${pname}.desktop
-    install -m 444 -D ${appimageContents}/*.png $out/share/icons/hicolor/512x512/apps/${pname}.png
-    
-    substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace-fail "Exec=AppRun" "Exec=${pname}"
+    install -m 444 -D ${appimageContents}/ghost-downloader.desktop $out/share/applications/ghost-downloader.desktop
+    install -m 444 -D ${appimageContents}/ghost-downloader.png $out/share/icons/hicolor/512x512/apps/ghost-downloader.png
   '';
 
   meta = with lib; {
