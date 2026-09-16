@@ -25,6 +25,7 @@ appimageTools.wrapType2 {
   extraInstall = ''
     install -m 444 -D ${appimageContents}/ghost-downloader.desktop $out/share/applications/ghost-downloader.desktop
     install -m 444 -D ${appimageContents}/ghost-downloader.png $out/share/icons/hicolor/512x512/apps/ghost-downloader.png
+    ls -a 
   '';
 
   meta = with lib; {
