@@ -119,7 +119,7 @@
     shotcut
     lx-music-desktop
     protonplus
-    (pkgs.callPackage ../pkgs/ghostdownloader.nix { })
+    # (pkgs.callPackage ../pkgs/ghostdownloader.nix { })
     _7zip-zstd-rar
     lutris
     tlp
