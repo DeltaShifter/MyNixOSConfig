@@ -111,7 +111,7 @@
     baidupcs-go
     telegram-desktop
     clapper-enhancers
-    # pkgs-unstable.ventoy-full
+    ventoy-full
     foliate
     splayer
     (pkgs.callPackage ../pkgs/alacritty-smooth.nix { })
@@ -119,7 +119,7 @@
     shotcut
     lx-music-desktop
     protonplus
-    # (pkgs.callPackage ../pkgs/ghostdownloader.nix { })
+    (pkgs.callPackage ../pkgs/ghostdownloader.nix { })
     _7zip-zstd-rar
     lutris
     tlp
@@ -128,10 +128,10 @@
     # ---PkgsEnd--- 
   ];
 
-  nixpkgs.config.permittedInsecurePackages = [
-    "ventoy-1.1.17"
-    "ventoy-1.1.12"
-  ];
+  nixpkgs.config.allowInsecurePredicate = pkg:
+    builtins.elem (lib.getName pkg) [
+      "ventoy"
+    ];
 
   services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
 
