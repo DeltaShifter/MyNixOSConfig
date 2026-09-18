@@ -86,6 +86,7 @@
     extraGroups = [ "networkmanager" "wheel" "openrazer" ];
     packages = with pkgs; [
       quickemu
+      quickgui
       bottles
       #  thunderbird
     ];
