@@ -85,6 +85,8 @@
     description = "dale";
     extraGroups = [ "networkmanager" "wheel" "openrazer" ];
     packages = with pkgs; [
+      quickemu
+      bottles
       #  thunderbird
     ];
   };
