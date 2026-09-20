@@ -103,6 +103,7 @@
         config = {
           allowUnfree = true;
           permittedInsecurePackages = [
+            "electron-41.9.1"
             "ventoy-1.1.17"
           ];
         };

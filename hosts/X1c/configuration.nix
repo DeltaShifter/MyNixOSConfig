@@ -102,6 +102,7 @@
     description = "dale";
     extraGroups = [ "networkmanager" "wheel" "video" ];
     packages = with pkgs; [
+      bottles
       #  thunderbird
     ];
   };

@@ -131,6 +131,7 @@
   nixpkgs.config.allowInsecurePredicate = pkg:
     builtins.elem (lib.getName pkg) [
       "ventoy"
+      "electron"
     ];
 
   services.xserver.excludePackages = [ pkgs.xterm ]; # 配合上面的伪装禁用xterm
