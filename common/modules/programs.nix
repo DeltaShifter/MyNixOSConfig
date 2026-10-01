@@ -113,7 +113,6 @@
     clapper-enhancers
     ventoy-full
     foliate
-    splayer
     (pkgs.callPackage ../pkgs/alacritty-smooth.nix { })
     gimp-with-plugins
     shotcut
