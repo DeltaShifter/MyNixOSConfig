@@ -20,10 +20,19 @@ appimageTools.wrapType2 {
 
   extraPkgs = pkgs: with pkgs; [
     zstd
+    libayatana-appindicator
+    webkitgtk_4_1
+    glib-networking
   ];
+
+  profile = ''
+    export WEBKIT_DISABLE_DMABUF_RENDERER=1
+  '';
 
   extraInstallCommands = ''
     install -m 444 -D ${appimageContents}/coolapk-desktop.desktop $out/share/applications/coolapk-desktop.desktop
     install -m 444 -D ${appimageContents}/coolapk-desktop.png $out/share/icons/hicolor/512x512/apps/coolapk-desktop.png
+    substituteInPlace $out/share/applications/coolapk-desktop.desktop \
+      --replace-warn "Exec=AppRun" "Exec=${pname}"
   '';
 }
