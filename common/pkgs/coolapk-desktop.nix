@@ -29,12 +29,9 @@ appimageTools.wrapType2 {
   ];
 
   profile = ''
-    # 核心修复：强行使用 FHS 沙盒内 NixOS 原生的 Wayland 和托盘库
-    # 这会无视 AppImage 内部的过期库，直接解决 EGL 崩溃和托盘缺失问题
-    export LD_PRELOAD=/usr/lib/libwayland-client.so.0:/usr/lib/libappindicator3.so.1
-    
-    # 强制禁用 DMA-BUF 依然是一个好习惯，以防闪烁
+        export LD_PRELOAD=/usr/lib/libwayland-client.so.0
     export WEBKIT_DISABLE_DMABUF_RENDERER=1
+    
   '';
 
   extraInstallCommands = ''
