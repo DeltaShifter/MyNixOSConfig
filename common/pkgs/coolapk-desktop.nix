@@ -7,7 +7,7 @@ let
 
   src = fetchurl {
     url = "https://github.com/daimiaopeng/coolapk-desktop/releases/download/v${version}/coolapk-desktop_${version}_amd64.AppImage";
-    hash = "sha256-N2CYcJXIOeBWNn9LRxnCIzPVLI7O8ROBSU2rfXRMy6A=";
+    hash = "sha256-JexM1urOVgu6aMXecBdf6Ojvf+mqmGVmEf0khEXxaXw=";
   };
   appimageContents = appimageTools.extractType2 {
     inherit pname version src;
