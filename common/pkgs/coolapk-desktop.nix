@@ -20,13 +20,14 @@ appimageTools.wrapType2 {
 
   extraPkgs = pkgs: with pkgs; [
     zstd
-    libayatana-appindicator
+    libappindicator-gtk3
     webkitgtk_4_1
     glib-networking
   ];
 
   profile = ''
-    export WEBKIT_DISABLE_DMABUF_RENDERER=1
+    export GDK_BACKEND=x11
+
   '';
 
   extraInstallCommands = ''
