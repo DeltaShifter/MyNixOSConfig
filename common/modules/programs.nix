@@ -114,7 +114,6 @@
     ventoy-full
     foliate
     (pkgs.callPackage ../pkgs/alacritty-smooth.nix { })
-    (pkgs.callPackage ../pkgs/coolapk-desktop.nix { })
     gimp-with-plugins
     shotcut
     lx-music-desktop
