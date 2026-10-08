@@ -17,7 +17,7 @@ in
 appimageTools.wrapType2 {
   # 明确指定最终生成的命令名，避免默认生成带版本号的长名称导致桌面快捷方式找不到
   name = pname;
-  inherit version src;
+  inherit pname version src;
 
   extraPkgs = pkgs: with pkgs; [
     zstd
