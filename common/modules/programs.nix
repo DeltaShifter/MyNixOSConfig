@@ -124,6 +124,7 @@
     tlp
     nodejs_26
     pnpm
+    (pkgs.callPackage ../pkgs/coolapk-desktop.nix { })
     # ---PkgsEnd--- 
   ];
 
