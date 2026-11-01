@@ -43,11 +43,11 @@ rustPlatform.buildRustPackage {
     repo = "alacritty";
     rev = "all-patches"; # 对应 PKGBUILD 的 branch=all-patches
     # 这里的 hash 需要你在构建报错时更新，或使用 nix-prefetch-github 获取
-    hash = "sha256-/Tu5IIE+5sPCYYwXldq0+Keb2WcH3r5KnyjpuxwhZSM=";
+    hash = "sha256-iwhUgY8hIAdnu+z7f7VFDMe+uiTLxY3h4D3KMY+jgPc=";
   };
 
   # 注意：更改源码后，必须更新此 hash
-  cargoHash = "sha256-pbDuSvlTEUdf23LFXxK17UsXUzTUQsnnypoduUdsm+c=";
+  cargoHash = "sha256-HDin7Zq+PrcjHTwZfk26C8Uwq8FQWkeaXUoFonoHWR0=";
 
   nativeBuildInputs = [
     pkg-config
