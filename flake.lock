@@ -167,11 +167,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1793341285,
-        "narHash": "sha256-Y1CiZ4SoBUjLQyQM/pY+rS2dXD3CHLPstF0lmOc73D4=",
+        "lastModified": 1793540411,
+        "narHash": "sha256-fiPJ88izTVucjeo2EQ3jk4aWmLg03I1D4vxnX2QjEgE=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "1c89083e451e891152365b799595cf7790a43325",
+        "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
         "type": "github"
       },
       "original": {
@@ -183,11 +183,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1793410479,
-        "narHash": "sha256-HzgjxrLY4AEc0044ZuM5CHbLSWLZgDlay1idmzvvpJs=",
+        "lastModified": 1793633738,
+        "narHash": "sha256-tItrb9M8eYA6WhFgmT9tpGKueri3+wRuVA952o/2xSU=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "fa1373130d5a21c040a47c5dbe1913d59ed91808",
+        "rev": "7dcdd87373d72e7a2173e4db02e20d3d7f495cfd",
         "type": "github"
       },
       "original": {
@@ -205,11 +205,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793547202,
-        "narHash": "sha256-aPcSi7J72SyODxzX8t7lOTQcNEUP9AVhaOwOjImcmVU=",
+        "lastModified": 1793720750,
+        "narHash": "sha256-PQPzTfal0Rw/HnC+kQdYrtp1XM4zHlE/yHhh9sGm1UE=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "fa44ab2f20fef660b29e3cb5fc5cd9f348afc6e7",
+        "rev": "531e5eb6ed1074e7c762c83c0e102b597460367c",
         "type": "github"
       },
       "original": {
@@ -255,10 +255,10 @@
     "yazi-plugins": {
       "flake": false,
       "locked": {
-        "lastModified": 1793537242,
-        "narHash": "sha256-Zh8iH0ji1fE4tQ/bv1jdxYnYBzcv16ygEMQCg7jxr8s=",
+        "lastModified": 1793563896,
+        "narHash": "sha256-ihkKeOQ7HG/oS1DSYLDOifmhzY9nqEu6xC+DtrpzR3w=",
         "ref": "refs/heads/main",
-        "rev": "d5bab2144a89cb905f3d2c6f2e8cb9f71e088a87",
+        "rev": "25d992d7de29a6fbaeff8d3b27007a33225cd118",
         "revCount": 312,
         "type": "git",
         "url": "https://github.com/yazi-rs/plugins.git"
