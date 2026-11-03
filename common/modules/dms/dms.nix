@@ -2,7 +2,7 @@
 
 {
   imports = [
-    inputs.dms.nixosModules.default
+    inputs.dms.nixosModules.dank-material-shell
   ];
 
   services.displayManager.dms-greeter = {
@@ -24,16 +24,16 @@
     enableVPN = true;
   };
 
-  environment.systemPackages = [
-    pkgs.qt6.qtwebsockets
-    pkgs.qt6.qtbase
-    inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
-  ];
+  # environment.systemPackages = [
+  # pkgs.qt6.qtwebsockets
+  # pkgs.qt6.qtbase
+  # inputs.dms.packages.${pkgs.stdenv.hostPlatform.system}.default
+  # ];
 
-  environment.variables = {
-    QML2_IMPORT_PATH = [
-      "${pkgs.qt6.qtwebsockets}/lib/qt-6/qml"
-    ];
-  };
+  # environment.variables = {
+  # QML2_IMPORT_PATH = [
+  # "${pkgs.qt6.qtwebsockets}/lib/qt-6/qml"
+  # ];
+  # };
 
 }
