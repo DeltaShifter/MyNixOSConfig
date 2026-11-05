@@ -3,11 +3,11 @@
     "dank-qml-common": {
       "flake": false,
       "locked": {
-        "lastModified": 1792513666,
-        "narHash": "sha256-RDqPdPrM5lnwRrfFGLz3IwgTjCV2Ie+nrTD3ldj1t/s=",
+        "lastModified": 1793720721,
+        "narHash": "sha256-A266EMSFs169/cqH+9elzMX/6N+ycuEBXFw4qXdTD7k=",
         "owner": "duxlabs-dev",
         "repo": "dux-qml-common",
-        "rev": "ebf5e6c002da1bdaa4aaa2f319fea7b8507abc42",
+        "rev": "be3e16ca62866a749b34cfefe1aaed81cfe21e94",
         "type": "github"
       },
       "original": {
@@ -25,11 +25,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792523829,
-        "narHash": "sha256-hyWdbsyOGXsJxvXG4Tqg0uRI1s3JwPi8DKyWips3Ta8=",
+        "lastModified": 1793755740,
+        "narHash": "sha256-7t40yrXTwPUMWNkGv6QiPoZ49G6BHloQjDtKSeC3WVM=",
         "owner": "duxlabs-dev",
         "repo": "dux-shell",
-        "rev": "9b413296b16721f7679fb62e624cb1ed2433fa58",
+        "rev": "7627111c3ebd402662283f5f4a93223cda9e0a9d",
         "type": "github"
       },
       "original": {
@@ -138,11 +138,11 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793355509,
-        "narHash": "sha256-/Zs18x+IW4LuVH0rKxra0WPRgsk0DQsi0Bwkf8sOC5c=",
+        "lastModified": 1793871777,
+        "narHash": "sha256-DbFyxXHjP4SJDWVVIILkgrUZxj29cDusi8ULXoQGuZ8=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "04c6b94fa104bc23650983a4513aea196794d321",
+        "rev": "d645c71a58dbae3eb17ff551a07aea13a541cb1a",
         "type": "github"
       },
       "original": {
@@ -167,11 +167,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1793540411,
-        "narHash": "sha256-fiPJ88izTVucjeo2EQ3jk4aWmLg03I1D4vxnX2QjEgE=",
+        "lastModified": 1793726008,
+        "narHash": "sha256-jQp1wKvbwWdLBASTXkSi/VYmDJ5AbBi1WvcMt9HWJC8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0bb2eedc20e4739f29e8045034f2828ad7054f8f",
+        "rev": "1d060086d60cb76a40cf37109f979d88a5bd6396",
         "type": "github"
       },
       "original": {
@@ -205,11 +205,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793720750,
-        "narHash": "sha256-PQPzTfal0Rw/HnC+kQdYrtp1XM4zHlE/yHhh9sGm1UE=",
+        "lastModified": 1793886445,
+        "narHash": "sha256-7shbOv+w03RMGHafVo2Zl7cDrblUKNmf8eH0e7hcTjM=",
         "owner": "nix-community",
         "repo": "NUR",
-        "rev": "531e5eb6ed1074e7c762c83c0e102b597460367c",
+        "rev": "8089b4fbb65f9edf28cbc2d451a2dc8c6c6b0df5",
         "type": "github"
       },
       "original": {
@@ -255,11 +255,11 @@
     "yazi-plugins": {
       "flake": false,
       "locked": {
-        "lastModified": 1793563896,
-        "narHash": "sha256-ihkKeOQ7HG/oS1DSYLDOifmhzY9nqEu6xC+DtrpzR3w=",
+        "lastModified": 1793868947,
+        "narHash": "sha256-pO6rUSWNqMeWN+ikT3TFoOGohBHl+9UXUneVLcOddFY=",
         "ref": "refs/heads/main",
-        "rev": "25d992d7de29a6fbaeff8d3b27007a33225cd118",
-        "revCount": 312,
+        "rev": "2e0d8cf9084bc007b835fcf7c492a32736aa2ff9",
+        "revCount": 320,
         "type": "git",
         "url": "https://github.com/yazi-rs/plugins.git"
       },
