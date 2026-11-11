@@ -118,9 +118,8 @@
     shotcut
     lx-music-desktop
     protonplus
-    (pkgs.callPackage ../pkgs/ghostdownloader.nix { })
     _7zip-zstd-rar
-    lutris
+    nur.repos.XiaoXioe.ghost-downloader-3
     tlp
     nodejs_26
     pnpm
