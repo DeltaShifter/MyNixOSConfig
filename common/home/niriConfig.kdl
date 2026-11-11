@@ -1,5 +1,4 @@
   // niri启动时运行
-spawn-at-startup "dms" "run"
 spawn-at-startup "udiskie" "--smart-tray"
 
   // 窗口规则
