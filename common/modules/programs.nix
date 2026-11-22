@@ -21,8 +21,8 @@
   };
   programs.gamescope.enable = true; # 开启gamescope取得更好的全屏体验
 
-  services.v2raya.enable = true;
-  services.v2raya.cliPackage = pkgs.xray;
+  # services.v2raya.enable = true;
+  # services.v2raya.cliPackage = pkgs.xray;
 
   services.scx = {
     enable = true;
@@ -88,6 +88,7 @@
     adwaita-icon-theme
     bibata-cursors-translucent
     xray
+    v2rayn
     gparted
     google-chrome
     microsoft-edge
